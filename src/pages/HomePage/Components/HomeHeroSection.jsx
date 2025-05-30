@@ -214,6 +214,7 @@ const styles = {
     overflow: "hidden",
     fontFamily: fonts.Noto,
     zIndex: 1,
+    backgroundColor:'#000'
   },
   videoBackground: {
     position: "fixed", 
