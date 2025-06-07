@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import fonts from "../../../../components/Common/Font";
 
-const constructionVideo = "assets/images/const.mp4"; 
+const constructionVideo = "/const.mp4"; 
 const bmrdaStamp = "assets/images/bmrda2.png";
 
 const NewlyLaunchedProjects = () => {

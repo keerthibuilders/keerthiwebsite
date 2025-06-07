@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
-import videoFile from "/assets/images/KTM Urvi.mp4";
-import videoFile2 from "/assets/images/KTM Industrial Area.mp4";
+
+// Fix the video imports - remove the extra "../" since public folder is at root
+const videoFile = "/KTM Urvi.mp4";
+const videoFile2 = "/KTM Industrial Area.mp4";
 
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -11,7 +13,7 @@ const PropertyCard = ({ image, title, location, video }) => {
 
   useEffect(() => {
     if (videoRef.current && !isHovered) {
-      // Set video to start from 20 seconds
+      // Set video to start from 12 seconds
       videoRef.current.currentTime = 12;
       videoRef.current.play().catch(console.error);
     }
@@ -19,7 +21,7 @@ const PropertyCard = ({ image, title, location, video }) => {
 
   const handleVideoLoad = () => {
     if (videoRef.current) {
-      // Set starting time to 20 seconds when video loads
+      // Set starting time to 13 seconds when video loads
       videoRef.current.currentTime = 13;
     }
   };
