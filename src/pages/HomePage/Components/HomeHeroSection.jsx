@@ -26,14 +26,62 @@ function HomeHeroSection() {
   // Ref for the hero container
   const heroRef = useRef(null);
 
-  // Effect to update navbar style when component mounts
+  // Effect to update navbar style when component mounts or becomes visible
   useEffect(() => {
-    // Add a class to the body to indicate video background is active
-    document.body.classList.add('has-video-background');
+    // Force apply video background class
+    const applyVideoBackground = () => {
+      document.body.classList.add('has-video-background');
+      
+      // Force update navbar styles
+      const navbar = document.querySelector('header') || 
+                    document.querySelector('nav') || 
+                    document.querySelector('.navbar');
+      
+      if (navbar) {
+        navbar.style.position = 'absolute';
+        navbar.style.top = '0';
+        navbar.style.left = '0';
+        navbar.style.right = '0';
+        navbar.style.zIndex = '1000';
+        navbar.style.backgroundColor = 'transparent';
+      }
+    };
+
+    // Apply immediately
+    applyVideoBackground();
+    
+    // Also apply after a short delay to ensure DOM is ready
+    const timeoutId = setTimeout(applyVideoBackground, 100);
     
     // Clean up when component unmounts
     return () => {
+      clearTimeout(timeoutId);
       document.body.classList.remove('has-video-background');
+      
+      // Reset navbar styles when leaving
+      const navbar = document.querySelector('header') || 
+                    document.querySelector('nav') || 
+                    document.querySelector('.navbar');
+      
+      if (navbar) {
+        navbar.style.position = '';
+        navbar.style.backgroundColor = '';
+      }
+    };
+  }, []); // Empty dependency array ensures this runs on every mount
+
+  // Additional effect to handle route changes
+  useEffect(() => {
+    const handleRouteChange = () => {
+      // Reapply video background styles when route changes
+      document.body.classList.add('has-video-background');
+    };
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener('popstate', handleRouteChange);
+    
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
     };
   }, []);
 
@@ -153,10 +201,10 @@ function HomeHeroSection() {
           body.has-video-background header,
           body.has-video-background nav,
           body.has-video-background .navbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
             z-index: 1000 !important;
             background-color: transparent !important;
           }
