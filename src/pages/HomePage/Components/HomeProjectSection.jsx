@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import logo from "../../../assets/images/logo.png"; 
+import logo from "../../../../public/assets/images/logo.png"; 
 import fonts from "../../../components/Common/Font";
 import AllProjects from "./ProjectTap/AllProjects";
 import NewlyLaunchedProjects from "./ProjectTap/NewlyLaunchedProjects";

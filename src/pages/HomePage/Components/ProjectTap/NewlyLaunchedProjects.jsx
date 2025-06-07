@@ -3,8 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import fonts from "../../../../components/Common/Font";
 
-const constructionVideo = "/src/assets/images/const.mp4"; 
-const bmrdaStamp = "/src/assets/images/bmrda2.png";
+const constructionVideo = "../../../../public/assets/images/const.mp4"; 
+const bmrdaStamp = "../../../public/assets/images/bmrda2.png";
 
 const NewlyLaunchedProjects = () => {
   const [isVisible, setIsVisible] = useState(false);

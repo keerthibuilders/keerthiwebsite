@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Phone, Mail, MapPin, Clock, HardHat, Paintbrush, Wrench } from 'lucide-react';
 import fonts from '../../../components/Common/Font';
-import animation from "../../../assets/images/bbb.mp4"
+import animation from "../../../../public/assets/images/bbb.mp4"
 const HomeContactSection = () => {
   const sectionRef = useRef(null);
 

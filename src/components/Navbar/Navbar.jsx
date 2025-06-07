@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Navbar as BootstrapNavbar, Container, Nav, Button } from "react-bootstrap";
-import logo from "../../assets/images/logo.png"; // Adjust the path as necessary
+import logo from "../../../public/assets/images/logo.png"; // Adjust the path as necessary
 import fonts from "../Common/Font";
 
 const Navbar = () => {
