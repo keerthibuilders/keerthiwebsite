@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
-import videoFile from "../../../../public/assets/images/KTM Urvi.mp4";
-import videoFile2 from "../../../../public/assets/images/KTM Industrial Area.mp4";
+import videoFile from "/assets/images/KTM Urvi.mp4";
+import videoFile2 from "/assets/images/KTM Industrial Area.mp4";
 
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);

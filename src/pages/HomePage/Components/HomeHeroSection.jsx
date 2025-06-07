@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import fonts from "../../../components/Common/Font";
 
 // Update the video path to use bgv1.mp4
-const backgroundVideo = "../../../../public/assets/images/bgv1.mp4";
+const backgroundVideo = "/assets/images/bgv1.mp4";
 
 function HomeHeroSection() {
   // Define the final stat values
