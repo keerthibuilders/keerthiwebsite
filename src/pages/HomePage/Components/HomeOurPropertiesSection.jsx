@@ -4,8 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
 
 // Fix the video imports - remove the extra "../" since public folder is at root
-const videoFile = "/KTM Urvi.mp4";
-const videoFile2 = "/KTM Industrial Area.mp4";
+const videoFile = "../../../../public/videos/KTM Urvi.mp4";
+const videoFile2 = "../../../../public/videos/KTM Industrial Area.mp4";
 
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);
