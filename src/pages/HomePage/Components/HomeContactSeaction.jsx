@@ -51,7 +51,7 @@ const HomeContactSection = () => {
       </video>
 
       {/* Video Overlay */}
-      <div style={styles.videoOverlay}></div>
+      <div id='contact'style={styles.videoOverlay}></div>
 
       <Container style={styles.containerWrapper}>
         <Row className="align-items-start">

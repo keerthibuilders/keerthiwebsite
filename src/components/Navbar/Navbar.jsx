@@ -52,17 +52,21 @@ const Navbar = () => {
   return (
     <BootstrapNavbar expand="lg" style={styles.navbar}>
       <Container>
-        <BootstrapNavbar.Brand href="#home" style={styles.brand}>
-          <img
-            src={logo}
-            alt="Keerthi Builders Logo"
-            style={styles.logo}
-          />
-          <div style={styles.titleContainer}>
-            <h1 style={styles.title}>KEERTHI BUILDERS</h1>
-            <p style={styles.subtitle}>Building the future of RealEstate</p>
-          </div>
-        </BootstrapNavbar.Brand>
+        <BootstrapNavbar.Brand 
+  href="/" 
+  style={styles.brand}
+>
+  <img
+    src={logo}
+    alt="Keerthi Builders Logo"
+    style={styles.logo}
+  />
+  <div style={styles.titleContainer}>
+    <h1 style={styles.title}>KEERTHI BUILDERS</h1>
+    <p style={styles.subtitle}>Building the future of RealEstate</p>
+  </div>
+</BootstrapNavbar.Brand>
+
         
         <BootstrapNavbar.Toggle 
           aria-controls="basic-navbar-nav" 
@@ -70,15 +74,38 @@ const Navbar = () => {
         />
         <BootstrapNavbar.Collapse id="basic-navbar-nav" className="custom-navbar-collapse">
           <Nav className="ms-auto side-menu" style={styles.nav}>
-            <Nav.Link href="#projects" style={styles.navLink}>Projects</Nav.Link>
-            <Nav.Link href="#about" style={styles.navLink}>About</Nav.Link>
-            <Button 
-              href="#contact" 
-              style={styles.contactButton}
-              variant="success"
-            >
-              Contact Us
-            </Button>
+            <Nav.Link 
+  href="#projects" 
+  style={styles.navLink}
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById('project-section')?.scrollIntoView({ behavior: 'smooth' });
+  }}
+>
+  Projects
+</Nav.Link>
+<Nav.Link 
+  href="#about" 
+  style={styles.navLink}
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  }}
+>
+  About
+</Nav.Link>
+<Button 
+  href="#contact" 
+  style={styles.contactButton}
+  variant="success"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }}
+>
+  Contact Us
+</Button>
+
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>

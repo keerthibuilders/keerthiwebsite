@@ -277,7 +277,7 @@ const DetailsLocation = () => {
   return (
     <>
       <style>{keyframes}</style>
-      <div className="container-fluid" style={styles.container}>
+      <div id='location' className="container-fluid" style={styles.container}>
         <h2 style={styles.sectionTitle}>
           Location
         </h2>

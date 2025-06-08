@@ -21,7 +21,7 @@ const DetailsPlan = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div id ='plan'style={styles.container}>
       {/* Heading */}
       <h2 style={styles.heading}>
         Plan

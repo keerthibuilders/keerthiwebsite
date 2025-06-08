@@ -38,7 +38,7 @@ function HomeAboutSection() {
   });
 
   return (
-    <div ref={sectionRef} style={styles.aboutContainer}>
+    <div id='about' ref={sectionRef} style={styles.aboutContainer}>
       {/* Animated background elements */}
       <div style={styles.backgroundElements}>
         <div style={styles.circle1} className="animated-bg-element"></div>
