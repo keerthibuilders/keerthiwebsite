@@ -3,9 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
 
-// Fix the video imports - remove the extra "../" since public folder is at root
-const videoFile = "../../../../public/videos/KTM Urvi.mp4";
-const videoFile2 = "../../../../public/videos/KTM Industrial Area.mp4";
+// Direct Cloudinary video URLs - these are correct
+const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
+const videoFile2 = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364547/ke7tlieyeuur72ld7uam.mp4";
 
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,10 +25,15 @@ const PropertyCard = ({ image, title, location, video }) => {
       videoRef.current.currentTime = 13;
     }
   };
-  
+
+  const handleVideoError = (e) => {
+    console.error('Video error:', e);
+    // You could set a fallback state here if needed
+  };
+
   return (
-    <div 
-      className="property-card text-black flex flex-col justify-between" 
+    <div
+      className="property-card text-black flex flex-col justify-between"
       style={{
         ...styles.propertyCard,
         backgroundImage: isHovered ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${image})` : 'none',
@@ -49,9 +54,10 @@ const PropertyCard = ({ image, title, location, video }) => {
           playsInline
           style={styles.cardVideo}
           onLoadedData={handleVideoLoad}
-          onError={(e) => console.error('Video error:', e)}
+          onError={handleVideoError}
         >
           <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       )}
 
@@ -61,26 +67,37 @@ const PropertyCard = ({ image, title, location, video }) => {
       )}
 
       <div className="content-wrapper">
-        <h2 className="text-2xl font-bold mb-2" style={{
-          ...styles.propertyTitle,
-          color: isHovered ? 'white' : 'white' // Always white for better visibility over video
-        }}>
+        <h2 
+          className="text-2xl font-bold mb-2" 
+          style={{
+            ...styles.propertyTitle,
+            color: isHovered ? 'white' : 'white' // Always white for better visibility over video
+          }}
+        >
           {title}
         </h2>
         {location && (
-          <p className="text-sm" style={{
-            ...styles.propertyLocation,
-            color: isHovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.8)'
-          }}>
+          <p 
+            className="text-sm" 
+            style={{
+              ...styles.propertyLocation,
+              color: isHovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.8)'
+            }}
+          >
             {location}
           </p>
         )}
       </div>
+
       <div style={styles.cardFooter}>
-        <a href="#" style={{
-          ...styles.viewLink,
-          color: isHovered ? 'white' : 'white' // Always white for better visibility
-        }}>
+        <a 
+          href="#" 
+          style={{
+            ...styles.viewLink,
+            color: isHovered ? 'white' : 'white' // Always white for better visibility
+          }}
+          onClick={(e) => e.preventDefault()} // Prevent default link behavior
+        >
           View details
         </a>
         <div style={{
@@ -146,23 +163,24 @@ const HomeOurPropertiesSection = () => {
 
       {/* Regular style tag instead of style jsx */}
       <style>{`
-          .property-card {
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-          }
-          
-          .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-          }
-          
-          .content-wrapper {
-            position: relative;
-            z-index: 3;
-            transition: all 0.3s ease;
-          }
-       `}</style>
+        .property-card {
+          transition: all 0.4s ease;
+          position: relative;
+          overflow: hidden;
+          border-radius: 8px;
+        }
+        
+        .property-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .content-wrapper {
+          position: relative;
+          z-index: 3;
+          transition: all 0.3s ease;
+        }
+      `}</style>
     </section>
   );
 };
@@ -213,10 +231,12 @@ const styles = {
     gap: "30px",
     maxWidth: "1000px",
     margin: "0 auto",
+    
   },
   propertyCard: {
-    height: "250px", // Smaller height
+    height: "250px", 
     cursor: "pointer",
+
     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
     display: "flex",
     flexDirection: "column",
@@ -224,6 +244,7 @@ const styles = {
     padding: "20px",
     transition: "all 0.4s ease",
     position: "relative",
+    borderRadius: "0px", 
   },
   cardVideo: {
     position: "absolute",
@@ -233,6 +254,8 @@ const styles = {
     height: "100%",
     objectFit: "cover",
     zIndex: 1,
+    borderRadius: "0px", 
+    backgroundColor:"#000",
   },
   cardVideoOverlay: {
     position: "absolute",
@@ -240,8 +263,9 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // Dark overlay for better text readability
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     zIndex: 2,
+    borderRadius: "0px", 
   },
   propertyTitle: {
     fontSize: "22px",
@@ -250,7 +274,7 @@ const styles = {
     textAlign: 'center',
     justifyContent: 'center',
     transition: "color 0.3s ease",
-    textShadow: "2px 2px 4px rgba(0,0,0,0.8)", // Strong text shadow for visibility over video
+    textShadow: "2px 2px 4px rgba(0,0,0,0.8)", 
     fontFamily: fonts.Noto,
   },
   propertyLocation: {
@@ -258,7 +282,7 @@ const styles = {
     marginBottom: "16px",
     transition: "color 0.3s ease",
     fontFamily: fonts.Noto,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.8)", // Text shadow for visibility
+    textShadow: "1px 1px 2px rgba(0,0,0,0.8)", 
   },
   cardFooter: {
     display: "flex",

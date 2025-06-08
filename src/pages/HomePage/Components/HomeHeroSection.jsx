@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import fonts from "../../../components/Common/Font";
 
-// Update the video path to use bgv1.mp4
-const backgroundVideo = "../../../../public/videos/bgv1.mp4";
+// Use the direct video URL instead of embed URL
+const backgroundVideo = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364250/tifbgogzzpox1hy5dqwy.mp4";
 
 function HomeHeroSection() {
   // Define the final stat values
@@ -13,16 +13,16 @@ function HomeHeroSection() {
     { number: 2.5, text: "Happy Customers", suffix: "K +" },
     { number: 50, text: "Lakhs+ sqft. Delivered", suffix: "+" }
   ];
-  
+
   // State to hold current counter values
   const [counters, setCounters] = useState(finalStats.map(() => 0));
-  
+
   // Ref to track if animation has run
   const animationPerformed = useRef(false);
-  
+
   // Ref for the stats section to detect when it's visible
   const statsRef = useRef(null);
-  
+
   // Ref for the hero container
   const heroRef = useRef(null);
 
@@ -31,12 +31,12 @@ function HomeHeroSection() {
     // Force apply video background class
     const applyVideoBackground = () => {
       document.body.classList.add('has-video-background');
-      
+
       // Force update navbar styles
-      const navbar = document.querySelector('header') || 
-                    document.querySelector('nav') || 
+      const navbar = document.querySelector('header') ||
+                    document.querySelector('nav') ||
                     document.querySelector('.navbar');
-      
+
       if (navbar) {
         navbar.style.position = 'absolute';
         navbar.style.top = '0';
@@ -49,20 +49,20 @@ function HomeHeroSection() {
 
     // Apply immediately
     applyVideoBackground();
-    
+
     // Also apply after a short delay to ensure DOM is ready
     const timeoutId = setTimeout(applyVideoBackground, 100);
-    
+
     // Clean up when component unmounts
     return () => {
       clearTimeout(timeoutId);
       document.body.classList.remove('has-video-background');
-      
+
       // Reset navbar styles when leaving
-      const navbar = document.querySelector('header') || 
-                    document.querySelector('nav') || 
+      const navbar = document.querySelector('header') ||
+                    document.querySelector('nav') ||
                     document.querySelector('.navbar');
-      
+
       if (navbar) {
         navbar.style.position = '';
         navbar.style.backgroundColor = '';
@@ -79,7 +79,7 @@ function HomeHeroSection() {
 
     // Listen for popstate events (back/forward navigation)
     window.addEventListener('popstate', handleRouteChange);
-    
+
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
     };
@@ -88,7 +88,7 @@ function HomeHeroSection() {
   useEffect(() => {
     // Skip if animation already performed
     if (animationPerformed.current) return;
-    
+
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
@@ -98,26 +98,26 @@ function HomeHeroSection() {
         observer.disconnect();
       }
     }, { threshold: 0.1 });
-    
+
     if (statsRef.current) {
       observer.observe(statsRef.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
-  
+
   const animateCounters = () => {
     // Animation duration in milliseconds
     const duration = 4000;
     // Number of steps in the animation
     const steps = 50;
     const interval = duration / steps;
-    
+
     let step = 0;
-    
+
     const timer = setInterval(() => {
       step++;
-      
+
       if (step <= steps) {
         setCounters(finalStats.map((stat, index) => {
           // Calculate current value based on animation progress
@@ -135,18 +135,24 @@ function HomeHeroSection() {
     <div ref={heroRef} style={styles.heroContainer} id="hero-section">
       {/* Video background contained within the hero section */}
       <div style={styles.videoBackground}>
-        <video 
-          autoPlay 
-          loop 
-          muted 
+        <video
+          autoPlay
+          loop
+          muted
           playsInline
           style={styles.fullPageVideo}
+          onError={(e) => {
+            console.error('Video failed to load:', e);
+            // Optionally set a fallback background
+            e.target.style.display = 'none';
+          }}
         >
           <source src={backgroundVideo} type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
         <div style={styles.videoOverlay}></div>
       </div>
-      
+
       {/* Hero Content */}
       <Container fluid style={styles.contentWrapper}>
         {/* Main Content */}
@@ -160,12 +166,11 @@ function HomeHeroSection() {
                 <p style={styles.description}>
                   With over a decade of expertise, Keerthi Builders develops thoughtfully located plots in and around Bangalore—blending value, vision, and trust to help you build your future from the ground up.
                 </p>
-              
               </div>
             </section>
           </Col>
         </Row>
-        
+
         {/* Stats Bar */}
         <Row className="mt-auto">
           <Col>
@@ -179,7 +184,7 @@ function HomeHeroSection() {
                           {counters[index]}{stat.suffix}
                         </p>
                       </div>
-                        <p style={styles.statText}>{stat.text}</p>
+                      <p style={styles.statText}>{stat.text}</p>
                     </div>
                   </Col>
                 ))}
@@ -188,7 +193,7 @@ function HomeHeroSection() {
           </Col>
         </Row>
       </Container>
-      
+
       {/* Add global styles for navbar when video background is present */}
       <style>
         {`
@@ -197,7 +202,7 @@ function HomeHeroSection() {
             padding: 0;
             overflow-x: hidden;
           }
-          
+
           body.has-video-background header,
           body.has-video-background nav,
           body.has-video-background .navbar {
@@ -208,41 +213,41 @@ function HomeHeroSection() {
             z-index: 1000 !important;
             background-color: transparent !important;
           }
-          
+
           body.has-video-background .navbar-brand h1 {
             color: #ffffff !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
           }
-          
+
           body.has-video-background .navbar-brand p {
             color: #e0e0e0 !important;
             text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
           }
-          
+
           body.has-video-background .nav-link {
             color: #ffffff !important;
             text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
           }
-          
+
           body.has-video-background .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
           }
-          
+
           @media (max-width: 576px) {
             body.has-video-background .navbar-brand img {
               height: 50px !important;
               width: 80px !important;
             }
-            
+
             body.has-video-background .navbar-brand h1 {
               font-size: 14px !important;
             }
-            
+
             body.has-video-background .navbar-brand p {
               font-size: 9px !important;
             }
           }
-          
+
           /* Create a CSS clip path for the video */
           #hero-section {
             clip-path: inset(0);
@@ -262,10 +267,10 @@ const styles = {
     overflow: "hidden",
     fontFamily: fonts.Noto,
     zIndex: 1,
-    backgroundColor:'#000'
+    backgroundColor: '#000'
   },
   videoBackground: {
-    position: "fixed", 
+    position: "fixed",
     top: 0,
     left: 0,
     width: "100%",
@@ -283,7 +288,7 @@ const styles = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    objectFit: "fit",
+    objectFit: "cover", // Changed from "fit" to "cover" for better video display
   },
   videoOverlay: {
     position: "absolute",
@@ -291,7 +296,7 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    // backgroundColor: "rgba(40, 39, 39, 0.5)",
+    backgroundColor: "rgba(40, 39, 39, 0.3)", // Added slight overlay for better text readability
     zIndex: 1,
   },
   contentWrapper: {
@@ -369,14 +374,12 @@ const styles = {
     boxSizing: "border-box",
     fontFamily: fonts.Noto,
     textAlign: "center",
-    
   },
   statContent: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontFamily: fonts.Noto,
-    
   },
   statNumber: {
     fontSize: "2.5rem",

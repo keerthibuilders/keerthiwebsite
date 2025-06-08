@@ -3,7 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import fonts from "../../../../components/Common/Font";
 
-const constructionVideo = "../../../../public/videos/const.mp4"; 
+// Use the direct video URL instead of embed URL
+const constructionVideo = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364250/lrtvw413izkcqxwwsgc2.mp4";
 const bmrdaStamp = "assets/images/bmrda2.png";
 
 const NewlyLaunchedProjects = () => {
@@ -19,12 +20,12 @@ const NewlyLaunchedProjects = () => {
       },
       { threshold: 0.1 }
     );
-    
+
     const sectionElement = document.getElementById('all-projects-content');
     if (sectionElement) {
       observer.observe(sectionElement);
     }
-    
+
     return () => {
       if (sectionElement) {
         observer.unobserve(sectionElement);
@@ -74,23 +75,29 @@ const NewlyLaunchedProjects = () => {
                 loop
                 playsInline
                 style={styles.featureVideo}
+                onError={(e) => {
+                  console.error('Video failed to load:', e);
+                  // Hide video on error and show fallback
+                  e.target.style.display = 'none';
+                }}
               >
                 <source
                   src={constructionVideo}
                   type="video/mp4"
                 />
+                Your browser does not support the video tag.
               </video>
             </div>
-            <img 
-              src={bmrdaStamp} 
-              alt="BMRDA Stamp" 
+            <img
+              src={bmrdaStamp}
+              alt="BMRDA Stamp"
               style={styles.stampImage}
             />
             <div style={styles.cardOverlay}>
               <p style={styles.overlayLabel}>SY NO.16/3</p>
               <h3 style={styles.overlayTitle}>Keerthi Infinity URVI</h3>
               <p style={styles.overlayDescription}>BYALALU</p>
-              <button 
+              <button
                 style={styles.viewButton}
                 onClick={handleViewDetailsClick}
               >
@@ -99,7 +106,7 @@ const NewlyLaunchedProjects = () => {
             </div>
           </div>
         </Col>
-        
+
         {/* Right Column */}
         <Col lg={8}>
           {/* Top Card */}
@@ -123,8 +130,8 @@ const NewlyLaunchedProjects = () => {
                     <h4 style={styles.cardTitle}>KTM Villa Enclace</h4>
                     <p style={styles.cardDescription}>Gudimavu KTM</p>
                   </div>
-                  <a 
-                    href="/detailspage" 
+                  <a
+                    href="/detailspage"
                     style={styles.readMore}
                     onClick={handleViewProjectClick}
                   >
@@ -133,13 +140,13 @@ const NewlyLaunchedProjects = () => {
                 </div>
               </Col>
             </Row>
-            <img 
-              src={bmrdaStamp} 
-              alt="BMRDA Stamp" 
+            <img
+              src={bmrdaStamp}
+              alt="BMRDA Stamp"
               style={styles.stampImage}
             />
           </div>
-          
+
           {/* Bottom Cards */}
           <Row className="g-3">
             <Col sm={6}>
@@ -160,8 +167,8 @@ const NewlyLaunchedProjects = () => {
                         <p style={styles.cardLabel}>SY NO.13-2</p>
                       </Col>
                       <Col xs={4} className="text-end">
-                        <a 
-                          href="/detailspage" 
+                        <a
+                          href="/detailspage"
                           style={styles.readMore}
                           onClick={handleViewProjectClick}
                         >
@@ -173,9 +180,9 @@ const NewlyLaunchedProjects = () => {
                     <p style={styles.cardDescription}>Ruppis Byalalu</p>
                   </div>
                 </div>
-                <img 
-                  src={bmrdaStamp} 
-                  alt="BMRDA Stamp" 
+                <img
+                  src={bmrdaStamp}
+                  alt="BMRDA Stamp"
                   style={styles.stampImage}
                 />
               </div>
@@ -198,8 +205,8 @@ const NewlyLaunchedProjects = () => {
                         <p style={styles.cardLabel}>SY N0.24/12</p>
                       </Col>
                       <Col xs={4} className="text-end">
-                        <a 
-                          href="/detailspage" 
+                        <a
+                          href="/detailspage"
                           style={styles.readMore}
                           onClick={handleViewProjectClick}
                         >
@@ -211,9 +218,9 @@ const NewlyLaunchedProjects = () => {
                     <p style={styles.cardDescription}>Ajjanahalli</p>
                   </div>
                 </div>
-                <img 
-                  src={bmrdaStamp} 
-                  alt="BMRDA Stamp" 
+                <img
+                  src={bmrdaStamp}
+                  alt="BMRDA Stamp"
                   style={styles.stampImage}
                 />
               </div>
@@ -221,8 +228,7 @@ const NewlyLaunchedProjects = () => {
           </Row>
         </Col>
       </Row>
-      
-      
+
       {/* CSS for hover animations */}
       <style>
         {`
@@ -235,13 +241,17 @@ const NewlyLaunchedProjects = () => {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.2);
           }
+          
+          .hover-card:hover .feature-video {
+            transform: scale(1.05);
+          }
         `}
       </style>
     </div>
   );
 };
 
-// Styles for AllProjects component
+// Styles for NewlyLaunchedProjects component
 const styles = {
   featureCard: {
     height: "350px",
@@ -259,6 +269,7 @@ const styles = {
     position: 'relative',
     overflow: 'hidden',
     borderRadius: '8px',
+    backgroundColor: '#f0f0f0', // Fallback background color
   },
   featureVideo: {
     width: '100%',
@@ -283,14 +294,14 @@ const styles = {
     fontSize: "14px",
     fontWeight: "500",
     textTransform: "uppercase",
-    marginBottom: "8px", 
-    color: "#FFF", 
+    marginBottom: "8px",
+    color: "#FFF",
     margin: 0,
     fontFamily: fonts.Noto
   },
   overlayTitle: {
     color: "white",
-    fontSize: "22px", 
+    fontSize: "22px",
     lineHeight: "1.2",
     margin: "0 0 8px 0",
     fontFamily: fonts.Noto
@@ -305,13 +316,13 @@ const styles = {
     backgroundColor: "#1C542C",
     color: "white",
     border: "none",
-    padding: "10px 20px", 
-    fontSize: "14px", 
+    padding: "10px 20px",
+    fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
+    transition: "all 0.3s ease",
     boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-    borderRadius: "0px",
+    borderRadius: "4px",
     fontFamily: fonts.Noto
   },
   mediumCard: {
@@ -328,7 +339,7 @@ const styles = {
   mediumCardImage: {
     height: "100%",
     width: "100%",
-    objectFit: "fill",
+    objectFit: "cover", // Changed from "fill" to "cover" for better image display
     borderTopLeftRadius: "8px",
     borderBottomLeftRadius: "8px"
   },
@@ -341,10 +352,10 @@ const styles = {
     fontFamily: fonts.Noto
   },
   smallCard: {
-    height: "180px", 
+    height: "180px",
     overflow: "hidden",
     backgroundColor: "#fff",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.1)", 
+    boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
     border: "none",
     display: "flex",
     flexDirection: "column",
@@ -369,8 +380,8 @@ const styles = {
     fontFamily: fonts.Noto
   },
   cardLabel: {
-    fontSize: "18px", 
-    color: "#1C542C", 
+    fontSize: "18px",
+    color: "#1C542C",
     fontWeight: "500",
     textTransform: "uppercase",
     marginBottom: '5px',
@@ -378,7 +389,7 @@ const styles = {
     fontFamily: fonts.Noto
   },
   cardTitle: {
-    fontSize: "14px", 
+    fontSize: "14px",
     lineHeight: "1.2",
     color: "#333",
     margin: 0,
@@ -395,8 +406,9 @@ const styles = {
     color: "#1C542C",
     textDecoration: "none",
     fontSize: "14px",
-    marginBottom:'40px',
-    fontFamily: fonts.Noto
+    marginBottom: '40px',
+    fontFamily: fonts.Noto,
+    transition: "color 0.3s ease"
   },
   stampImage: {
     position: "absolute",

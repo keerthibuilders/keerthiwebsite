@@ -2,9 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Phone, Mail, MapPin, Clock, HardHat, Paintbrush, Wrench } from 'lucide-react';
 import fonts from '../../../components/Common/Font';
-import animation from "../../../../public/videos/bbb.mp4"
+
 const HomeContactSection = () => {
   const sectionRef = useRef(null);
+  
+  // Define the video URL as a constant
+  const animationVideoUrl = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364250/wniuljdtfg64uqrokofh.mp4";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,7 +46,7 @@ const HomeContactSection = () => {
         playsInline
         style={styles.backgroundVideo}
       >
-        <source src={animation} type="video/mp4" />
+        <source src={animationVideoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -127,7 +130,6 @@ const HomeContactSection = () => {
                   <div style={styles.qualityContent}>
                     <h3 style={styles.qualityTitle}>Unmatched Quality</h3>
                     <p style={styles.qualityText}>
-
                       Every square foot reflects our 10+ years of experience. From layout planning to land grading, we follow industry-best practices to ensure value that lasts.
                     </p>
                   </div>
@@ -140,8 +142,7 @@ const HomeContactSection = () => {
                   <div style={styles.qualityContent}>
                     <h3 style={styles.qualityTitle}>Best Price in Town</h3>
                     <p style={styles.qualityText}>
-
-                      We offer premium plots at prices that make sense. With Keerthi Builders, you get unmatched value—no inflated costs, just honest pricing and prime locations..
+                      We offer premium plots at prices that make sense. With Keerthi Builders, you get unmatched value—no inflated costs, just honest pricing and prime locations.
                     </p>
                   </div>
                 </div>
@@ -282,10 +283,10 @@ const styles = {
     bottom: -15,
     left: 0,
     width: '60%',
-    height: '30%', // Video covers bottom 60% of the section
+    height: '30%',
     objectFit: 'fill',
     zIndex: 0,
-    opacity: 0.7, // Watermark effect
+    opacity: 0.7,
   },
   videoOverlay: {
     position: 'absolute',
@@ -355,7 +356,6 @@ const styles = {
       color: '#21623C',
     }
   },
-  // Quality section styles
   qualityItem: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -367,7 +367,7 @@ const styles = {
     boxShadow: '0 3px 10px rgba(0,0,0,0.05)',
     borderRadius: '0 8px 8px 0',
     fontFamily: fonts.Noto,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent background for better visibility over video
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     ':hover': {
       backgroundColor: 'rgba(33, 98, 60, 0.05)',
       transform: 'translateX(5px)',
