@@ -301,21 +301,7 @@ function Footer() {
             </ul>
           </Col>
           
-          {/* Company Policies */}
-          <Col md={3} lg={2} className="text-start">
-            <h5 style={styles.heading}>Policies</h5>
-            <ul style={styles.linksList}>
-              <li style={styles.listItem}>
-                <a href="/termsconditions" style={styles.link}>Terms & Conditions</a>
-              </li>
-              <li style={styles.listItem}>
-                <a href="/privacypolicy" style={styles.link}>Privacy Policy</a>
-              </li>
-              <li style={styles.listItem}>
-                <a href="/refundpolicy" style={styles.link}>Refund Policy</a>
-              </li>
-            </ul>
-          </Col>
+         
 
           {/* Contact Info */}
           <Col md={3} lg={4} className="text-start">
