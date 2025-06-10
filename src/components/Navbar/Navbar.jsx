@@ -68,7 +68,6 @@ const Navbar = () => {
 
     handleHashNavigation();
     window.addEventListener('hashchange', handleHashNavigation);
-
     return () => {
       window.removeEventListener('hashchange', handleHashNavigation);
     };
@@ -92,16 +91,16 @@ const Navbar = () => {
   }, [expanded]);
 
   return (
-    <BootstrapNavbar 
-      expand="lg" 
+    <BootstrapNavbar
+      expand="lg"
       style={styles.navbar}
       expanded={expanded}
       onToggle={(expanded) => setExpanded(expanded)}
       ref={navbarRef}
     >
       <Container>
-        <BootstrapNavbar.Brand 
-          href="/" 
+        <BootstrapNavbar.Brand
+          href="/"
           style={styles.brand}
         >
           <img
@@ -114,8 +113,9 @@ const Navbar = () => {
             <p style={styles.subtitle}>Building the future of RealEstate</p>
           </div>
         </BootstrapNavbar.Brand>
-
-        <BootstrapNavbar.Toggle 
+        
+        <BootstrapNavbar.Toggle
+          id="navbar-toggle-btn"
           aria-controls="basic-navbar-nav"
           onClick={() => setExpanded(!expanded)}
         />
@@ -124,6 +124,7 @@ const Navbar = () => {
           {/* Close button for mobile */}
           {expanded && (
             <button
+              id="navbar-close-btn"
               onClick={() => setExpanded(false)}
               style={styles.closeButton}
               aria-label="Close menu"
@@ -133,22 +134,23 @@ const Navbar = () => {
           )}
           
           <Nav className="ms-auto">
-            <Nav.Link 
-              href="#project-section" 
+            <Nav.Link
+              href="#project-section"
               style={styles.navLink}
               onClick={(e) => handleNavigation('project-section', e)}
             >
               Projects
             </Nav.Link>
-            <Nav.Link 
-              href="#about" 
+            <Nav.Link
+              href="#about"
               style={styles.navLink}
               onClick={(e) => handleNavigation('about', e)}
             >
               About
             </Nav.Link>
-            <Button 
-              href="#contact" 
+            <Button
+              id="navbar-contact-btn"
+              href="#contact"
               style={styles.contactButton}
               variant="success"
               onClick={(e) => handleNavigation('contact', e)}
@@ -158,22 +160,22 @@ const Navbar = () => {
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>
-      
+
       <style>
         {`
-          .navbar-toggler {
+          #navbar-toggle-btn {
             border: none !important;
             box-shadow: none !important;
             outline: none !important;
             padding: 4px 8px !important;
           }
           
-          .navbar-toggler:focus {
+          #navbar-toggle-btn:focus {
             box-shadow: none !important;
             outline: none !important;
           }
           
-          .navbar-toggler-icon {
+          #navbar-toggle-btn .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
             width: 24px !important;
             height: 24px !important;
@@ -198,6 +200,16 @@ const Navbar = () => {
             
             .nav-link:hover {
               color: #e0e0e0 !important;
+            }
+            
+            #navbar-contact-btn {
+              background-color: #1C542C !important;
+              border-color: #1C542C !important;
+            }
+            
+            #navbar-contact-btn:hover {
+              background-color: #164023 !important;
+              border-color: #164023 !important;
             }
           }
           
@@ -244,16 +256,43 @@ const Navbar = () => {
               background-color: rgba(28, 84, 44, 0.1) !important;
             }
             
-            .btn {
+            #navbar-contact-btn {
               margin-top: 1rem !important;
               width: 100% !important;
               padding: 12px 20px !important;
               font-size: 16px !important;
+              background-color: #1C542C !important;
+              border-color: #1C542C !important;
             }
             
-            .btn:hover {
+            #navbar-contact-btn:hover {
               background-color: #164023 !important;
               border-color: #164023 !important;
+            }
+            
+            #navbar-close-btn {
+              position: absolute;
+              top: 15px;
+              right: 20px;
+              background: none;
+              border: none;
+              fontSize: 30px;
+              color: #1C542C;
+              cursor: pointer;
+              width: 30px;
+              height: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 0;
+              line-height: 1;
+              z-index: 1031;
+            }
+            
+            #navbar-close-btn:hover {
+              color: #164023;
+              background-color: rgba(28, 84, 44, 0.1);
+              border-radius: 50%;
             }
             
             /* Add overlay when menu is open */

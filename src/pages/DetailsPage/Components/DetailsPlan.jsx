@@ -21,86 +21,195 @@ const DetailsPlan = () => {
   };
 
   return (
-    <div id ='plan'style={styles.container}>
-      {/* Heading */}
-      <h2 style={styles.heading}>
-        Plan
-      </h2>
+    <>
+      <style>
+        {`
+          .plan-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: ${fonts.Noto};
+          }
+          
+          .plan-heading {
+            font-size: 32px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 30px;
+            text-align: left;
+            font-family: ${fonts.Noto};
+          }
+          
+          .plan-image-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 100%;
+            height: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          
+          .plan-image-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          }
+          
+          .plan-close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            border-radius: 0;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            font-family: ${fonts.Noto};
+            color: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+          }
+          
+          .plan-close-button:hover {
+            background-color: #f0f0f0;
+          }
+          
+          /* Mobile Styles */
+          @media (max-width: 768px) {
+            .plan-container {
+              padding: 20px 15px;
+            }
+            
+            .plan-heading {
+              font-size: 24px;
+              margin-bottom: 20px;
+            }
+            
+            .plan-image-container {
+              width: 100%;
+              max-width: 350px;
+              height: 250px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+              border-radius: 0;
+            }
+            
+            .plan-close-button {
+              top: 15px;
+              right: 15px;
+              width: 40px;
+              height: 40px;
+              font-size: 24px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+              border-radius: 0;
+            }
+          }
+          
+          /* Tablet Styles */
+          @media (min-width: 769px) and (max-width: 1024px) {
+            .plan-container {
+              padding: 30px 20px;
+            }
+            
+            .plan-heading {
+              font-size: 28px;
+              margin-bottom: 25px;
+            }
+            
+            .plan-image-container {
+              width: 500px;
+              height: 350px;
+              border-radius: 0;
+            }
+          }
+          
+          /* Large Desktop Styles */
+          @media (min-width: 1200px) {
+            .plan-container {
+              padding: 50px 20px;
+            }
+            
+            .plan-heading {
+              font-size: 36px;
+              margin-bottom: 40px;
+            }
+            
+            .plan-image-container {
+              width: 700px;
+              height: 450px;
+              border-radius: 0;
+            }
+          }
+        `}
+      </style>
+      
+      <div id='plan' className="plan-container">
+        {/* Heading */}
+        <h2 className="plan-heading">
+          Plan
+        </h2>
 
-      {/* Image Container */}
-      <div style={styles.imageWrapper}>
-        <div style={styles.imageContainer}>
-          <img
-            src={imageUrl}
-            alt="Master Plan"
-            onClick={openFullScreen}
-            style={styles.planImage}
-          />
-        </div>
-      </div>
-
-      {isFullScreen && (
-        <div
-          style={styles.fullscreenOverlay}
-          onClick={handleBackdropClick}
-        >
-          <button
-            onClick={closeFullScreen}
-            style={styles.closeButton}
-          >
-            ×
-          </button>
-          <div style={styles.fullscreenContainer}>
+        {/* Image Container */}
+        <div style={styles.imageWrapper}>
+          <div className="plan-image-container">
             <img
               src={imageUrl}
-              alt="Master Plan - Full View"
-              style={styles.fullscreenImage}
+              alt="Master Plan"
+              onClick={openFullScreen}
+              style={styles.planImage}
             />
           </div>
         </div>
-      )}
-    </div>
+
+        {isFullScreen && (
+          <div
+            style={styles.fullscreenOverlay}
+            onClick={handleBackdropClick}
+          >
+            <button
+              onClick={closeFullScreen}
+              className="plan-close-button"
+            >
+              ×
+            </button>
+            <div style={styles.fullscreenContainer}>
+              <img
+                src={imageUrl}
+                alt="Master Plan - Full View"
+                style={styles.fullscreenImage}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
-// Styles object
+// Remaining styles that don't need responsiveness
 const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '1200px',
-    margin: '0 auto',
-    textAlign: 'center',
-    fontFamily: fonts.Noto
-  },
-  heading: {
-    fontSize: '32px',
-    fontWeight: '500',
-    color: '#000',
-    marginBottom: '30px',
-    textAlign: 'left',
-    fontFamily: fonts.Noto
-  },
   imageWrapper: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  imageContainer: {
-    position: 'relative',
-    display: 'inline-block',
-    cursor: 'pointer',
-    borderRadius: '0px',
-    overflow: 'hidden',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-    width: '600px',
-    maxWidth: '100%',
-    height: '400px'
-  },
   planImage: {
     width: '100%',
     height: '100%',
     display: 'block',
-    objectFit: 'cover'
+    objectFit: 'cover',
+    transition: 'transform 0.3s ease',
+    borderRadius: '0'
   },
   fullscreenOverlay: {
     position: 'fixed',
@@ -123,31 +232,11 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  closeButton: {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    background: 'white',
-    border: 'none',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    fontSize: '30px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: '10000',
-    fontFamily: fonts.Noto,
-    color: '#000',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
-  },
   fullscreenImage: {
     width: '100%',
     height: '100%',
     objectFit: 'contain',
-    borderRadius: '0px'
+    borderRadius: '0'
   }
 };
 
