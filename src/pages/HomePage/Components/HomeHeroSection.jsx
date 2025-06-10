@@ -26,65 +26,6 @@ function HomeHeroSection() {
   // Ref for the hero container
   const heroRef = useRef(null);
 
-  // Effect to update navbar style when component mounts or becomes visible
-  useEffect(() => {
-    // Force apply video background class
-    const applyVideoBackground = () => {
-      document.body.classList.add('has-video-background');
-
-      // Force update navbar styles
-      const navbar = document.querySelector('header') ||
-                    document.querySelector('nav') ||
-                    document.querySelector('.navbar');
-
-      if (navbar) {
-        navbar.style.position = 'absolute';
-        navbar.style.top = '0';
-        navbar.style.left = '0';
-        navbar.style.right = '0';
-        navbar.style.zIndex = '1000';
-        navbar.style.backgroundColor = 'transparent';
-      }
-    };
-
-    // Apply immediately
-    applyVideoBackground();
-
-    // Also apply after a short delay to ensure DOM is ready
-    const timeoutId = setTimeout(applyVideoBackground, 100);
-
-    // Clean up when component unmounts
-    return () => {
-      clearTimeout(timeoutId);
-      document.body.classList.remove('has-video-background');
-
-      // Reset navbar styles when leaving
-      const navbar = document.querySelector('header') ||
-                    document.querySelector('nav') ||
-                    document.querySelector('.navbar');
-
-      if (navbar) {
-        navbar.style.position = '';
-        navbar.style.backgroundColor = '';
-      }
-    };
-  }, []); // Empty dependency array ensures this runs on every mount
-
-  // Additional effect to handle route changes
-  useEffect(() => {
-    const handleRouteChange = () => {
-      // Reapply video background styles when route changes
-      document.body.classList.add('has-video-background');
-    };
-
-    // Listen for popstate events (back/forward navigation)
-    window.addEventListener('popstate', handleRouteChange);
-
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, []);
-
   useEffect(() => {
     // Skip if animation already performed
     if (animationPerformed.current) return;
@@ -194,58 +135,13 @@ function HomeHeroSection() {
         </Row>
       </Container>
 
-      {/* Add global styles for navbar when video background is present */}
+      {/* Basic global styles */}
       <style>
         {`
           body {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-          }
-
-          body.has-video-background header,
-          body.has-video-background nav,
-          body.has-video-background .navbar {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            z-index: 1000 !important;
-            background-color: transparent !important;
-          }
-
-          body.has-video-background .navbar-brand h1 {
-            color: #ffffff !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
-          }
-
-          body.has-video-background .navbar-brand p {
-            color: #e0e0e0 !important;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
-          }
-
-          body.has-video-background .nav-link {
-            color: #ffffff !important;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
-          }
-
-          body.has-video-background .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-          }
-
-          @media (max-width: 576px) {
-            body.has-video-background .navbar-brand img {
-              height: 50px !important;
-              width: 80px !important;
-            }
-
-            body.has-video-background .navbar-brand h1 {
-              font-size: 14px !important;
-            }
-
-            body.has-video-background .navbar-brand p {
-              font-size: 9px !important;
-            }
           }
 
           /* Create a CSS clip path for the video */

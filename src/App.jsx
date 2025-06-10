@@ -8,6 +8,8 @@ import HomeHeroSection from './pages/HomePage/Components/HomeHeroSection';
 import HomeContactSection from './pages/HomePage/Components/HomeContactSeaction';
 import HomeAboutSection from './pages/HomePage/Components/HomeAboutSection';
 import HomeProjectSection from './pages/HomePage/Components/HomeProjectSection';
+import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
+import SocialMediaBar from './components/SocialMediaBar/SocialMediaBar';
 
 
 function App() {
@@ -17,13 +19,10 @@ function App() {
        <Navbar />
         <Routes>
           <Route path="/" element={<HomeMainPage />} />
-          <Route path="/home" element={<HomeHeroSection />} />
-          <Route path="/about" element={<HomeAboutSection />} />
-          <Route path="/projects" element={<HomeProjectSection />} />
-          <Route path="/contact" element={<HomeContactSection />} />
-
           <Route path="/detailspage" element={<SiteDetailsPage />} />
         </Routes>
+        <SocialMediaBar />
+        <WhatsAppButton />
         <Footer />
       </div>
     </BrowserRouter>

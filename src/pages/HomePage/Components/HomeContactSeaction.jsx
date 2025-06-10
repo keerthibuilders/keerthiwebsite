@@ -35,9 +35,9 @@ const HomeContactSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} style={styles.section} className="contact-section">
+    <section id='contact' ref={sectionRef} style={styles.section} className="contact-section">
       <div className="background-pattern"></div>
-
+      
       {/* Background Video Watermark */}
       <video
         autoPlay
@@ -49,10 +49,10 @@ const HomeContactSection = () => {
         <source src={animationVideoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
+      
       {/* Video Overlay */}
-      <div id='contact'style={styles.videoOverlay}></div>
-
+      <div style={styles.videoOverlay}></div>
+      
       <Container style={styles.containerWrapper}>
         <Row className="align-items-start">
           <Col lg={6} className="info-column">
@@ -63,7 +63,7 @@ const HomeContactSection = () => {
                 If you have any questions or want to <strong>get a free estimate</strong> for your project,
                 contact us via email or phone call. We will be very happy to help you!
               </p>
-
+              
               <div className="info-items-container">
                 <div style={styles.infoItem} className="info-item">
                   <div style={styles.iconWrapper}>
@@ -71,43 +71,44 @@ const HomeContactSection = () => {
                   </div>
                   <div style={styles.infoContent}>
                     <span style={styles.infoLabel}>Phone</span>
-                    <a href="tel:+14706011911" style={styles.infoText}>470-601-1911</a>
+                    <a href="tel:+919742063580" style={styles.infoText}>97420 63580</a>
                   </div>
                 </div>
-
+                
                 <div style={styles.infoItem} className="info-item">
                   <div style={styles.iconWrapper}>
                     <Mail style={styles.icon} />
                   </div>
                   <div style={styles.infoContent}>
                     <span style={styles.infoLabel}>Email</span>
-                    <a href="mailto:contact@keerthibuilders.com" style={styles.infoText}>contact@keerthibuilders.com</a>
+                    <a href="mailto:keerthibuildersales@gmail.com" style={styles.infoText}>keerthibuildersales@gmail.com</a>
                   </div>
                 </div>
-
+                
                 <div style={styles.infoItem} className="info-item">
                   <div style={styles.iconWrapper}>
                     <MapPin style={styles.icon} />
                   </div>
                   <div style={styles.infoContent}>
                     <span style={styles.infoLabel}>Address</span>
-                    <span style={styles.infoText}>2271 Rodao Dr SW, Lilburn, GA 30047</span>
+                    <span style={styles.infoText}>938, 1st Main Rd, Stage II, Kengeri Satellite Town, Bengaluru, Karnataka 560060</span>
                   </div>
                 </div>
-
+                
                 <div style={styles.infoItem} className="info-item">
                   <div style={styles.iconWrapper}>
                     <Clock style={styles.icon} />
                   </div>
                   <div style={styles.infoContent}>
                     <span style={styles.infoLabel}>Working Hours</span>
-                    <span style={styles.infoText}>Monday – Friday: 8:00 am – 5:00 pm</span>
+                    <span style={styles.infoText}>Monday – Sunday: 10:00 am – 5:00 pm</span>
+                    <span style={styles.infoText}>Tuesday: Closed</span>
                   </div>
                 </div>
               </div>
             </div>
           </Col>
-
+          
           <Col lg={6} className="quality-column">
             <div className="quality-wrapper">
               <div className="quality-items-container">
@@ -122,7 +123,7 @@ const HomeContactSection = () => {
                     </p>
                   </div>
                 </div>
-
+                
                 <div style={styles.qualityItem} className="quality-item">
                   <div style={styles.qualityIconWrapper}>
                     <Paintbrush style={styles.qualityIcon} />
@@ -134,7 +135,7 @@ const HomeContactSection = () => {
                     </p>
                   </div>
                 </div>
-
+                
                 <div style={styles.qualityItem} className="quality-item">
                   <div style={styles.qualityIconWrapper}>
                     <Wrench style={styles.qualityIcon} />
@@ -151,7 +152,7 @@ const HomeContactSection = () => {
           </Col>
         </Row>
       </Container>
-
+      
       <style>{`
         .contact-section {
           position: relative;
@@ -265,6 +266,19 @@ const HomeContactSection = () => {
             width: 60px;
           }
         }
+        
+        /* Responsive padding adjustments */
+        @media (max-width: 768px) {
+          .contact-section {
+            padding-top: 60px !important;
+          }
+        }
+        
+        @media (max-width: 576px) {
+          .contact-section {
+            padding-top: 40px !important;
+          }
+        }
       `}</style>
     </section>
   );
@@ -272,7 +286,7 @@ const HomeContactSection = () => {
 
 const styles = {
   section: {
-    padding: '20px 0',
+    padding: '80px 20px 20px 20px', // Added 80px top padding
     backgroundColor: '#fff',
     position: 'relative',
     fontFamily: fonts.Noto,
@@ -293,7 +307,7 @@ const styles = {
     bottom: 0,
     left: 0,
     right: 0,
-    height: '60%', 
+    height: '60%',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     zIndex: 1,
   },
@@ -352,9 +366,6 @@ const styles = {
     textDecoration: 'none',
     transition: 'color 0.3s ease',
     fontFamily: fonts.Noto,
-    ':hover': {
-      color: '#21623C',
-    }
   },
   qualityItem: {
     display: 'flex',
@@ -368,10 +379,6 @@ const styles = {
     borderRadius: '0 8px 8px 0',
     fontFamily: fonts.Noto,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    ':hover': {
-      backgroundColor: 'rgba(33, 98, 60, 0.05)',
-      transform: 'translateX(5px)',
-    }
   },
   qualityIconWrapper: {
     display: 'flex',

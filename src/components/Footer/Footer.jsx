@@ -5,10 +5,8 @@ import { IoMailOutline } from "react-icons/io5";
 import { LuMapPin } from "react-icons/lu";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { CiFacebook } from "react-icons/ci";
-import { CiLinkedin } from "react-icons/ci";
+import { CiFacebook, CiYoutube } from "react-icons/ci";
 import fonts from '../Common/Font';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
@@ -18,6 +16,25 @@ function Footer() {
   const footerRef = useRef(null);
   const webRef = useRef(null);
   const animationRef = useRef(null);
+
+  // Handle navigation function
+  const handleNavigation = (targetId, event) => {
+    event.preventDefault();
+    
+    // Check if we're on the home page
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/home';
+    
+    if (isHomePage) {
+      // If on home page, scroll to the section
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with hash
+      window.location.href = `/#${targetId}`;
+    }
+  };
 
   // Handle mouse movement to track position
   const handleMouseMove = (e) => {
@@ -76,7 +93,6 @@ function Footer() {
   // Draw and animate spider web effect
   useEffect(() => {
     if (!isHovering || !webRef.current || webPoints.length === 0) return;
-
     const canvas = webRef.current;
     const ctx = canvas.getContext('2d');
     
@@ -200,9 +216,9 @@ function Footer() {
           const offset = Math.sin(animationProgress * 10) * 10; // Wavy effect
           
           ctx.quadraticCurveTo(
-            midX + offset, 
+            midX + offset,
             midY - offset,
-            point.x, 
+            point.x,
             point.y
           );
           
@@ -257,16 +273,17 @@ function Footer() {
   }, []);
 
   return (
-    <footer 
+    <footer
       ref={footerRef}
       style={styles.footer}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      id="contact"
     >
       {/* Spider web canvas overlay */}
-      <canvas 
-        ref={webRef} 
+      <canvas
+        ref={webRef}
         style={{
           position: 'absolute',
           top: 0,
@@ -289,20 +306,50 @@ function Footer() {
               interests and preferences.
             </p>
           </Col>
-
+          
           {/* Useful Links */}
           <Col md={3} lg={2} className="text-start">
             <h5 style={styles.heading}>Useful Links</h5>
             <ul style={styles.linksList}>
-              <li style={styles.listItem}><a href="/" style={styles.link}>Home</a></li>
-              <li style={styles.listItem}><a href="/projects" style={styles.link}>Projects</a></li>
-              <li style={styles.listItem}><a href="/about" style={styles.link}>About Us</a></li>
-              <li style={styles.listItem}><a href="/contact" style={styles.link}>Contact us</a></li>
+              <li style={styles.listItem}>
+                <a
+                  href="#hero-section"
+                  style={styles.link}
+                  onClick={(e) => handleNavigation('hero-section', e)}
+                >
+                  Home
+                </a>
+              </li>
+              <li style={styles.listItem}>
+                <a
+                  href="#project-section"
+                  style={styles.link}
+                  onClick={(e) => handleNavigation('project-section', e)}
+                >
+                  Projects
+                </a>
+              </li>
+              <li style={styles.listItem}>
+                <a
+                  href="#about"
+                  style={styles.link}
+                  onClick={(e) => handleNavigation('about', e)}
+                >
+                  About Us
+                </a>
+              </li>
+              <li style={styles.listItem}>
+                <a
+                  href="#contact"
+                  style={styles.link}
+                  onClick={(e) => handleNavigation('contact', e)}
+                >
+                  Contact us
+                </a>
+              </li>
             </ul>
           </Col>
           
-         
-
           {/* Contact Info */}
           <Col md={3} lg={4} className="text-start">
             <h5 style={styles.heading}>Contact</h5>
@@ -310,15 +357,15 @@ function Footer() {
               <li style={styles.contactItem}>
                 <IoMailOutline style={styles.icon} />
                 <a
-                  href="mailto:info@keerthibuilders.com"
+                  href="mailto:keerthibuildersales@gmail.com"
                   style={styles.link}
                 >
-                  info@keerthibuilders.com
+                  keerthibuildersales@gmail.com
                 </a>
               </li>
               <li style={styles.contactItem}>
                 <MdOutlinePhone style={styles.icon} />
-                <a href="tel:+919999999999" style={styles.link}>+91 9999999999</a>
+                <a href="tel:+919742063580" style={styles.link}>+91 97420 63580</a>
               </li>
               <li style={styles.contactItem}>
                 <LuMapPin style={{...styles.icon, width:'20px' }} />
@@ -328,15 +375,15 @@ function Footer() {
                   rel="noopener noreferrer"
                   style={styles.link}
                 >
-                  #247, 1st Floor, 2nd Stage, Bengaluru, 560071.
+                  #938, 1st Main Rd, Stage II, Kengeri Satellite Town, Bengaluru, Karnataka 560060.
                 </a>
               </li>
             </ul>
           </Col>
         </Row>
-
+        
         <hr style={styles.divider} />
-
+        
         {/* Copyright & Social Media */}
         <Row className="align-items-center">
           <Col md={7} className="text-center text-md-start">
@@ -344,12 +391,11 @@ function Footer() {
               <small>Copyright © {new Date().getFullYear()} Keerthi Builders. All Rights Reserved.</small>
             </p>
           </Col>
-
-          <Col md={5}>
-            <ul style={styles.socialList} className="text-center text-md-end">
+          <Col md={5} className="d-flex justify-content-center justify-content-md-end">
+            <ul style={styles.socialList}>
               <li style={styles.socialItem}>
-                <a
-                  href="https://wa.me/919999999999"
+                                <a
+                  href="https://wa.me/919742063580"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
@@ -360,8 +406,7 @@ function Footer() {
               </li>
               <li style={styles.socialItem}>
                 <a
-
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/keerthibuildersblr/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -372,7 +417,7 @@ function Footer() {
               </li>
               <li style={styles.socialItem}>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/keerthibuildersbangalore/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -383,27 +428,60 @@ function Footer() {
               </li>
               <li style={styles.socialItem}>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.youtube.com/channel/UCgrjUXJh7DfBnhQt3NxPLeA"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="LinkedIn"
+                  aria-label="YouTube"
                   style={styles.socialLink}
                 >
-                  <CiLinkedin />
+                  <CiYoutube />
                 </a>
               </li>
             </ul>
           </Col>
         </Row>
       </Container>
+      {/* Add CSS for hover effects */}
+      <style>
+        {`
+          .footer-link:hover {
+            color: #ffc107 !important;
+            transition: color 0.3s ease;
+          }
+          
+          .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            transform: translateY(-3px) !important;
+            transition: all 0.3s ease;
+          }
+          
+          @media (max-width: 767.98px) {
+            .social-list {
+              justify-content: center !important;
+              margin: 0 !important;
+            }
+            
+            .social-item {
+              margin: 0 0.5rem !important;
+            }
+          }
+          
+          @media (min-width: 768px) {
+            .social-list {
+              justify-content: flex-end !important;
+              margin: 0 !important;
+            }
+          }
+        `}
+      </style>
     </footer>
   );
 }
 
 const styles = {
   footer: {
-    backgroundColor: '#21623C', 
-    color: '#fff',  
+    backgroundColor: '#21623C',
+    color: '#fff',
     padding: '3rem 0 2rem',
     position: 'relative',
     overflow: 'hidden',
@@ -444,9 +522,7 @@ const styles = {
     fontSize: '14px',
     fontWeight: '400',
     fontFamily: fonts.Noto,
-    '&:hover': {
-      color: '#ffc107'
-    }
+    cursor: 'pointer'
   },
   contactList: {
     listStyle: 'none',
@@ -463,26 +539,22 @@ const styles = {
     fontSize: '1rem',
     marginRight: '0.75rem',
     width: '16px',
-    marginTop: '0.25rem'  
-  },
-  phoneIndent: {
-    width: '16px',
-    marginRight: '0.75rem'
+    marginTop: '0.25rem',
+    flexShrink: 0
   },
   divider: {
     borderColor: 'rgba(255, 255, 255, 0.2)',
     margin: '2rem 0'
   },
   copyright: {
-    color: '#fff',  
-    fontSize: '14px',  
-    fontWeight: '400',  
+    color: '#fff',
+    fontSize: '14px',
+    fontWeight: '400',
     marginBottom: '0',
     fontFamily: fonts.Noto
   },
   socialList: {
     display: 'flex',
-    justifyContent: 'flex-end',
     listStyle: 'none',
     padding: 0,
     margin: 0,
@@ -493,7 +565,7 @@ const styles = {
     marginLeft: '1rem'
   },
   socialLink: {
-    color: '#fff',  
+    color: '#fff',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     width: '36px',
     height: '36px',
@@ -502,11 +574,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all 0.3s ease',
-    '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-      transform: 'translateY(-3px)'
-    }
-  },
+    textDecoration: 'none'
+  }
 };
-   
+
 export default Footer;
+

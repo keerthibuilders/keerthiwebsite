@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Container, Card, Image } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import fonts from "../../../components/Common/Font";
 
@@ -12,33 +12,46 @@ const HomeTestimonial = () => {
   const testimonialData = [
     {
       id: 1,
-      name: "Kaushik RK",
-      role: "Motorcycle Enthusiast",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      text: "At RealRoadies, we redefine corporate events by merging adventure, teamwork, and brand visibility—all powered by motorcycles. Whether it's about brand activation, employee engagement, leadership development, CSR initiatives, diversity & inclusion, or wellness programs, we craft unforgettable experiences that go beyond the ordinary and create a lasting impact."
+      name: "Vedavyas Rao",
+      role: " IT Engineer ",
+      text: "Santhosh took me through three plots in and around Kengeri. Each one was better than the other. The layouts and planning are very good and Santhosh explained me on many things which I wasn't aware of and he answered all my naive questions. These layouts seems good for investments."
     },
     {
       id: 2,
-      name: "Priya Sharma",
-      role: "Motorcycle Enthusiast",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      text: "As an HR professional, I was looking for something different for our annual team event. RealRoadies delivered beyond expectations! The customized motorcycle journey through scenic routes created lasting memories and strengthened team bonds. Our employees are still talking about it months later."
+      name: "Guru Saitej",
+      role: "Happy Customer",
+      text: "Very neat and clean business anyone can trust. Human being thinking of level very helping nature hood MD Mr Manjunath . Thanking you for understanding problems and situations. So kind of supporting business. Anyone can trust."
     },
     {
       id: 3,
-      name: "Rajiv Mehta",
-      role: "Motorcycle Enthusiast",
-      image: "https://randomuser.me/api/portraits/men/67.jpg",
-      text: "We partnered with RealRoadies for our brand activation campaign, and the results were phenomenal. Their motorcycle-themed events created the perfect buzz around our product launch. The professional approach combined with their passion for riding made the collaboration seamless."
+      name: "Prathik Jain",
+      role: "Plot Owner",
+      text: "Very genuine people & well planned plots. I just bought one about 3 months ago. Very happy with the prices & entire process so far. Would definitely recommend to my near & dear ones."
     },
     {
       id: 4,
-      name: "Ananya Patel",
-      role: "Motorcycle Enthusiast",
-      image: "https://randomuser.me/api/portraits/women/29.jpg",
-      text: "The leadership development program by RealRoadies was unlike any corporate training I've experienced. Using motorcycle journeys as a metaphor for business challenges was brilliant. My team returned more confident, resilient, and united. Highly recommend for any organization looking to invest in their leaders."
+      name: "Prasad S",
+      role: "Professional",
+      text: "'Keerthi iinfinity' is one of the leading and fast growing Developers in Bangalore,&Ruppees Enclave is to Good, The Site Price is for Money.👍"
     }
   ];
+
+  // Function to generate profile picture from initials
+  const generateProfilePic = (name) => {
+    const initials = name.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
+    const colors = ['#1C542C', '#1C542C', '#1C542C', '#1C542C', '#1C542C'];
+    const colorIndex = name.length % colors.length;
+    const backgroundColor = colors[colorIndex];
+    
+    return (
+      <div style={{
+        ...styles.profilePicture,
+        backgroundColor: backgroundColor
+      }}>
+        {initials}
+      </div>
+    );
+  };
 
   // Check scroll position to show/hide navigation arrows
   const checkScrollPosition = () => {
@@ -125,9 +138,9 @@ const HomeTestimonial = () => {
       
       .testimonial-card {
         transition: all 0.3s ease;
-        height: 320px !important; /* Reduced from 400px to 320px */
+        height: 320px !important;
         position: relative;
-        padding-bottom: 80px !important; /* Space for author area */
+        padding-bottom: 80px !important;
         font-family: ${fonts.Noto};
       }
       
@@ -139,7 +152,7 @@ const HomeTestimonial = () => {
       .testimonial-text {
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 7; /* Reduced from 10 to 7 lines */
+        -webkit-line-clamp: 7;
         -webkit-box-orient: vertical;
         font-family: ${fonts.Noto};
       }
@@ -264,14 +277,7 @@ const HomeTestimonial = () => {
                   
                   {/* Author area - positioned absolutely at bottom */}
                   <div className="testimonial-footer" style={styles.testimonialFooter}>
-                    <Image
-                      src={testimonial.image}
-                      roundedCircle
-                      width={50}
-                      height={50}
-                      alt={testimonial.name}
-                      style={styles.testimonialImage}
-                    />
+                    {generateProfilePic(testimonial.name)}
                     <div style={styles.testimonialAuthor}>
                       <h6 style={{...styles.testimonialName, fontFamily: fonts.Noto}}>{testimonial.name}</h6>
                       <small style={{...styles.testimonialRole, fontFamily: fonts.Noto}}>{testimonial.role}</small>
@@ -335,9 +341,9 @@ const styles = {
     flex: "0 0 auto",
     minWidth: "350px",
     maxWidth: "400px",
-    height: "200px", 
+    height: "200px",
     margin: "0 0px",
-    position: "relative", 
+    position: "relative",
     fontFamily: fonts.Noto,
   },
   quoteIcon: {
@@ -352,14 +358,14 @@ const styles = {
     lineHeight: "1.6",
     overflow: "hidden",
     display: "-webkit-box",
-    WebkitLineClamp: 7, 
+    WebkitLineClamp: 7,
     WebkitBoxOrient: "vertical",
     fontFamily: fonts.Noto,
   },
   testimonialFooter: {
     display: "flex",
     alignItems: "center",
-    position: "absolute", // Position at bottom
+    position: "absolute",
     bottom: "20px",
     left: "20px",
     right: "20px",
@@ -367,9 +373,20 @@ const styles = {
     paddingTop: "15px",
     fontFamily: fonts.Noto,
   },
-  testimonialImage: {
+  profilePicture: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    fontSize: "18px",
+    fontWeight: "600",
+    fontFamily: fonts.Noto,
     border: "3px solid white",
     boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
+    flexShrink: 0,
   },
   testimonialAuthor: {
     marginLeft: "15px",
@@ -430,5 +447,6 @@ const styles = {
     marginTop: "20px",
   }
 };
+
 
 export default HomeTestimonial;
