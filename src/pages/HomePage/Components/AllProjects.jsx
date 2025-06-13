@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import logo from "/assets/images/logo.png";
 import fonts from "../../../components/Common/Font";
 
-const HomeProjectSection = () => {
+const AllProjects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -123,7 +123,7 @@ const HomeProjectSection = () => {
         <Row className="mb-2 mb-md-4">
           <Col xs={12} className="text-center">
             <h2 style={{...styles.heading, ...getAnimationStyle(1)}} className="mb-3 mb-md-4">
-              Newly Launched Projects
+              All Projects
             </h2>
           </Col>
         </Row>
@@ -137,16 +137,15 @@ const HomeProjectSection = () => {
               onMouseLeave={() => setIsPaused(false)}
               className="d-flex align-items-center justify-content-center position-relative"
             >
-              {/* Previous Button - Desktop */}
+              {/* Previous Button */}
               <button 
                 style={styles.navButton} 
                 onClick={() => handleNavClick(prevSlide)}
                 aria-label="Previous projects"
-                className="d-none d-lg-flex align-items-center justify-content-center"
+                className="d-none d-md-flex align-items-center justify-content-center"
               >
                 &#8249;
               </button>
-
               {/* Previous Button - Mobile/Tablet */}
               <button 
                 style={styles.mobileNavButton} 
@@ -156,7 +155,6 @@ const HomeProjectSection = () => {
               >
                 &#8249;
               </button>
-              
               {/* Images Container */}
               <div style={styles.imagesWrapper} className="d-flex align-items-center justify-content-center position-relative overflow-hidden w-100">
                 {/* Previous Image (Half out of screen) - Hidden on mobile */}
@@ -199,12 +197,12 @@ const HomeProjectSection = () => {
                 </div>
               </div>
               
-              {/* Next Button - Desktop */}
+              {/* Next Button */}
               <button 
                 style={styles.navButton} 
                 onClick={() => handleNavClick(nextSlide)}
                 aria-label="Next projects"
-                className="d-none d-lg-flex align-items-center justify-content-center"
+                className="d-none d-md-flex align-items-center justify-content-center"
               >
                 &#8250;
               </button>
@@ -218,9 +216,12 @@ const HomeProjectSection = () => {
               >
                 &#8250;
               </button>
+              
             </div>
           </Col>
         </Row>
+
+        
         
         {/* Dots Indicator */}
         <Row className="mt-4">
@@ -281,13 +282,14 @@ const HomeProjectSection = () => {
             #project-section .center-image-container {
               flex: 0 0 100% !important;
               height: 180px !important;
-              max-width: 280px !important;
+              max-width: 320px !important;
               margin: 0 auto !important;
               border-radius: 0px !important;
               overflow: hidden !important;
             }
             #project-section .mobile-image {
-              object-fit: fit !important;
+              object-fit: cover !important;
+              object-position: center !important;
             }
           }
 
@@ -295,13 +297,14 @@ const HomeProjectSection = () => {
             #project-section .center-image-container {
               flex: 0 0 100% !important;
               height: 220px !important;
-              max-width: 350px !important;
+              max-width: 400px !important;
               margin: 0 auto !important;
               border-radius: 0px !important;
               overflow: hidden !important;
             }
             #project-section .mobile-image {
               object-fit: fit !important;
+              object-position: center !important;
             }
           }
 
@@ -314,6 +317,7 @@ const HomeProjectSection = () => {
             }
             #project-section .mobile-image {
               object-fit: fit !important;
+              object-position: center !important;
             }
           }
 
@@ -333,6 +337,7 @@ const HomeProjectSection = () => {
           /* Ensure proper image aspect ratio on all devices */
           .mobile-image {
             object-fit: fit;
+            object-position: center;
           }
         `}
       </style>
@@ -414,18 +419,12 @@ const styles = {
     backgroundColor: "#1C542C",
     color: "white",
     border: "none",
-    borderRadius: "50%",
-    width: "45px",
-    height: "45px",
-    fontSize: "20px",
+    borderRadius: "25px",
+    padding: "10px 20px",
+    fontSize: "16px",
     cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-    transition: "all 0.3s ease",
-    zIndex: 10,
-    flexShrink: 0
+    transition: "all 0.3s ease"
   },
   imagesWrapper: {
     display: "flex",
@@ -494,4 +493,4 @@ const styles = {
   }
 };
 
-export default HomeProjectSection;
+export default AllProjects;

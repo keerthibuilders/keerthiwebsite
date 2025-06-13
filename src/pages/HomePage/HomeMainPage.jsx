@@ -5,15 +5,17 @@ import HomeAboutSection from './Components/HomeAboutSection'
 import HomeTestimonial from './Components/HomeTestimonial'
 import HomeOurPropertiesSection from './Components/HomeOurPropertiesSection'
 import HomeContactSection from './Components/HomeContactSeaction'
+import AllProject from './Components/AllProjects'
 
 const HomeMainPage = () => {
   return (
     <div>
       <HomeHeroSection />
       <HomeProjectSection />
-      <HomeAboutSection />
-      <HomeTestimonial />
       <HomeOurPropertiesSection />
+      <AllProject />
+      <HomeTestimonial />
+      <HomeAboutSection />
       <HomeContactSection />
     </div>
   )

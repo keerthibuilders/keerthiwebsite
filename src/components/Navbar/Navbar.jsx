@@ -5,7 +5,19 @@ import fonts from "../Common/Font";
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navbarRef = useRef(null);
+
+  // Handle scroll to change navbar appearance
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 50); // Change navbar after 50px scroll
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Enhanced navigation function
   const handleNavigation = (targetId, event) => {
@@ -93,7 +105,14 @@ const Navbar = () => {
   return (
     <BootstrapNavbar
       expand="lg"
-      style={styles.navbar}
+      style={{
+        ...styles.navbar,
+        backgroundColor: isScrolled ? '#ffffff' : 'transparent',
+        boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+        transition: 'all 0.3s ease',
+        position: 'fixed',
+        padding: '0.75rem 0' // Reduced equal top and bottom padding
+      }}
       expanded={expanded}
       onToggle={(expanded) => setExpanded(expanded)}
       ref={navbarRef}
@@ -109,8 +128,20 @@ const Navbar = () => {
             style={styles.logo}
           />
           <div style={styles.titleContainer}>
-            <h1 style={styles.title}>KEERTHI BUILDERS</h1>
-            <p style={styles.subtitle}>Building the future of RealEstate</p>
+            <h1 style={{
+              ...styles.title,
+              color: isScrolled ? '#1C542C' : '#ffffff',
+              textShadow: isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
+            }}>
+              KEERTHI BUILDERS
+            </h1>
+            <p style={{
+              ...styles.subtitle,
+              color: isScrolled ? '#000' : '#e0e0e0',
+              textShadow: isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+            }}>
+              Building the future of RealEstate
+            </p>
           </div>
         </BootstrapNavbar.Brand>
         
@@ -138,6 +169,7 @@ const Navbar = () => {
               href="#project-section"
               style={styles.navLink}
               onClick={(e) => handleNavigation('project-section', e)}
+              className={isScrolled ? 'scrolled' : ''}
             >
               Projects
             </Nav.Link>
@@ -145,6 +177,7 @@ const Navbar = () => {
               href="#about"
               style={styles.navLink}
               onClick={(e) => handleNavigation('about', e)}
+              className={isScrolled ? 'scrolled' : ''}
             >
               About
             </Nav.Link>
@@ -176,7 +209,7 @@ const Navbar = () => {
           }
           
           #navbar-toggle-btn .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)'}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
             width: 24px !important;
             height: 24px !important;
           }
@@ -196,10 +229,20 @@ const Navbar = () => {
               font-weight: 500 !important;
               font-size: 16px !important;
               padding: 0.5rem 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-link.scrolled {
+              color: #1C542C !important;
+              text-shadow: none !important;
             }
             
             .nav-link:hover {
               color: #e0e0e0 !important;
+            }
+            
+            .nav-link.scrolled:hover {
+              color: #164023 !important;
             }
             
             #navbar-contact-btn {
@@ -339,13 +382,11 @@ const Navbar = () => {
 
 const styles = {
   navbar: {
-    position: "absolute",
+    position: "fixed",
     top: "0",
     left: "0",
     right: "0",
     zIndex: "1000",
-    padding: "1.5rem 0 0 0",
-    backgroundColor: "transparent",
     fontFamily: fonts.Noto
   },
   brand: {
@@ -361,23 +402,22 @@ const styles = {
   titleContainer: {
     display: "flex",
     flexDirection: "column",
-    marginTop: '20px',
-    fontFamily: fonts.Noto
+    fontFamily: fonts.Noto,
+    marginTop:"25px",
+    marginLeft:"5px"
   },
   title: {
     fontSize: "16px",
     fontWeight: "600",
-    color: "#ffffff",
     margin: "0",
     fontFamily: fonts.Noto,
-    textShadow: "0 2px 4px rgba(0,0,0,0.7)"
+    transition: "all 0.3s ease"
   },
   subtitle: {
     fontSize: "10px",
-    color: "#e0e0e0",
     margin: "0",
     fontFamily: fonts.Noto,
-    textShadow: "0 1px 3px rgba(0,0,0,0.7)"
+    transition: "all 0.3s ease"
   },
   navLink: {
     fontFamily: fonts.Noto

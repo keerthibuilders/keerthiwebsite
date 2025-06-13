@@ -90,7 +90,7 @@ const PropertyCard = ({ image, title, location, video }) => {
       </div>
 
       <div style={styles.cardFooter}>
-        <a 
+        {/* <a 
           href="#" 
           style={{
             ...styles.viewLink,
@@ -99,7 +99,7 @@ const PropertyCard = ({ image, title, location, video }) => {
           onClick={(e) => e.preventDefault()} // Prevent default link behavior
         >
           View details
-        </a>
+        </a> */}
         <div style={{
           ...styles.arrowContainer,
           backgroundColor: isHovered ? 'white' : 'rgba(255,255,255,0.9)',
@@ -125,6 +125,12 @@ const HomeOurPropertiesSection = () => {
       title: "Industrial",
       video: videoFile2
     },
+    {
+      id: 3,
+      image: "https://images.pexels.com/photos/27102111/pexels-photo-27102111/free-photo-of-welder-in-factory.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      title: "Premium Villa Plots",
+      video: videoFile2
+    },
   ];
 
   return (
@@ -135,7 +141,7 @@ const HomeOurPropertiesSection = () => {
       <Container style={styles.contentContainer}>
         <Row className="mb-4">
           <Col lg={12} className="mx-auto">
-            <h2 style={styles.sectionTitle}>Our Properties</h2>
+            <h2 style={styles.sectionTitle}>Our Portfolio</h2>
             <p style={styles.sectionDescription}>
               At Keerthi Builders, we redefine real estate by merging innovation, quality, and customer satisfaction.
               Whether it's about residential properties, commercial spaces, luxury villas, affordable housing, or
@@ -192,7 +198,7 @@ const styles = {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed", // Optional: creates parallax effect
-    padding: "60px 0",
+    padding: "40px 0",
     color: "white",
     position: "relative",
     overflow: "hidden", // Added to contain video
@@ -227,14 +233,14 @@ const styles = {
   },
   cardsContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 300px))", // Fixed width cards
+    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 300px))", // Fixed width cards
     gap: "30px",
-    maxWidth: "1000px",
+    maxWidth: "1200px",
     margin: "0 auto",
     
   },
   propertyCard: {
-    height: "250px", 
+    height: "210px", 
     cursor: "pointer",
 
     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
@@ -271,8 +277,6 @@ const styles = {
     fontSize: "22px",
     fontWeight: "500",
     marginBottom: "8px",
-    textAlign: 'center',
-    justifyContent: 'center',
     transition: "color 0.3s ease",
     textShadow: "2px 2px 4px rgba(0,0,0,0.8)", 
     fontFamily: fonts.Noto,
