@@ -234,7 +234,7 @@ const styles = {
   cardsContainer: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(350px, 300px))", // Fixed width cards
-    gap: "30px",
+    gap: "20px",
     maxWidth: "1200px",
     margin: "0 auto",
     
