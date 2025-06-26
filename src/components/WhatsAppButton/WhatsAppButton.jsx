@@ -23,19 +23,28 @@ const WhatsAppPage = () => {
           position: "fixed",
           bottom: "20px",
           right: "20px",
-          backgroundColor: "#000", 
+          backgroundColor: "#25D366", // Original WhatsApp green color
           borderRadius: "50%",
-          width: "50px",
-          height: "50px",
+          width: "40px", // Slightly larger for better visibility
+          height: "40px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           cursor: "pointer",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          boxShadow: "0 4px 12px rgba(37, 211, 102, 0.4)", // Green shadow for glow effect
           zIndex: 1000,
+          transition: "all 0.3s ease", // Smooth hover transition
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.transform = "scale(1.1)";
+          e.target.style.boxShadow = "0 6px 20px rgba(37, 211, 102, 0.6)";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.transform = "scale(1)";
+          e.target.style.boxShadow = "0 4px 12px rgba(37, 211, 102, 0.4)";
         }}
       >
-        <FaWhatsapp size={30} color="#fff" />
+        <FaWhatsapp size={28} color="#fff" />
       </div>
     </div>
   );

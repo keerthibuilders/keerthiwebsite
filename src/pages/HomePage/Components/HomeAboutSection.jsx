@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { ArrowUpRight } from "lucide-react";
-import fonts from "../../../components/Common/Font";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function HomeAboutSection() {
+const HomeAboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -30,15 +29,36 @@ function HomeAboutSection() {
     };
   }, []);
 
-  const getAnimationStyle = (index) => ({
+  // Image zoom animation on load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setImageLoaded(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const getTextAnimationStyle = (direction, index) => ({
     opacity: isVisible ? 1 : 0,
-    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-    transition: `opacity 0.8s ease, transform 0.8s ease`,
+    transform: isVisible ? 'translateX(0)' : `translateX(${direction === 'left' ? '-100px' : '100px'})`,
+    transition: `all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
     transitionDelay: `${0.2 * index}s`
   });
 
+  const getImageZoomStyle = () => ({
+    opacity: imageLoaded ? 1 : 0,
+    transform: imageLoaded ? 'scale(1)' : 'scale(0.3)',
+    transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)'
+  });
+
+  const getVisionMissionAnimationStyle = (direction, index) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateX(0)' : `translateX(${direction === 'left' ? '-80px' : '80px'})`,
+    transition: `all 0.8s ease-out`,
+    transitionDelay: `${0.3 + (0.2 * index)}s`
+  });
+
   return (
-    <div id='about' ref={sectionRef} style={styles.aboutContainer}>
+    <div ref={sectionRef} style={styles.aboutContainer}>
       {/* Animated background elements */}
       <div style={styles.backgroundElements}>
         <div style={styles.circle1} className="animated-bg-element"></div>
@@ -51,52 +71,65 @@ function HomeAboutSection() {
         <div style={{...styles.rainLine, left: '75%', animationDelay: '2.1s'}} className="rain-line"></div>
       </div>
 
+      {/* About Section */}
       <Container style={styles.contentWrapper}>
-        <Row className="mb-4">
-          <Col>
-            {/* Header with animation */}
-            <div style={{...styles.headerContainer, ...getAnimationStyle(1)}}>
-              <div style={styles.headingWrapper}>
-                <h2 style={styles.heading}>
-                  About Us
-                </h2>
-                <div 
-                  style={{
-                    ...styles.arrowContainer,
-                  }}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                >
-                  <ArrowUpRight size={22} color={isHovered ? 'white' : 'white'} />
-                </div>
-              </div>
-              <p style={styles.paragraph}>
-                At Keerthi Builders, we don’t just develop plots—we lay the groundwork for dreams. With over 10 years of experience in land development across Bangalore and its fast-growing outskirts, we’ve earned a reputation for trust, transparency, and long-term value. Every project we take on is driven by a simple belief: land is more than an asset—it’s the beginning of someone’s future. Our commitment to clear titles, prime locations, and ethical practices ensures that every Keerthi plot is a step toward prosperity and peace of mind.
-              </p>
+        <Row style={styles.aboutRow}>
+          {/* Left Side Image with Zoom Animation */}
+          <Col lg={5} md={6} style={styles.imageColumn}>
+            <div style={getImageZoomStyle()}>
+              <img
+                src="https://www.kowalinvestmentgroup.com/wp-content/uploads/2023/08/Business-Owner.jpg"
+                alt="KT Manjunath - Founder"
+                style={styles.founderImage}
+                onLoad={() => setImageLoaded(true)}
+              />
             </div>
-
-            {/* Content with animation */}
-            <div style={{...styles.contentBlock, ...getAnimationStyle(2)}}>
-              <p style={styles.paragraph}>
-                The driving force behind Keerthi Builders is our founder, KT Manjunath—a visionary with relentless dedication and a sharp instinct for growth. From humble beginnings to becoming one of the most respected names in Bangalore’s real estate landscape, Mr. Manjunath’s journey is a testament to what integrity, hard work, and foresight can achieve. His hands-on leadership and people-first approach have helped hundreds of families and investors secure their space in the city’s bright future.
-              </p>
-            </div>
-
-            {/* <div style={{...styles.contentBlock, ...getAnimationStyle(3)}}>
-              <p style={styles.paragraph}>
-                Our team of experienced professionals combines a passion for construction with
-                expertise in modern building techniques to deliver tailored solutions that align with your
-                dreams and aspirations. We believe in the transformative power of thoughtfully designed spaces and the unique
-                sense of belonging that develops when families move into homes built with care and precision.
-                From custom-designed layouts to comprehensive project management, we handle every
-                detail to ensure your property investment is secure, valuable, and impactful.
-              </p>
-            </div> */}
+          </Col>
+          
+          {/* Right Side Text Content with Side Animation */}
+          <Col lg={7} md={6} style={styles.contentColumn}>
+            <h2 style={{...styles.founderName, ...getTextAnimationStyle('right', 1)}}>
+              KT Manjunath
+            </h2>
+            <h5 style={{...styles.founderTitle, ...getTextAnimationStyle('right', 2)}}>
+              Founder & Managing Director
+            </h5>
+            <p style={{...styles.founderDescription, ...getTextAnimationStyle('right', 3)}}>
+              The driving force behind Keerthi Builders is our founder, KT Manjunath—a visionary with
+              relentless dedication and a sharp instinct for growth. From humble beginnings to becoming
+              one of the most respected names in Bangalore's real estate landscape, Mr. Manjunath's
+              journey is a testament to what integrity, hard work, and foresight can achieve.
+            </p>
           </Col>
         </Row>
       </Container>
 
-      {/* CSS for additional animations */}
+      {/* Vision Section with New Background */}
+      <div style={styles.visionMissionWrapper}>
+        <Container style={{...styles.sectionWrapper, ...getVisionMissionAnimationStyle('left', 1)}}>
+          <h2 style={styles.sectionTitle}>Our Vision</h2>
+          <p style={styles.sectionText}>
+            To be the most trusted and preferred land development company in South India,
+            creating sustainable communities that enhance the quality of life for generations to come.
+            We envision a future where every plot we develop becomes the foundation for
+            prosperity, happiness, and lasting memories for families across Bangalore and beyond.
+          </p>
+        </Container>
+
+        {/* Mission Section */}
+        <Container style={{...styles.sectionWrapper, ...getVisionMissionAnimationStyle('right', 2)}}>
+          <h2 style={styles.sectionTitle}>Our Mission</h2>
+          <p style={styles.sectionText}>
+            To deliver exceptional land development projects with complete transparency,
+            ethical practices, and unwavering commitment to quality, ensuring every
+            investment becomes a foundation for prosperity and peace of mind.
+            We are committed to transforming aspirations into reality through innovative
+            land development solutions that prioritize customer satisfaction and long-term value.
+          </p>
+        </Container>
+      </div>
+
+      {/* CSS for animations and responsive design */}
       <style>
         {`
           .animated-bg-element {
@@ -107,15 +140,6 @@ function HomeAboutSection() {
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
             100% { transform: translateY(0) rotate(0deg); }
-          }
-          
-          .feature-box {
-            transition: all 0.3s ease;
-          }
-          
-          .feature-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           }
           
           .rain-line {
@@ -140,18 +164,23 @@ function HomeAboutSection() {
               opacity: 0;
             }
           }
+
+          @media (max-width: 768px) {
+            .about-row {
+              flex-direction: column !important;
+            }
+          }
         `}
       </style>
     </div>
   );
-}
+};
 
-// Enhanced styles object with imported font styles and background image
 const styles = {
   aboutContainer: {
     backgroundColor: "#1C542C",
     color: "white",
-    padding: "40px 0",
+    padding: "40px 0 0 0", // Remove bottom padding
     position: "relative",
     overflow: "hidden",
     backgroundImage: "url('/src/assets/images/bg1.png')",
@@ -178,15 +207,6 @@ const styles = {
     top: "-150px",
     right: "-100px",
   },
-  circle2: {
-    position: "absolute",
-    width: "200px",
-    height: "200px",
-    borderRadius: "50%",
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    bottom: "-100px",
-    left: "10%",
-  },
   rectangle: {
     position: "absolute",
     width: "400px",
@@ -205,82 +225,85 @@ const styles = {
     borderRadius: "4px",
   },
   contentWrapper: {
-    margin: "0 auto",
-    padding: "0 15px",
+    maxWidth: "1200px",
+    position: "relative",
+    zIndex: 2,
+    marginBottom: "20px",
+  },
+  aboutRow: {
+    alignItems: "center",
+    minHeight: "40vh",
+  },
+  imageColumn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+  },
+  founderImage: {
+    width: "100%",
+    maxWidth: "300px",
+    height: "250px",
+    borderRadius: "0px",
+    objectFit: "cover",
+    boxShadow: "0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2)",
+    border: "3px solid rgba(255, 255, 255, 0.1)",
+  },
+  contentColumn: {
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  founderName: {
+    fontSize: "32px",
+    fontWeight: "500",
+    color: "#fff",
+    marginBottom: "0.5rem",
+    fontFamily: "sans-serif",
+  },
+  founderTitle: {
+    fontSize: "14px",
+    marginBottom: "2rem",
+    color: "#4CAF50",
+    fontWeight: "400",
+    fontFamily: "sans-serif",
+  },
+  founderDescription: {
+    fontSize: "16px",
+    lineHeight: "1.8",
+    color: "rgba(255, 255, 255, 0.9)",
+    marginBottom: "1.5rem",
+    fontFamily: "sans-serif",
+  },
+  // New wrapper for Vision/Mission with light background
+  visionMissionWrapper: {
+    backgroundColor: "#e8f5e9",
+    padding: "30px 0",
     position: "relative",
     zIndex: 2,
   },
-  headerContainer: {
-    marginBottom: "10px",
-  },
-  headingWrapper: {
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-    marginBottom: "40px",
-  },
-  heading: {
-    fontFamily: fonts.Noto,
-    fontSize: "32px",
-    fontWeight: 500,
-    margin: "0",
-    textAlign: "left",
+  sectionWrapper: {
+    maxWidth: "800px",
     position: "relative",
-    display: "inline-block",
+    zIndex: 2,
+    marginBottom: "20px",
   },
-  arrowContainer: {
-    padding: "8px",
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "all 0.3s ease",
-  },
-  introDescription: {
-    fontSize: "14px",
-    lineHeight: "1.6",
-    textAlign: "left",
-    fontFamily: fonts.Noto,
-  },
-  contentBlock: {
+  sectionTitle: {
+    fontSize: "28px",
+    fontWeight: "500",
     marginBottom: "10px",
-  },
-  paragraph: {
-    fontFamily: fonts.Noto,
-    fontSize: "16px",
-    lineHeight: "1.5",
-    margin: "0",
+    color: "#2e7d32", // Darker green for better contrast on light background
+    fontFamily: "sans-serif",
     textAlign: "left",
-    fontWeight: 400,
   },
-  featureBox: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: "8px",
-    padding: "25px",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    backdropFilter: "blur(5px)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    fontFamily: fonts.Noto,
-  },
-  featureIcon: {
-    fontSize: "40px",
-    marginBottom: "15px",
-  },
-  featureTitle: {
-    fontSize: "20px",
-    fontWeight: 600,
-    marginBottom: "10px",
-    fontFamily: fonts.Noto,
-  },
-  featureDescription: {
+  sectionText: {
     fontSize: "16px",
-    lineHeight: "1.6",
-    margin: "0",
-    fontFamily: fonts.Noto,
+    lineHeight: "1.8",
+    color: "#424242", // Dark gray for better readability on light background
+    fontFamily: "sans-serif",
+    margin: 0,
+    textAlign: "left",
   },
 };
 

@@ -6,7 +6,7 @@ import fonts from "../../../components/Common/Font";
 // Direct Cloudinary video URLs - these are correct
 const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
 const videoFile2 = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364547/ke7tlieyeuur72ld7uam.mp4";
-
+const videoFile3 ="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917082/oqydr1o12iwmkhkwrdma.mp4"
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef(null);
@@ -90,16 +90,6 @@ const PropertyCard = ({ image, title, location, video }) => {
       </div>
 
       <div style={styles.cardFooter}>
-        {/* <a 
-          href="#" 
-          style={{
-            ...styles.viewLink,
-            color: isHovered ? 'white' : 'white' // Always white for better visibility
-          }}
-          onClick={(e) => e.preventDefault()} // Prevent default link behavior
-        >
-          View details
-        </a> */}
         <div style={{
           ...styles.arrowContainer,
           backgroundColor: isHovered ? 'white' : 'rgba(255,255,255,0.9)',
@@ -127,9 +117,9 @@ const HomeOurPropertiesSection = () => {
     },
     {
       id: 3,
-      image: "https://images.pexels.com/photos/27102111/pexels-photo-27102111/free-photo-of-welder-in-factory.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      image: "https://www.houseofhiranandani.com/vlogs/storage/2019/01/35.png",
       title: "Premium Villa Plots",
-      video: videoFile2
+      video: videoFile3
     },
   ];
 
@@ -151,19 +141,16 @@ const HomeOurPropertiesSection = () => {
         </Row>
         
         <Row className="justify-content-center">
-          <Col xs={12}>
-            <div style={styles.cardsContainer}>
-              {properties.map((property) => (
-                <PropertyCard
-                  key={property.id}
-                  image={property.image}
-                  title={property.title}
-                  location={property.location}
-                  video={property.video}
-                />
-              ))}
-            </div>
-          </Col>
+          {properties.map((property) => (
+            <Col lg={4} md={6} sm={12} key={property.id} className="mb-4">
+              <PropertyCard
+                image={property.image}
+                title={property.title}
+                location={property.location}
+                video={property.video}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
 
@@ -231,18 +218,9 @@ const styles = {
     fontFamily: fonts.Noto,
     textShadow: "1px 1px 2px rgba(0,0,0,0.5)", // Added text shadow for better visibility
   },
-  cardsContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 300px))", // Fixed width cards
-    gap: "20px",
-    maxWidth: "1200px",
-    margin: "0 auto",
-    
-  },
   propertyCard: {
-    height: "210px", 
+    height: "200px", // Increased height for better proportions
     cursor: "pointer",
-
     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
     display: "flex",
     flexDirection: "column",
@@ -251,6 +229,7 @@ const styles = {
     transition: "all 0.4s ease",
     position: "relative",
     borderRadius: "0px", 
+    width: "100%", // Ensure full width within column
   },
   cardVideo: {
     position: "absolute",
@@ -291,18 +270,10 @@ const styles = {
   cardFooter: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-end", // Align arrow to the right
     marginTop: "20px",
     position: "relative",
     zIndex: 3
-  },
-  viewLink: {
-    fontSize: "14px",
-    fontWeight: "400",
-    textDecoration: "none",
-    transition: "color 0.3s ease",
-    fontFamily: fonts.Noto,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.8)", // Text shadow for visibility
   },
   arrowContainer: {
     padding: "8px",

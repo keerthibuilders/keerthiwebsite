@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // Add this import
 import logo from "/assets/images/logo.png";
 import fonts from "../../../components/Common/Font";
 
@@ -7,6 +8,7 @@ const HomeProjectSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate(); // Add this hook
 
   // Sample project data - replace with your actual data
   const projects = [
@@ -110,6 +112,16 @@ const HomeProjectSection = () => {
     setTimeout(() => setIsPaused(false), 5000);
   };
 
+  // Add navigation handler for center image click only
+  const handleCenterImageClick = () => {
+    navigate('/detailspage', { 
+      state: { 
+        projectId: projects[currentIndex].id,
+        projectData: projects[currentIndex]
+      } 
+    });
+  };
+
   return (
     <div id="project-section" style={styles.projectSection}>
       {/* Background Design Elements */}
@@ -123,7 +135,7 @@ const HomeProjectSection = () => {
         <Row className="mb-2 mb-md-4">
           <Col xs={12} className="text-center">
             <h2 style={{...styles.heading, ...getAnimationStyle(1)}} className="mb-3 mb-md-4">
-              Newly Launched Projects
+              On Going Projects
             </h2>
           </Col>
         </Row>
@@ -159,8 +171,11 @@ const HomeProjectSection = () => {
               
               {/* Images Container */}
               <div style={styles.imagesWrapper} className="d-flex align-items-center justify-content-center position-relative overflow-hidden w-100">
-                {/* Previous Image (Half out of screen) - Hidden on mobile */}
-                <div style={styles.leftSideImageContainer} className="d-none d-lg-block">
+                {/* Previous Image (Half out of screen) - Hidden on mobile - NOT CLICKABLE */}
+                <div 
+                  style={styles.leftSideImageContainer} 
+                  className="d-none d-lg-block"
+                >
                   <img 
                     src={projects[getPrevIndex()].image} 
                     alt="Previous project"
@@ -172,12 +187,16 @@ const HomeProjectSection = () => {
                   />
                 </div>
                 
-                {/* Current Image (Center, Full size) */}
-                <div style={styles.centerImageContainer} className="position-relative center-image-container">
+                {/* Current Image (Center, Full size) - CLICKABLE */}
+                <div 
+                  style={styles.centerImageContainer} 
+                  className="position-relative center-image-container"
+                  onClick={handleCenterImageClick}
+                >
                   <img 
                     src={projects[currentIndex].image} 
                     alt="Current project"
-                    style={styles.centerImage}
+                    style={{...styles.centerImage, cursor: 'pointer'}}
                     className="w-100 h-100 center-image-hover mobile-image"
                     onError={(e) => {
                       e.target.src = logo;
@@ -185,8 +204,11 @@ const HomeProjectSection = () => {
                   />
                 </div>
                 
-                {/* Next Image (Half out of screen) - Hidden on mobile */}
-                <div style={styles.rightSideImageContainer} className="d-none d-lg-block">
+                {/* Next Image (Half out of screen) - Hidden on mobile - NOT CLICKABLE */}
+                <div 
+                  style={styles.rightSideImageContainer} 
+                  className="d-none d-lg-block"
+                >
                   <img 
                     src={projects[getNextIndex()].image} 
                     alt="Next project"
@@ -255,7 +277,6 @@ const HomeProjectSection = () => {
           }
           .side-image-hover {
             transition: opacity 0.3s ease, transform 0.3s ease;
-            cursor: pointer;
           }
           .side-image-hover:hover {
             opacity: 0.9;
@@ -391,6 +412,7 @@ const styles = {
     gap: "20px",
     position: "relative",
     justifyContent: "center",
+
     width: "100%"
   },
   navButton: {
@@ -443,7 +465,8 @@ const styles = {
     overflow: "hidden",
     boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
     position: "relative",
-    zIndex: 3
+    zIndex: 3,
+    cursor: "pointer"
   },
   centerImage: {
     width: "100%",
@@ -459,7 +482,9 @@ const styles = {
     boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
     position: "relative",
     zIndex: 1,
-    marginRight: "-50px"
+    marginRight: "-50px",
+    cursor: "pointer",
+    transition: "opacity 0.3s ease"
   },
   rightSideImageContainer: {
     flex: "0 0 300px",
@@ -469,13 +494,16 @@ const styles = {
     boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
     position: "relative",
     zIndex: 1,
-    marginLeft: "-50px"
+    marginLeft: "-50px",
+    cursor: "pointer",
+    transition: "opacity 0.3s ease"
   },
   sideImage: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    className: "side-image-hover"
+    className: "side-image-hover",
+    transition: "transform 0.3s ease"
   },
   dotsContainer: {
     display: "flex",
@@ -495,3 +523,4 @@ const styles = {
 };
 
 export default HomeProjectSection;
+
