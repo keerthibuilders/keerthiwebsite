@@ -84,165 +84,210 @@ const HomeHeroSection = () => {
     }
   };
 
-  // Animation styles for top section only
+  // Animation styles
   const textAnimationStyle = {
-    transform: isVisible ? 'translateX(0)' : 'translateX(-100px)',
+    transform: isVisible ? 'translateY(0)' : 'translateY(-50px)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
   };
 
-  const imageAnimationStyle = {
-    transform: isVisible ? 'translateX(0) scale(1)' : 'translateX(100px) scale(0.8)',
+  const videoAnimationStyle = {
+    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.8)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s'
   };
 
   const titleAnimationStyle = {
-    transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
+    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s'
   };
 
   const descriptionAnimationStyle = {
-    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s'
   };
 
   return (
-    <div style={{ 
-      background: 'linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%)',
-      color: "#fff", 
-      paddingTop: "120px",
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      {/* Background Pattern for top section only */}
+    <>
+      {/* Text Section - White Background */}
+      <div style={{ 
+        background: '#fff',
+        color: "#000", 
+        paddingTop: "120px",
+        paddingBottom: "60px",
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Background Pattern for top section */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '100%',
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`,
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+        
+        <Container style={{ position: 'relative', zIndex: 1 }}>
+          <Row >
+            <Col lg={10} md={12} style={textAnimationStyle}>
+              <div className="start-center">
+                <h2 style={{ 
+                  fontSize: "2.5rem", 
+                  fontWeight: "500",
+                  color: "#000",
+                  marginBottom: "20px",
+                  ...titleAnimationStyle
+                }}>
+                  Keerthi Builders — The Ground Beneath Great Futures
+                </h2>
+                
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+
+      {/* Video Section with Split Background */}
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundImage: `radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                         radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`,
-        pointerEvents: 'none'
-      }} />
-      
-      <Container style={{ position: 'relative', zIndex: 1 }}>
-        <Row className="align-items-center">
-          <Col md={7} style={textAnimationStyle}>
-            <h2 style={{ 
-              fontSize: "2.5rem", 
-              fontWeight: "600",
-              background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              ...titleAnimationStyle
-            }}>
-              Keerthi Builders — The Ground Beneath Great Futures
-            </h2>
-            <p style={{ 
-              fontSize: "1.1rem", 
-              marginTop: "20px", 
-              lineHeight: "1.8",
-              color: "#cbd5e0",
-              ...descriptionAnimationStyle
-            }}>
-              With over a decade of expertise, Keerthi Builders develops thoughtfully located plots in and around Bangalore—
-              blending value, vision, and trust to help you build your future from the ground up.
-            </p>
-          </Col>
-          <Col md={5} className="text-center mt-4 mt-md-0" style={imageAnimationStyle}>
-            <div style={{
-              position: 'relative',
-              display: 'inline-block'
-            }}>
-              <video
-  autoPlay
-  loop
-  muted
-  playsInline
-  style={{
-    maxWidth: "100%",
-    width: "100%",
-    height: "auto",
-    border: "8px solid #4fd1c7",
-    borderRadius: "12px",
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-    transition: 'transform 0.3s ease',
-    objectFit: 'cover'
-  }}
-  onMouseEnter={(e) => {
-    e.target.style.transform = 'scale(1.05)';
-  }}
-  onMouseLeave={(e) => {
-    e.target.style.transform = 'scale(1)';
-  }}
-  onError={(e) => {
-    console.error('Video failed to load:', e);
-  }}
->
-  <source 
-    src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4" 
-    type="video/mp4" 
-  />
-  Your browser does not support the video tag.
-</video>
+        position: 'relative',
+        paddingTop: "0px",
+        paddingBottom: "80px"
+      }}>
+        {/* White background for top half of video */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '50%',
+          backgroundColor: '#fff',
+          zIndex: 0
+        }} />
+        
+        {/* Green background for bottom half of video */}
+        <div style={{
+          position: 'absolute',
+          top: '40%',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: '#1c4c29',
+          zIndex: 0
+        }} />
 
-              {/* Decorative elements */}
+        <Container style={{ position: 'relative', zIndex: 1 }}>
+          <Row className="justify-content-center">
+            <Col lg={11} xl={10} className="text-center" style={videoAnimationStyle}>
               <div style={{
-                position: 'absolute',
-                top: '-10px',
-                right: '-10px',
-                width: '60px',
-                height: '60px',
-                background: 'linear-gradient(135deg, #4fd1c7, #06b6d4)',
-                borderRadius: '50%',
-                opacity: 0.8,
-                animation: 'pulse 2s infinite'
-              }} />
-            </div>
-          </Col>
-        </Row>
-      </Container>
+                position: 'relative',
+                display: 'inline-block',
+                width: '100%',
+                maxWidth: '1000px'
+              }}>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: "250px",
+                    border: "3px solid #1c4c29",
+                    borderRadius: "12px",
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                    transition: 'transform 0.3s ease',
+                    objectFit: 'fill'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.02)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                  }}
+                  onError={(e) => {
+                    console.error('Video failed to load:', e);
+                  }}
+                >
+                  <source 
+                    src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4" 
+                    type="video/mp4" 
+                  />
+                  Your browser does not support the video tag.
+                </video>
 
-      {/* Simple Stats Section without animations */}
+                {/* Decorative elements */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-15px',
+                  right: '-15px',
+                  width: '70px',
+                  height: '70px',
+                  background: 'linear-gradient(135deg, #4fd1c7, #06b6d4)',
+                  borderRadius: '50%',
+                  opacity: 0.8,
+                  animation: 'pulse 2s infinite'
+                }} />
+                
+                {/* Additional decorative element */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: '-10px',
+                  width: '50px',
+                  height: '50px',
+                  background: 'linear-gradient(135deg, #06b6d4, #4fd1c7)',
+                  borderRadius: '50%',
+                  opacity: 0.6,
+                  animation: 'pulse 2s infinite 1s'
+                }} />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+
+      {/* Stats Section */}
       <div 
         ref={statsRef}
         style={{ 
           backgroundColor: "#1c4c29", 
-          padding: "10px 0", 
-          marginTop: "20px",
-          marginBottom: "0"
+          padding: "0px 0 40px 0", 
+          position: 'relative',
+          zIndex: 2
         }}
       >
         <Container>
           <Row className="text-center text-white">
             <Col xs={6} md={3}>
-              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem" }}>
+              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem", color: "white" }}>
                 {formatNumber(counters.projects, 'projects')}+
               </h2>
-              <p style={{ fontSize: "1.1rem", marginBottom: "0" }}>Projects Completed</p>
+              <p style={{ fontSize: "1.1rem", marginBottom: "0", color: "white" }}>Projects Completed</p>
             </Col>
             <Col xs={6} md={3}>
-              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem" }}>
+              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem", color: "white" }}>
                 {formatNumber(counters.experience, 'experience')}+
               </h2>
-              <p style={{ fontSize: "1.1rem", marginBottom: "0" }}>Years of Experience</p>
+              <p style={{ fontSize: "1.1rem", marginBottom: "0", color: "white" }}>Years of Experience</p>
             </Col>
             <Col xs={6} md={3}>
-              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem" }}>
+              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem", color: "white" }}>
                 {formatNumber(counters.customers, 'customers')}+
               </h2>
-              <p style={{ fontSize: "1.1rem", marginBottom: "0" }}>Happy Customers</p>
+              <p style={{ fontSize: "1.1rem", marginBottom: "0", color: "white" }}>Happy Customers</p>
             </Col>
             <Col xs={6} md={3}>
-              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem" }}>
+              <h2 style={{ fontWeight: "bold", fontSize: "2.5rem", color: "white" }}>
                 {formatNumber(counters.sqft, 'sqft')}+
               </h2>
-              <p style={{ fontSize: "1.1rem", marginBottom: "0" }}>Lakhs+ sqft. Delivered</p>
+              <p style={{ fontSize: "1.1rem", marginBottom: "0", color: "white" }}>Lakhs+ sqft. Delivered</p>
             </Col>
           </Row>
         </Container>
@@ -260,7 +305,7 @@ const HomeHeroSection = () => {
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

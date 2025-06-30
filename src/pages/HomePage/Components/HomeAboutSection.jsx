@@ -58,7 +58,7 @@ const HomeAboutSection = () => {
   });
 
   return (
-    <div ref={sectionRef} style={styles.aboutContainer}>
+    <div id="about" ref={sectionRef} style={styles.aboutContainer}>
       {/* Animated background elements */}
       <div style={styles.backgroundElements}>
         <div style={styles.circle1} className="animated-bg-element"></div>
@@ -244,7 +244,8 @@ const styles = {
     width: "100%",
     maxWidth: "300px",
     height: "250px",
-    borderRadius: "0px",
+    borderTopRightRadius: "60px",
+    borderBottomLeftRadius: "60px",
     objectFit: "cover",
     boxShadow: "0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2)",
     border: "3px solid rgba(255, 255, 255, 0.1)",

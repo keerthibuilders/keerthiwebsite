@@ -7,6 +7,7 @@ import fonts from "../../../components/Common/Font";
 const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
 const videoFile2 = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364547/ke7tlieyeuur72ld7uam.mp4";
 const videoFile3 ="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917082/oqydr1o12iwmkhkwrdma.mp4"
+
 const PropertyCard = ({ image, title, location, video }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef(null);
@@ -124,38 +125,168 @@ const HomeOurPropertiesSection = () => {
   ];
 
   return (
-    <section style={styles.sectionContainer}>
-      {/* Background overlay for better text readability */}
-      <div style={styles.backgroundOverlay}></div>
-      
-      <Container style={styles.contentContainer}>
-        <Row className="mb-4">
-          <Col lg={12} className="mx-auto">
-            <h2 style={styles.sectionTitle}>Our Portfolio</h2>
-            <p style={styles.sectionDescription}>
-              At Keerthi Builders, we redefine real estate by merging innovation, quality, and customer satisfaction.
-              Whether it's about residential properties, commercial spaces, luxury villas, affordable housing, or
-              custom projects, we craft exceptional living and working environments that go beyond expectations and create lasting value.
-            </p>
-          </Col>
-        </Row>
+    <>
+      <section style={styles.sectionContainer}>
+        {/* Background overlay for better text readability */}
+        <div style={styles.backgroundOverlay}></div>
         
-        <Row className="justify-content-center">
-          {properties.map((property) => (
-            <Col lg={4} md={6} sm={12} key={property.id} className="mb-4">
-              <PropertyCard
-                image={property.image}
-                title={property.title}
-                location={property.location}
-                video={property.video}
-              />
+        {/* Animated Top to Bottom Lines - Initially Hidden */}
+        <div style={styles.animatedLinesContainer}>
+          {/* Line 1 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '15%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '0s'
+            }}
+          />
+          
+          {/* Line 2 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '30%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '1s'
+            }}
+          />
+          
+          {/* Line 3 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '45%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '2s'
+            }}
+          />
+          
+          {/* Line 4 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '60%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '3s'
+            }}
+          />
+          
+          {/* Line 5 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '75%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '4s'
+            }}
+          />
+          
+          {/* Line 6 */}
+          <div 
+            style={{
+              position: 'absolute',
+              left: '85%',
+              top: '-60px',
+              width: '2px',
+              height: '50px',
+              background: 'rgba(255, 255, 255, 0.4)',
+              borderRadius: '2px',
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              opacity: 0,
+              animation: 'rainDropSequence 6s linear infinite',
+              animationDelay: '5s'
+            }}
+          />
+        </div>
+        
+        <Container style={styles.contentContainer}>
+          <Row className="mb-4">
+            <Col lg={12} className="mx-auto">
+              <h2 style={styles.sectionTitle}>Our Portfolio</h2>
+              <p style={styles.sectionDescription}>
+                At Keerthi Builders, we redefine real estate by merging innovation, quality, and customer satisfaction.
+                Whether it's about residential properties, commercial spaces, luxury villas, affordable housing, or
+                custom projects, we craft exceptional living and working environments that go beyond expectations and create lasting value.
+              </p>
             </Col>
-          ))}
-        </Row>
-      </Container>
+          </Row>
+          
+          <Row className="justify-content-center">
+            {properties.map((property) => (
+              <Col lg={4} md={6} sm={12} key={property.id} className="mb-4">
+                <PropertyCard
+                  image={property.image}
+                  title={property.title}
+                  location={property.location}
+                  video={property.video}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
 
-      {/* Regular style tag instead of style jsx */}
-      <style>{`
+      {/* Global CSS for animations */}
+      <style jsx global>{`
+        @keyframes rainDropSequence {
+          0% {
+            transform: translateY(0);
+            opacity: 0;
+          }
+          5% {
+            opacity: 0.7;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 0.8;
+          }
+          95% {
+            opacity: 0.3;
+          }
+          100% {
+            transform: translateY(calc(100vh + 100px));
+            opacity: 0;
+          }
+        }
+        
         .property-card {
           transition: all 0.4s ease;
           position: relative;
@@ -174,7 +305,7 @@ const HomeOurPropertiesSection = () => {
           transition: all 0.3s ease;
         }
       `}</style>
-    </section>
+    </>
   );
 };
 
@@ -184,11 +315,11 @@ const styles = {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed", // Optional: creates parallax effect
+    backgroundAttachment: "fixed",
     padding: "40px 0",
     color: "white",
     position: "relative",
-    overflow: "hidden", // Added to contain video
+    overflow: "hidden",
   },
   backgroundOverlay: {
     position: "absolute",
@@ -196,8 +327,18 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(28, 84, 44, 0.7)", // Semi-transparent overlay to maintain readability
+    backgroundColor: "rgba(28, 84, 44, 0.7)",
     zIndex: 1,
+  },
+  animatedLinesContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    pointerEvents: "none",
+    zIndex: 1,
+    overflow: "hidden"
   },
   contentContainer: {
     position: "relative",
@@ -208,7 +349,7 @@ const styles = {
     marginBottom: "16px",
     fontSize: "30px",
     fontFamily: fonts.Noto,
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)", // Added text shadow for better visibility
+    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
   },
   sectionDescription: {
     lineHeight: "1.6",
@@ -216,10 +357,10 @@ const styles = {
     marginBottom: "30px",
     margin: "0 auto",
     fontFamily: fonts.Noto,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.5)", // Added text shadow for better visibility
+    textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
   },
   propertyCard: {
-    height: "200px", // Increased height for better proportions
+    height: "200px",
     cursor: "pointer",
     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
     display: "flex",
@@ -229,7 +370,7 @@ const styles = {
     transition: "all 0.4s ease",
     position: "relative",
     borderRadius: "0px", 
-    width: "100%", // Ensure full width within column
+    width: "100%",
   },
   cardVideo: {
     position: "absolute",
@@ -270,12 +411,12 @@ const styles = {
   cardFooter: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end", // Align arrow to the right
+    justifyContent: "flex-end",
     marginTop: "20px",
     position: "relative",
     zIndex: 3
   },
-  arrowContainer: {
+    arrowContainer: {
     padding: "8px",
     borderRadius: "50%",
     boxShadow: "0 2px 4px rgba(0,0,0,0.3)",

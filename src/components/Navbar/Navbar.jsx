@@ -8,6 +8,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navbarRef = useRef(null);
 
+  const isHomeHero = (window.location.pathname === '/' || window.location.pathname === '/home') && !isScrolled;
+
   // Handle scroll to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
@@ -22,13 +24,13 @@ const Navbar = () => {
   // Enhanced navigation function
   const handleNavigation = (targetId, event) => {
     event.preventDefault();
-    
+
     // Close mobile menu first
     setExpanded(false);
-    
+
     // Check if we're on the home page
     const isHomePage = window.location.pathname === '/' || window.location.pathname === '/home';
-    
+
     if (isHomePage) {
       // If on home page, scroll to the section
       setTimeout(() => {
@@ -111,7 +113,7 @@ const Navbar = () => {
         boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
         transition: 'all 0.3s ease',
         position: 'fixed',
-        padding: '0.75rem 0' // Reduced equal top and bottom padding
+        padding: '0.75rem 0'
       }}
       expanded={expanded}
       onToggle={(expanded) => setExpanded(expanded)}
@@ -130,27 +132,27 @@ const Navbar = () => {
           <div style={styles.titleContainer}>
             <h1 style={{
               ...styles.title,
-              color: isScrolled ? '#1C542C' : '#ffffff',
-              textShadow: isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
+              color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
+              textShadow: isHomeHero || isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
             }}>
               KEERTHI BUILDERS
             </h1>
             <p style={{
               ...styles.subtitle,
-              color: isScrolled ? '#000' : '#e0e0e0',
-              textShadow: isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+              color: isHomeHero || isScrolled ? '#1C542C' : '#e0e0e0',
+              textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
             }}>
               Building the future of RealEstate
             </p>
           </div>
         </BootstrapNavbar.Brand>
-        
+
         <BootstrapNavbar.Toggle
           id="navbar-toggle-btn"
           aria-controls="basic-navbar-nav"
           onClick={() => setExpanded(!expanded)}
         />
-        
+
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           {/* Close button for mobile */}
           {expanded && (
@@ -163,22 +165,28 @@ const Navbar = () => {
               ×
             </button>
           )}
-          
+
           <Nav className="ms-auto">
             <Nav.Link
               href="#project-section"
-              style={styles.navLink}
+              style={{
+                ...styles.navLink,
+                color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
+                textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+              }}
               onClick={(e) => handleNavigation('project-section', e)}
-              className={isScrolled ? 'scrolled' : ''}
-            >
+              className={isScrolled ? 'scrolled' : ''}>
               Projects
             </Nav.Link>
             <Nav.Link
               href="#about"
-              style={styles.navLink}
+              style={{
+                ...styles.navLink,
+                color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
+                textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+              }}
               onClick={(e) => handleNavigation('about', e)}
-              className={isScrolled ? 'scrolled' : ''}
-            >
+              className={isScrolled ? 'scrolled' : ''}>
               About
             </Nav.Link>
             <Button
@@ -209,7 +217,7 @@ const Navbar = () => {
           }
           
           #navbar-toggle-btn .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)'}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isHomeHero ? 'rgba(0,0,0,1)' : (isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)')}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
             width: 24px !important;
             height: 24px !important;
           }
@@ -224,8 +232,8 @@ const Navbar = () => {
             }
             
             .nav-link {
-              color: #ffffff !important;
-              text-shadow: 0 1px 3px rgba(0,0,0,0.7) !important;
+              color: ${isHomeHero ? '#1C542C' : '#ffffff'} !important;
+              text-shadow: ${isHomeHero ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'} !important;
               font-weight: 500 !important;
               font-size: 16px !important;
               padding: 0.5rem 0 !important;
@@ -258,32 +266,33 @@ const Navbar = () => {
           
           /* Mobile styles */
           @media (max-width: 991.98px) {
+            /* Navbar bar is transparent on mobile, bg handled by inline style (isScrolled) */
+            
             .navbar-collapse {
               position: fixed !important;
+              background-color: #fff !important;
               top: 0 !important;
               right: 0 !important;
               width: 280px !important;
               height: 100vh !important;
-              background-color: #fff !important;
+              background-color: #fff !important; /* Only toggler dropdown has bg */
               z-index: 1030 !important;
               transition: transform 0.3s ease !important;
               transform: translateX(100%) !important;
               padding: 2rem 1.5rem !important;
               box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1) !important;
               overflow-y: auto !important;
+              border-radius: 0 0 0 24px !important;
             }
-            
             .navbar-collapse.show {
               transform: translateX(0) !important;
             }
-            
             .navbar-nav {
               flex-direction: column !important;
               align-items: flex-start !important;
               padding-top: 2rem !important;
               width: 100% !important;
             }
-            
             .nav-link {
               color: #1C542C !important;
               text-shadow: none !important;
@@ -293,12 +302,10 @@ const Navbar = () => {
               font-size: 18px !important;
               font-weight: 500 !important;
             }
-            
             .nav-link:hover {
               color: #164023 !important;
               background-color: rgba(28, 84, 44, 0.1) !important;
             }
-            
             #navbar-contact-btn {
               margin-top: 1rem !important;
               width: 100% !important;
@@ -307,19 +314,17 @@ const Navbar = () => {
               background-color: #1C542C !important;
               border-color: #1C542C !important;
             }
-            
             #navbar-contact-btn:hover {
               background-color: #164023 !important;
               border-color: #164023 !important;
             }
-            
             #navbar-close-btn {
               position: absolute;
               top: 15px;
               right: 20px;
               background: none;
               border: none;
-              fontSize: 30px;
+              font-size: 30px;
               color: #1C542C;
               cursor: pointer;
               width: 30px;
@@ -331,13 +336,11 @@ const Navbar = () => {
               line-height: 1;
               z-index: 1031;
             }
-            
             #navbar-close-btn:hover {
               color: #164023;
               background-color: rgba(28, 84, 44, 0.1);
               border-radius: 50%;
             }
-            
             /* Add overlay when menu is open */
             .navbar-collapse.show::before {
               content: "";
@@ -357,19 +360,15 @@ const Navbar = () => {
               height: 50px !important;
               width: 80px !important;
             }
-            
             .navbar-brand h1 {
               font-size: 14px !important;
             }
-            
             .navbar-brand p {
               font-size: 9px !important;
             }
-            
             .navbar-collapse {
               width: 250px !important;
             }
-            
             .navbar-collapse.show::before {
               right: 250px !important;
             }
@@ -403,8 +402,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     fontFamily: fonts.Noto,
-    marginTop:"25px",
-    marginLeft:"5px"
+    marginTop: "25px",
+    marginLeft: "5px"
   },
   title: {
     fontSize: "16px",
@@ -451,5 +450,4 @@ const styles = {
     zIndex: "1031"
   }
 };
-
 export default Navbar;
