@@ -6,6 +6,7 @@ import HomeTestimonial from './Components/HomeTestimonial'
 import HomeOurPropertiesSection from './Components/HomeOurPropertiesSection'
 import HomeContactSection from './Components/HomeContactSeaction'
 import AllProject from './Components/AllProjects'
+import HomeVisionMission from './Components/HomeVisionMission'
 
 const HomeMainPage = () => {
   return (
@@ -16,6 +17,7 @@ const HomeMainPage = () => {
       <AllProject />
       <HomeTestimonial />
       <HomeAboutSection />
+      <HomeVisionMission />
       <HomeContactSection />
     </div>
   )

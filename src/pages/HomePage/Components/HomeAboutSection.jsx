@@ -104,31 +104,7 @@ const HomeAboutSection = () => {
         </Row>
       </Container>
 
-      {/* Vision Section with New Background */}
-      <div style={styles.visionMissionWrapper}>
-        <Container style={{...styles.sectionWrapper, ...getVisionMissionAnimationStyle('left', 1)}}>
-          <h2 style={styles.sectionTitle}>Our Vision</h2>
-          <p style={styles.sectionText}>
-            To be the most trusted and preferred land development company in South India,
-            creating sustainable communities that enhance the quality of life for generations to come.
-            We envision a future where every plot we develop becomes the foundation for
-            prosperity, happiness, and lasting memories for families across Bangalore and beyond.
-          </p>
-        </Container>
-
-        {/* Mission Section */}
-        <Container style={{...styles.sectionWrapper, ...getVisionMissionAnimationStyle('right', 2)}}>
-          <h2 style={styles.sectionTitle}>Our Mission</h2>
-          <p style={styles.sectionText}>
-            To deliver exceptional land development projects with complete transparency,
-            ethical practices, and unwavering commitment to quality, ensuring every
-            investment becomes a foundation for prosperity and peace of mind.
-            We are committed to transforming aspirations into reality through innovative
-            land development solutions that prioritize customer satisfaction and long-term value.
-          </p>
-        </Container>
-      </div>
-
+      
       {/* CSS for animations and responsive design */}
       <style>
         {`

@@ -12,6 +12,7 @@ const HomeHeroSection = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const statsRef = useRef(null);
+  const videoRef = useRef(null);
 
   // Trigger entrance animations on component mount
   useEffect(() => {
@@ -20,6 +21,13 @@ const HomeHeroSection = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  // Set video to start from 10 seconds when it loads
+  const handleVideoLoadedData = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 6; // Start from 10 seconds
+    }
+  };
 
   // Counter animation function
   const animateCounter = (start, end, duration, key) => {
@@ -144,7 +152,7 @@ const HomeHeroSection = () => {
                   marginBottom: "20px",
                   ...titleAnimationStyle
                 }}>
-                  Keerthi Builders — The Ground Beneath Great Futures
+                  Keerthi Builders — The <span style={{ color: '#1c4c29' }}>Ground</span> Beneath <span style={{ color: '#1c4c29' }}>Great</span> Futures
                 </h2>
                 
               </div>
@@ -173,7 +181,7 @@ const HomeHeroSection = () => {
         {/* Green background for bottom half of video */}
         <div style={{
           position: 'absolute',
-          top: '40%',
+          top: '30%',
           left: 0,
           right: 0,
           bottom: 0,
@@ -191,15 +199,17 @@ const HomeHeroSection = () => {
                 maxWidth: '1000px'
               }}>
                 <video
+                  ref={videoRef}
                   autoPlay
                   loop
                   muted
                   playsInline
+                  onLoadedData={handleVideoLoadedData}
                   style={{
                     width: "100%",
                     height: "auto",
                     maxHeight: "250px",
-                    border: "3px solid #1c4c29",
+                    border: "none",
                     borderRadius: "12px",
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
                     transition: 'transform 0.3s ease',
@@ -222,31 +232,9 @@ const HomeHeroSection = () => {
                   Your browser does not support the video tag.
                 </video>
 
-                {/* Decorative elements */}
-                <div style={{
-                  position: 'absolute',
-                  top: '-15px',
-                  right: '-15px',
-                  width: '70px',
-                  height: '70px',
-                  background: 'linear-gradient(135deg, #4fd1c7, #06b6d4)',
-                  borderRadius: '50%',
-                  opacity: 0.8,
-                  animation: 'pulse 2s infinite'
-                }} />
                 
-                {/* Additional decorative element */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '-10px',
-                  left: '-10px',
-                  width: '50px',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, #06b6d4, #4fd1c7)',
-                  borderRadius: '50%',
-                  opacity: 0.6,
-                  animation: 'pulse 2s infinite 1s'
-                }} />
+                
+                
               </div>
             </Col>
           </Row>

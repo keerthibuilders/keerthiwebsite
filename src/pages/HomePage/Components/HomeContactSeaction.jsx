@@ -286,7 +286,7 @@ const HomeContactSection = () => {
 
 const styles = {
   section: {
-    padding: '80px 20px 20px 20px', // Added 80px top padding
+    padding: '40px 20px 20px 20px', // Added 80px top padding
     backgroundColor: '#fff',
     position: 'relative',
     fontFamily: fonts.Noto,
