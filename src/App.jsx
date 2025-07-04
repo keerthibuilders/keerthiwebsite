@@ -10,6 +10,7 @@ import HomeAboutSection from './pages/HomePage/Components/HomeAboutSection';
 import HomeProjectSection from './pages/HomePage/Components/HomeProjectSection';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import SocialMediaBar from './components/SocialMediaBar/SocialMediaBar';
+import About from './pages/About/About';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeMainPage />} />
           <Route path="/detailspage" element={<SiteDetailsPage />} />
+          <Route path="/about" element={<About />} />
         </Routes>
         <SocialMediaBar />
         <WhatsAppButton />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Navbar as BootstrapNavbar, Container, Nav, Button } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../../public/assets/images/logo.png";
 import fonts from "../Common/Font";
 
@@ -7,8 +8,11 @@ const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navbarRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const isHomeHero = (window.location.pathname === '/' || window.location.pathname === '/home') && !isScrolled;
+  // Check if we're on a page with white header (home hero or about page)
+  const isWhiteHeaderPage = (location.pathname === '/' || location.pathname === '/home' || location.pathname === '/about') && !isScrolled;
 
   // Handle scroll to change navbar appearance
   useEffect(() => {
@@ -29,9 +33,12 @@ const Navbar = () => {
     setExpanded(false);
 
     // Check if we're on the home page
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/home';
+    const isHomePage = location.pathname === '/' || location.pathname === '/home';
 
-    if (isHomePage) {
+    if (targetId === 'about') {
+      // Navigate to about page
+      navigate('/about');
+    } else if (isHomePage) {
       // If on home page, scroll to the section
       setTimeout(() => {
         const targetElement = document.getElementById(targetId);
@@ -41,8 +48,15 @@ const Navbar = () => {
       }, 300); // Small delay to allow menu to close
     } else {
       // If on another page, navigate to home page with hash
-      window.location.href = `/#${targetId}`;
+      navigate(`/#${targetId}`);
     }
+  };
+
+  // Handle home navigation
+  const handleHomeNavigation = (event) => {
+    event.preventDefault();
+    setExpanded(false);
+    navigate('/');
   };
 
   // Handle click outside to close navbar
@@ -69,8 +83,8 @@ const Navbar = () => {
   // Handle scroll to section after page load (for external navigation)
   useEffect(() => {
     const handleHashNavigation = () => {
-      const hash = window.location.hash.substring(1);
-      if (hash) {
+      const hash = location.hash.substring(1);
+      if (hash && location.pathname === '/') {
         setTimeout(() => {
           const targetElement = document.getElementById(hash);
           if (targetElement) {
@@ -81,11 +95,7 @@ const Navbar = () => {
     };
 
     handleHashNavigation();
-    window.addEventListener('hashchange', handleHashNavigation);
-    return () => {
-      window.removeEventListener('hashchange', handleHashNavigation);
-    };
-  }, []);
+  }, [location]);
 
   // Handle escape key to close navbar
   useEffect(() => {
@@ -122,6 +132,7 @@ const Navbar = () => {
       <Container>
         <BootstrapNavbar.Brand
           href="/"
+          onClick={handleHomeNavigation}
           style={styles.brand}
         >
           <img
@@ -132,17 +143,17 @@ const Navbar = () => {
           <div style={styles.titleContainer}>
             <h1 style={{
               ...styles.title,
-              color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
-              textShadow: isHomeHero || isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
+              color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
+              textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
             }}>
               KEERTHI BUILDERS
             </h1>
             <p style={{
               ...styles.subtitle,
-              color: isHomeHero || isScrolled ? '#1C542C' : '#e0e0e0',
-              textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+              color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#e0e0e0',
+              textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
             }}>
-              Building the future of RealEstate
+              Where Excellence Meets Experince
             </p>
           </div>
         </BootstrapNavbar.Brand>
@@ -167,28 +178,33 @@ const Navbar = () => {
           )}
 
           <Nav className="ms-auto">
+           
+            
             <Nav.Link
               href="#project-section"
               style={{
                 ...styles.navLink,
-                color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
-                textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+                color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
+                textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
               }}
               onClick={(e) => handleNavigation('project-section', e)}
               className={isScrolled ? 'scrolled' : ''}>
               Projects
             </Nav.Link>
+            
             <Nav.Link
-              href="#about"
+              href="/about"
               style={{
                 ...styles.navLink,
-                color: isHomeHero || isScrolled ? '#1C542C' : '#ffffff',
-                textShadow: isHomeHero || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+                color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
+                textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)',
+                fontWeight: location.pathname === '/about' ? '600' : '500'
               }}
               onClick={(e) => handleNavigation('about', e)}
               className={isScrolled ? 'scrolled' : ''}>
               About
             </Nav.Link>
+            
             <Button
               id="navbar-contact-btn"
               href="#contact"
@@ -217,7 +233,7 @@ const Navbar = () => {
           }
           
           #navbar-toggle-btn .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isHomeHero ? 'rgba(0,0,0,1)' : (isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)')}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isWhiteHeaderPage ? 'rgba(28, 84, 44, 1)' : (isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)')}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
             width: 24px !important;
             height: 24px !important;
           }
@@ -232,8 +248,8 @@ const Navbar = () => {
             }
             
             .nav-link {
-              color: ${isHomeHero ? '#1C542C' : '#ffffff'} !important;
-              text-shadow: ${isHomeHero ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'} !important;
+              color: ${isWhiteHeaderPage ? '#1C542C' : '#ffffff'} !important;
+              text-shadow: ${isWhiteHeaderPage ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'} !important;
               font-weight: 500 !important;
               font-size: 16px !important;
               padding: 0.5rem 0 !important;
@@ -246,7 +262,7 @@ const Navbar = () => {
             }
             
             .nav-link:hover {
-              color: #e0e0e0 !important;
+              color: ${isWhiteHeaderPage ? '#164023' : '#e0e0e0'} !important;
             }
             
             .nav-link.scrolled:hover {
@@ -266,8 +282,6 @@ const Navbar = () => {
           
           /* Mobile styles */
           @media (max-width: 991.98px) {
-            /* Navbar bar is transparent on mobile, bg handled by inline style (isScrolled) */
-            
             .navbar-collapse {
               position: fixed !important;
               background-color: #fff !important;
@@ -275,7 +289,7 @@ const Navbar = () => {
               right: 0 !important;
               width: 280px !important;
               height: 100vh !important;
-              background-color: #fff !important; /* Only toggler dropdown has bg */
+              background-color: #fff !important;
               z-index: 1030 !important;
               transition: transform 0.3s ease !important;
               transform: translateX(100%) !important;
@@ -341,7 +355,6 @@ const Navbar = () => {
               background-color: rgba(28, 84, 44, 0.1);
               border-radius: 50%;
             }
-            /* Add overlay when menu is open */
             .navbar-collapse.show::before {
               content: "";
               position: fixed;
@@ -450,4 +463,5 @@ const styles = {
     zIndex: "1031"
   }
 };
+
 export default Navbar;

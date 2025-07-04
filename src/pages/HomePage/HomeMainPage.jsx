@@ -16,8 +16,8 @@ const HomeMainPage = () => {
       <HomeOurPropertiesSection />
       <AllProject />
       <HomeTestimonial />
-      <HomeAboutSection />
-      <HomeVisionMission />
+      {/* <HomeAboutSection />
+      <HomeVisionMission /> */}
       <HomeContactSection />
     </div>
   )

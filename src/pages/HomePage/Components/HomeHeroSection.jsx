@@ -11,6 +11,7 @@ const HomeHeroSection = () => {
   });
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [lettersVisible, setLettersVisible] = useState(false);
   const statsRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -18,6 +19,10 @@ const HomeHeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
+      // Start letter animation after main animation
+      setTimeout(() => {
+        setLettersVisible(true);
+      }, 500);
     }, 100);
     return () => clearTimeout(timer);
   }, []);
@@ -25,7 +30,7 @@ const HomeHeroSection = () => {
   // Set video to start from 10 seconds when it loads
   const handleVideoLoadedData = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 6; // Start from 10 seconds
+      videoRef.current.currentTime = 6; // Start from 6 seconds
     }
   };
 
@@ -35,13 +40,13 @@ const HomeHeroSection = () => {
     const timer = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const current = Math.floor(start + (end - start) * easeOutQuart);
-      
+
       setCounters(prev => ({ ...prev, [key]: current }));
-      
+
       if (progress >= 1) {
         clearInterval(timer);
         setCounters(prev => ({ ...prev, [key]: end }));
@@ -56,7 +61,7 @@ const HomeHeroSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
-            
+
             // Start all counter animations
             animateCounter(0, 15, 2000, 'projects');
             animateCounter(0, 17, 2200, 'experience');
@@ -105,24 +110,35 @@ const HomeHeroSection = () => {
     transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s'
   };
 
-  const titleAnimationStyle = {
-    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-    opacity: isVisible ? 1 : 0,
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s'
-  };
-
-  const descriptionAnimationStyle = {
-    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-    opacity: isVisible ? 1 : 0,
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s'
+  // Letter animation component
+  const AnimatedText = ({ text, delay = 0 }) => {
+    return (
+      <span style={{ display: 'inline-block' }}>
+        {text.split('').map((char, index) => (
+          <span
+            key={index}
+            style={{
+              display: 'inline-block',
+              opacity: lettersVisible ? 1 : 0,
+              transform: lettersVisible ? 'translateY(0) rotateX(0)' : 'translateY(50px) rotateX(90deg)',
+              transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+              transitionDelay: `${delay + index * 0.1}s`,
+              transformOrigin: 'bottom center',
+            }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        ))}
+      </span>
+    );
   };
 
   return (
     <>
       {/* Text Section - White Background */}
-      <div style={{ 
+      <div style={{
         background: '#fff',
-        color: "#000", 
+        color: "#000",
         paddingTop: "120px",
         paddingBottom: "60px",
         position: 'relative',
@@ -140,21 +156,55 @@ const HomeHeroSection = () => {
           pointerEvents: 'none',
           zIndex: 0
         }} />
-        
-        <Container style={{ position: 'relative', zIndex: 1 }}>
-          <Row >
+
+        {/* Animated rain drop lines */}
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}>
+          <div style={{ ...styles.rainLine, left: '10%', animationDelay: '0s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '25%', animationDelay: '1.2s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '40%', animationDelay: '0.5s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '60%', animationDelay: '1.8s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '75%', animationDelay: '0.8s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '90%', animationDelay: '2.2s' }} className="rain-line"></div>
+        </div>
+
+        <Container style={{ position: 'relative', zIndex: 2 }}>
+          <Row>
             <Col lg={10} md={12} style={textAnimationStyle}>
               <div className="start-center">
-                <h2 style={{ 
-                  fontSize: "2.5rem", 
+                <h2 style={{
+                  fontSize: "2.5rem",
                   fontWeight: "500",
                   color: "#000",
-                  marginBottom: "20px",
-                  ...titleAnimationStyle
+                  lineHeight: '1.2'
                 }}>
-                  Keerthi Builders — The <span style={{ color: '#1c4c29' }}>Ground</span> Beneath <span style={{ color: '#1c4c29' }}>Great</span> Futures
+                  <AnimatedText text="Keerthi Builders — The " delay={0} />
+                  <span style={{ color: '#1c4c29' }}>
+                    <AnimatedText text="Ground" delay={2.5} />
+                  </span>
+                  <AnimatedText text=" Beneath " delay={3.1} />
+                  <span style={{ color: '#1c4c29' }}>
+                    <AnimatedText text="Great" delay={4.0} />
+                  </span>
+                  <AnimatedText text=" Futures" delay={4.6} />
                 </h2>
-                
+              </div>
+              <div className="start-center">
+                <p style={{
+                  fontSize: "28px",
+                  fontWeight: "400",
+                  color: "#000",
+                  lineHeight: '1.2'
+                }}>
+                  <AnimatedText text="Where Excellence Meets Experience " delay={0} />
+                </p>
               </div>
             </Col>
           </Row>
@@ -177,7 +227,7 @@ const HomeHeroSection = () => {
           backgroundColor: '#fff',
           zIndex: 0
         }} />
-        
+
         {/* Green background for bottom half of video */}
         <div style={{
           position: 'absolute',
@@ -191,12 +241,13 @@ const HomeHeroSection = () => {
 
         <Container style={{ position: 'relative', zIndex: 1 }}>
           <Row className="justify-content-center">
-            <Col lg={11} xl={10} className="text-center" style={videoAnimationStyle}>
+            <Col lg={12} xl={10} className="text-center" style={videoAnimationStyle}>
               <div style={{
                 position: 'relative',
                 display: 'inline-block',
                 width: '100%',
-                maxWidth: '1000px'
+                maxWidth: '1200px',
+                backgroundColor: 'none',
               }}>
                 <video
                   ref={videoRef}
@@ -208,33 +259,18 @@ const HomeHeroSection = () => {
                   style={{
                     width: "100%",
                     height: "auto",
-                    maxHeight: "250px",
+                    maxHeight: "300px",
                     border: "none",
                     borderRadius: "12px",
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-                    transition: 'transform 0.3s ease',
                     objectFit: 'fill'
                   }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'scale(1.02)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'scale(1)';
-                  }}
-                  onError={(e) => {
-                    console.error('Video failed to load:', e);
-                  }}
-                >
-                  <source 
-                    src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4" 
-                    type="video/mp4" 
-                  />
-                  Your browser does not support the video tag.
-                </video>
 
-                
-                
-                
+                >
+                  <source
+                    src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4"
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </Col>
           </Row>
@@ -242,16 +278,34 @@ const HomeHeroSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div 
+      <div
         ref={statsRef}
-        style={{ 
-          backgroundColor: "#1c4c29", 
-          padding: "0px 0 40px 0", 
+        style={{
+          backgroundColor: "#1c4c29",
+          padding: "0px 0 40px 0",
           position: 'relative',
-          zIndex: 2
+          border: "none",
+          zIndex: 2,
+          overflow: 'hidden'
         }}
       >
-        <Container>
+        {/* Animated rain drop lines for stats section */}
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}>
+          <div style={{ ...styles.rainLineWhite, left: '15%', animationDelay: '0.3s' }} className="rain-line-white"></div>
+          <div style={{ ...styles.rainLineWhite, left: '35%', animationDelay: '1.5s' }} className="rain-line-white"></div>
+          <div style={{ ...styles.rainLineWhite, left: '55%', animationDelay: '0.9s' }} className="rain-line-white"></div>
+          <div style={{ ...styles.rainLineWhite, left: '75%', animationDelay: '2.1s' }} className="rain-line-white"></div>
+        </div>
+
+        <Container style={{ position: 'relative', zIndex: 2 }}>
           <Row className="text-center text-white">
             <Col xs={6} md={3}>
               <h2 style={{ fontWeight: "bold", fontSize: "2.5rem", color: "white" }}>
@@ -281,20 +335,88 @@ const HomeHeroSection = () => {
         </Container>
       </div>
 
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 0.8;
+      {/* CSS for rain line animations */}
+      <style>
+        {`
+          .rain-line {
+            animation: rainDrop 4s linear infinite;
           }
-          50% {
-            transform: scale(1.1);
-            opacity: 0.6;
+          
+          .rain-line-white {
+            animation: rainDropWhite 5s linear infinite;
           }
-        }
-      `}</style>
+          
+          @keyframes rainDrop {
+            0% {
+              transform: translateY(-100%);
+              height: 40px;
+              opacity: 0;
+            }
+            10% {
+              opacity: 0.6;
+            }
+            90% {
+              opacity: 0.6;
+            }
+            100% {
+              transform: translateY(800px);
+              height: 25px;
+              opacity: 0;
+            }
+          }
+
+          @keyframes rainDropWhite {
+            0% {
+              transform: translateY(-100%);
+              height: 50px;
+              opacity: 0;
+            }
+            10% {
+              opacity: 0.4;
+            }
+            90% {
+              opacity: 0.4;
+            }
+            100% {
+              transform: translateY(600px);
+              height: 30px;
+              opacity: 0;
+            }
+          }
+
+          @keyframes pulse {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 0.8;
+            }
+            50% {
+              transform: scale(1.1);
+              opacity: 0.6;
+            }
+          }
+        `}
+      </style>
     </>
   );
+};
+
+const styles = {
+  rainLine: {
+    position: "absolute",
+    width: "1px",
+    height: "40px",
+    backgroundColor: "rgba(28, 76, 41, 0.3)",
+    top: "-50px",
+    borderRadius: "4px",
+  },
+  rainLineWhite: {
+    position: "absolute",
+    width: "1px",
+    height: "50px",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    top: "-50px",
+    borderRadius: "4px",
+  },
 };
 
 export default HomeHeroSection;

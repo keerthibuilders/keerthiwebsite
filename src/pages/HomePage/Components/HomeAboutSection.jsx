@@ -58,11 +58,10 @@ const HomeAboutSection = () => {
   });
 
   return (
-    <div id="about" ref={sectionRef} style={styles.aboutContainer}>
+    <div  ref={sectionRef} style={styles.aboutContainer}>
       {/* Animated background elements */}
       <div style={styles.backgroundElements}>
-        <div style={styles.circle1} className="animated-bg-element"></div>
-        <div style={styles.rectangle} className="animated-bg-element"></div>
+        
         
         {/* Animated rain drop lines */}
         <div style={{...styles.rainLine, left: '15%', animationDelay: '0s'}} className="rain-line"></div>
@@ -72,14 +71,14 @@ const HomeAboutSection = () => {
       </div>
 
       {/* About Section */}
-      <Container style={styles.contentWrapper}>
+      <Container id="about" style={styles.contentWrapper}>
         <Row style={styles.aboutRow}>
           {/* Left Side Image with Zoom Animation */}
           <Col lg={5} md={6} style={styles.imageColumn}>
             <div style={getImageZoomStyle()}>
               <img
-                src="https://www.kowalinvestmentgroup.com/wp-content/uploads/2023/08/Business-Owner.jpg"
-                alt="KT Manjunath - Founder"
+                src="../../assets/images/owner.jpg"
+                alt="Founder"
                 style={styles.founderImage}
                 onLoad={() => setImageLoaded(true)}
               />
@@ -154,9 +153,9 @@ const HomeAboutSection = () => {
 
 const styles = {
   aboutContainer: {
-    backgroundColor: "#1C542C",
+    backgroundColor: "#21623C",
     color: "white",
-    padding: "40px 0 0 0", // Remove bottom padding
+    padding: "20px 0 0 0", // Remove bottom padding
     position: "relative",
     overflow: "hidden",
     backgroundImage: "url('/src/assets/images/bg1.png')",
@@ -217,14 +216,16 @@ const styles = {
     padding: "20px",
   },
   founderImage: {
+    Top: "100px",
     width: "100%",
-    maxWidth: "300px",
+    minWidth:"350px",
+    maxWidth: "500px",
     height: "250px",
     borderTopRightRadius: "60px",
     borderBottomLeftRadius: "60px",
     objectFit: "cover",
     boxShadow: "0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2)",
-    border: "3px solid rgba(255, 255, 255, 0.1)",
+    border: "2px solid rgba(255, 255, 255, 0.1)",
   },
   contentColumn: {
     padding: "20px",
@@ -233,7 +234,7 @@ const styles = {
     justifyContent: "center",
   },
   founderName: {
-    fontSize: "32px",
+    fontSize: "34px",
     fontWeight: "500",
     color: "#fff",
     marginBottom: "0.5rem",
@@ -270,14 +271,14 @@ const styles = {
     fontSize: "28px",
     fontWeight: "500",
     marginBottom: "10px",
-    color: "#2e7d32", // Darker green for better contrast on light background
+    color: "#2e7d32",
     fontFamily: "sans-serif",
     textAlign: "left",
   },
   sectionText: {
     fontSize: "16px",
     lineHeight: "1.8",
-    color: "#424242", // Dark gray for better readability on light background
+    color: "#424242",
     fontFamily: "sans-serif",
     margin: 0,
     textAlign: "left",
