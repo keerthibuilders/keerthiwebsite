@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const OurJourney = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -12,10 +14,9 @@ const OurJourney = () => {
       setIsMobile(width <= 768);
       setIsTablet(width > 768 && width <= 1024);
     };
-    
+
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-    
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
@@ -92,77 +93,98 @@ const OurJourney = () => {
 
   return (
     <>
-      <div ref={sectionRef} style={responsiveStyles.container}>
+      <div ref={sectionRef} style={responsiveStyles.container} className="our-journey-section position-relative py-5">
         {/* Animated background elements */}
         <div style={styles.backgroundElements}>
           {/* Desktop rain lines */}
           {!isMobile && !isTablet && (
             <>
-              <div style={{...styles.rainLine, left: '15%', animationDelay: '0s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '25%', animationDelay: '1.5s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '35%', animationDelay: '0.7s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '45%', animationDelay: '2.1s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '55%', animationDelay: '0.3s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '65%', animationDelay: '1.8s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '75%', animationDelay: '0.9s'}} className="rain-line"></div>
-              <div style={{...styles.rainLine, left: '85%', animationDelay: '2.4s'}} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '15%', animationDelay: '0s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '25%', animationDelay: '1.5s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '35%', animationDelay: '0.7s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '45%', animationDelay: '2.1s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '55%', animationDelay: '0.3s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '65%', animationDelay: '1.8s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '75%', animationDelay: '0.9s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLine, left: '85%', animationDelay: '2.4s' }} className="rain-line"></div>
             </>
           )}
           {/* Tablet rain lines */}
           {isTablet && (
             <>
-              <div style={{...styles.rainLineTablet, left: '20%', animationDelay: '0s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineTablet, left: '35%', animationDelay: '1s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineTablet, left: '50%', animationDelay: '0.5s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineTablet, left: '65%', animationDelay: '1.5s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineTablet, left: '80%', animationDelay: '0.8s'}} className="rain-line"></div>
+              <div style={{ ...styles.rainLineTablet, left: '20%', animationDelay: '0s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineTablet, left: '35%', animationDelay: '1s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineTablet, left: '50%', animationDelay: '0.5s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineTablet, left: '65%', animationDelay: '1.5s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineTablet, left: '80%', animationDelay: '0.8s' }} className="rain-line"></div>
             </>
           )}
           {/* Mobile rain lines */}
           {isMobile && (
             <>
-              <div style={{...styles.rainLineMobile, left: '25%', animationDelay: '0s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineMobile, left: '50%', animationDelay: '1s'}} className="rain-line"></div>
-              <div style={{...styles.rainLineMobile, left: '75%', animationDelay: '0.5s'}} className="rain-line"></div>
+              <div style={{ ...styles.rainLineMobile, left: '25%', animationDelay: '0s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineMobile, left: '50%', animationDelay: '1s' }} className="rain-line"></div>
+              <div style={{ ...styles.rainLineMobile, left: '75%', animationDelay: '0.5s' }} className="rain-line"></div>
             </>
           )}
         </div>
-
-        <div style={responsiveStyles.wrapper}>
-          {/* Left image with overlapping text - Same design structure */}
-          <div style={{...responsiveStyles.imageSection, ...getTextAnimationStyle('left', 1)}}>
-            <img
-              src="https://images.pexels.com/photos/2957862/pexels-photo-2957862.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="Our Journey"
-              style={responsiveStyles.image}
-            />
-            <div style={{...responsiveStyles.headingText, ...getTextAnimationStyle('left', 2)}}>
-              <div style={responsiveStyles.headingOur}>Our</div>
-              <div style={responsiveStyles.headingJourney}>Journey</div>
-            </div>
-          </div>
-
-          {/* Right text content - Same design structure */}
-          <div style={{...responsiveStyles.content, ...getTextAnimationStyle('right', 3)}}>
-            <p style={{...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 4)}}>
-              Started in 2019 by our visionary Founder, Mr. Sanjay Baid, Keerthi Builders strives for excellence.
-              With over 20 years of experience, Mr. Baid envisioned making approved projects more affordable,
-              transparent, and accessible while ensuring unwavering value for every investment.
-            </p>
-            <p style={{...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 5)}}>
-              Our journey is adorned with remarkable milestones. With the successful completion of several projects,
-              Keerthi Builders has solidified its position as a trusted name in real estate development.
-            </p>
-          </div>
-        </div>
-
+        <Container>
+          <Row>
+            <Col xs={12}>
+              {/* Title at top left */}
+              <h2
+                className="our-journey-title"
+                style={{
+                  fontWeight: 700,
+                  fontSize: isMobile ? '1.6rem' : isTablet ? '2rem' : '2.5rem',
+                  color: isTablet ? '#fff' : '#000',
+                  marginBottom: isMobile ? '24px' : '40px',
+                  marginLeft: 0,
+                  marginTop: 0,
+                  textAlign: 'left',
+                  letterSpacing: '1px',
+                  ...getTextAnimationStyle('left', 0),
+                  zIndex: 3,
+                  position: 'relative'
+                }}
+              >
+                Our Journey
+              </h2>
+            </Col>
+          </Row>
+          <Row className="align-items-center" style={{ gap: '0' }}>
+            {/* Image on left, text on right for desktop/tablet, stacked for mobile */}
+            <Col xs={12} md={5} className="mb-4 mb-md-0" style={{ paddingRight: isMobile ? '15px' : '5px' }}>
+              <div style={{ ...responsiveStyles.imageSection, ...getTextAnimationStyle('left', 1) }}>
+                <img
+                  src="./assets/images/abouts bottom.png"
+                  alt="Our Journey"
+                  style={responsiveStyles.image}
+                  className="img-fluid"
+                />
+              </div>
+            </Col>
+            <Col xs={12} md={7} style={{ paddingLeft: isMobile ? '15px' : '5px' }}>
+              <div style={{ ...responsiveStyles.content, ...getTextAnimationStyle('right', 3) }}>
+                <p style={{ ...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 4) }}>
+                  Started in 2019 by our visionary Founder, Mr. Sanjay Baid, Keerthi Builders strives for excellence.
+                  With over 20 years of experience, Mr. Baid envisioned making approved projects more affordable,
+                  transparent, and accessible while ensuring unwavering value for every investment.
+                </p>
+                <p style={{ ...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 5) }}>
+                  Our journey is adorned with remarkable milestones. With the successful completion of several projects,
+                  Keerthi Builders has solidified its position as a trusted name in real estate development.
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
         {/* CSS for animations */}
         <style>
           {`
             .rain-line {
               animation: rainDrop 5s linear infinite;
             }
-            
             @keyframes rainDrop {
               0% {
                 transform: translateY(-100%);
@@ -181,16 +203,23 @@ const OurJourney = () => {
                 opacity: 0;
               }
             }
-
+            .our-journey-title {
+              font-family: 'Arial', sans-serif;
+            }
             @media (max-width: 768px) {
-              .journey-section {
+              .our-journey-section {
                 padding: 20px 10px !important;
               }
+              .our-journey-title {
+                font-size: 1.6rem !important;
+              }
             }
-
             @media (max-width: 480px) {
-              .journey-section {
+              .our-journey-section {
                 padding: 15px 8px !important;
+              }
+              .our-journey-title {
+                font-size: 1.2rem !important;
               }
             }
           `}
@@ -206,14 +235,10 @@ const styles = {
     backgroundColor: '#fff',
     color: '#000',
     padding: '0px 50px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     fontFamily: 'Arial, sans-serif',
     position: 'relative',
     overflow: 'hidden',
   },
-  
   wrapper: {
     display: 'flex',
     maxWidth: '1200px',
@@ -223,14 +248,12 @@ const styles = {
     position: 'relative',
     zIndex: 2,
   },
-  
   imageSection: {
     position: 'relative',
     flex: '1 1 40%',
-    marginRight: '40px',
+    marginRight: '00px', // Reduced from 40px
     marginTop: '20px',
   },
-  
   image: {
     width: '80%',
     height: '400px',
@@ -238,7 +261,6 @@ const styles = {
     borderBottomRightRadius: '60px',
     objectFit: 'cover',
   },
-  
   headingText: {
     position: 'absolute',
     top: '20%',
@@ -252,45 +274,25 @@ const styles = {
     textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
   },
   
-  headingOur: {
-    fontSize: '38px',
-    fontWeight: '500',
-    position: 'relative',
-    right: '40px',
-  },
-  
-  headingJourney: {
-    fontSize: '38px',
-    fontWeight: '500',
-    position: 'relative',
-    left: '20px',
-  },
-  
   content: {
     flex: '1 1 55%',
-    paddingLeft: '20px',
+    paddingLeft: '0px', // Reduced from 0px
   },
-  
   paragraph: {
     fontSize: '16px',
     lineHeight: '1.6',
     color: '#000',
     marginBottom: '20px',
   },
-
-  // Tablet styles - Same design, scaled down
+  // Tablet styles
   containerTablet: {
     backgroundColor: '#21623C',
     color: '#fff',
     padding: '0px 30px 60px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     fontFamily: 'Arial, sans-serif',
     position: 'relative',
     overflow: 'hidden',
   },
-  
   wrapperTablet: {
     display: 'flex',
     maxWidth: '900px',
@@ -300,13 +302,11 @@ const styles = {
     position: 'relative',
     zIndex: 2,
   },
-  
   imageSectionTablet: {
     position: 'relative',
     flex: '1 1 40%',
-    marginRight: '25px',
+    marginRight: '10px', // Reduced from 25px
   },
-  
   imageTablet: {
     width: '80%',
     height: '320px',
@@ -314,7 +314,6 @@ const styles = {
     borderBottomRightRadius: '45px',
     objectFit: 'cover',
   },
-  
   headingTextTablet: {
     position: 'absolute',
     top: '20%',
@@ -327,64 +326,54 @@ const styles = {
     zIndex: 10,
     textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
   },
-  
   headingOurTablet: {
     fontSize: '30px',
     fontWeight: '500',
     position: 'relative',
     right: '30px',
   },
-  
   headingJourneyTablet: {
     fontSize: '30px',
     fontWeight: '500',
     position: 'relative',
     left: '15px',
   },
-  
   contentTablet: {
     flex: '1 1 55%',
-    paddingLeft: '15px',
+    paddingLeft: '10px', // Reduced from 15px
   },
-  
   paragraphTablet: {
     fontSize: '14px',
     lineHeight: '1.5',
     color: '#dcdcdc',
     marginBottom: '18px',
   },
-
-  // Mobile styles - Same design structure, mobile optimized
+  // Mobile styles
   containerMobile: {
     backgroundColor: '#fff',
     color: '#000',
     padding: '20px 15px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     fontFamily: 'Arial, sans-serif',
     position: 'relative',
     overflow: 'hidden',
   },
-  
   wrapperMobile: {
     display: 'flex',
-    flexDirection: 'column', // Stack vertically on mobile
+    flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
     position: 'relative',
     zIndex: 2,
-    gap: '20px',
+    gap: '10px', // Reduced from 20px
   },
-  
-  imageSectionMobile: {
+    imageSectionMobile: {
     position: 'relative',
     width: '100%',
-    marginLeft: '15px', // Remove right margin on mobile
+    marginLeft: '15px',
     display: 'flex',
     justifyContent: 'left',
+    marginBottom: '10px', // Reduced gap
   },
-  
   imageMobile: {
     width: '70%',
     height: '220px',
@@ -392,11 +381,10 @@ const styles = {
     borderBottomRightRadius: '30px',
     objectFit: 'cover',
   },
-  
   headingTextMobile: {
     position: 'absolute',
     top: '20%',
-    right: '20%', // Adjusted for mobile
+    right: '20%',
     transform: 'translateY(-50%)',
     fontSize: '24px',
     fontWeight: 'bold',
@@ -405,27 +393,24 @@ const styles = {
     zIndex: 10,
     textShadow: '3px 3px 10px rgba(0, 0, 0, 0.8)',
   },
-  
-    headingOurMobile: {
+  headingOurMobile: {
     fontSize: '20px',
     fontWeight: '500',
     position: 'relative',
     right: '20px',
   },
-  
   headingJourneyMobile: {
     fontSize: '20px',
     fontWeight: '500',
     position: 'relative',
     left: '10px',
   },
-  
   contentMobile: {
     width: '100%',
-    paddingLeft: '0px', // Remove left padding on mobile
+    paddingLeft: '0px',
     paddingRight: '0px',
+    marginTop: '5px', // Reduced gap
   },
-  
   paragraphMobile: {
     fontSize: '13px',
     lineHeight: '1.5',
@@ -434,7 +419,6 @@ const styles = {
     textAlign: 'left',
     padding: '0 10px',
   },
-
   // Background elements
   backgroundElements: {
     position: 'absolute',
@@ -445,8 +429,6 @@ const styles = {
     zIndex: 1,
     pointerEvents: 'none',
   },
-  
-  // Desktop rain line
   rainLine: {
     position: 'absolute',
     width: '2px',
@@ -455,8 +437,6 @@ const styles = {
     top: '-50px',
     borderRadius: '4px',
   },
-  
-  // Tablet rain line
   rainLineTablet: {
     position: 'absolute',
     width: '2px',
@@ -465,8 +445,6 @@ const styles = {
     top: '-45px',
     borderRadius: '3px',
   },
-  
-  // Mobile rain line - smaller and lighter
   rainLineMobile: {
     position: 'absolute',
     width: '1px',
@@ -478,3 +456,4 @@ const styles = {
 };
 
 export default OurJourney;
+

@@ -77,7 +77,7 @@ const HomeAboutSection = () => {
           <Col lg={5} md={6} style={styles.imageColumn}>
             <div style={getImageZoomStyle()}>
               <img
-                src="../../assets/images/owner.jpg"
+                src="../../assets/images/owner.png"
                 alt="Founder"
                 style={styles.founderImage}
                 onLoad={() => setImageLoaded(true)}
@@ -154,6 +154,7 @@ const HomeAboutSection = () => {
 const styles = {
   aboutContainer: {
     backgroundColor: "#1A662F",
+    padding: "50px 0",  
     color: "white",
     position: "relative",
     overflow: "hidden",

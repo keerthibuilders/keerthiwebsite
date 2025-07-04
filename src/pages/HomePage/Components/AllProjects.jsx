@@ -15,23 +15,39 @@ const AllProjects = () => {
   const projects = [
     {
       id: 1,
-      image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/44/4e/444ed0be-8344-47b3-a223-dc99e9155992/brgres_holiday-vacation_2048x1046_1.jpg"
+      image: "./../assets/images/sideshwara layout.png"
     },
     {
       id: 2,
-      image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/4e/86/4e865882-179b-4bcb-92e0-e021b3035638/2048x1046_2.jpg"
+      image: "./../assets/images/urvi phase one.png"
     },
     {
       id: 3,
-      image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/d0/03/d0037f8f-0f4a-480e-b487-132e0eb63bab/2048_copy_2.jpg"
+      image: "./../assets/images/industal phase - 1.png"
     },
     {
       id: 4,
-      image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/5b/3c/5b3cd784-0370-4360-8f43-482eef063698/brg_altius_2080x1046.jpg"
+      image: "./../assets/images/industal phase - 1.png"
     },
     {
       id: 5,
-      image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/26/77/2677738b-7123-4cb9-a6af-0cef6355d744/2048x1046_3.jpg"
+      image: "./../assets/images/industal phase - 2.png"
+    },
+    {
+      id: 6,
+      image: "./../assets/images/ktm villa enclave.png"
+    },
+    {
+      id: 7,
+      image: "./../assets/images/atr keerthi.png"
+    },
+    {
+      id: 8,
+      image: "./../assets/images/rupees.png"
+    },
+    {
+      id: 9,
+      image: "./../assets/images/rajeswari layout.png"
     }
   ];
 

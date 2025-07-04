@@ -117,10 +117,18 @@ const About = () => {
       <div style={{ ...styles.statBox, ...getAnimStyle(0) }}>
         <div style={styles.value}>23 lakhs+</div>
         <div style={styles.description}>Square feet Delivered</div>
+        
       </div>
       {/* Step Divider 1 */}
       <div style={{ ...styles.stepDividerContainer1, ...getAnimStyle(1) }}>
         <div style={styles.stepDivider1}></div>
+        <div style={styles.imageWrapper}>
+          <img
+            src="https://gurupunvaanii.com/wp-content/uploads/2024/01/Rectangle-5848.png"
+            alt="Delivered"
+            style={styles.dividerImage}
+          />
+          </div>
       </div>
       {/* Box 2 */}
       <div style={{ ...styles.statBox, ...getAnimStyle(2) }}>
@@ -207,7 +215,7 @@ const styles = {
   container: {
     backgroundColor: '#fff',
     color: '#fff',
-    padding: '40px 0px 0px 0px',
+    padding: '20px 0px 0px 0px',
     fontFamily: 'Arial, sans-serif',
   },
   
@@ -219,7 +227,7 @@ const styles = {
     gap: '30px',
     flexWrap: 'wrap',
     position: 'relative',
-    padding: '0 20px',
+    padding: '40px 20px',
   },
   
   statBox: {
@@ -362,17 +370,17 @@ const styles = {
   
   stepDivider1: {
     width: '1px',
-    height: '160px',
+    height: '200px',
     borderLeft: '2px dotted #000',
   },
   stepDivider2: {
     width: '1px',
-    height: '200px',
+    height: '240px',
     borderLeft: '2px dotted #000',
   },
   stepDivider3: {
     width: '1px',
-    height: '260px',
+    height: '300px',
     borderLeft: '2px dotted #000',
   },
   stepDivider4: {
