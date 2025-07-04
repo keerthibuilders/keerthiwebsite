@@ -280,7 +280,7 @@ const styles = {
   
   descriptionMobile: {
     fontSize: '12px',
-    color: '#ccc',
+    color: '#000',
     lineHeight: '1.3',
     marginBottom: '0px',
   },

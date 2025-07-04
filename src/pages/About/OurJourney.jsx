@@ -356,9 +356,9 @@ const styles = {
 
   // Mobile styles - Same design structure, mobile optimized
   containerMobile: {
-    backgroundColor: '#21623C',
-    color: '#fff',
-    padding: '0px 15px 40px',
+    backgroundColor: '#fff',
+    color: '#000',
+    padding: '20px 15px 20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -380,13 +380,13 @@ const styles = {
   imageSectionMobile: {
     position: 'relative',
     width: '100%',
-    marginRight: '0px', // Remove right margin on mobile
+    marginLeft: '15px', // Remove right margin on mobile
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'left',
   },
   
   imageMobile: {
-    width: '85%',
+    width: '70%',
     height: '220px',
     borderTopRightRadius: '30px',
     borderBottomRightRadius: '30px',
@@ -396,11 +396,11 @@ const styles = {
   headingTextMobile: {
     position: 'absolute',
     top: '20%',
-    right: '8%', // Adjusted for mobile
+    right: '20%', // Adjusted for mobile
     transform: 'translateY(-50%)',
     fontSize: '24px',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000',
     lineHeight: '1.1',
     zIndex: 10,
     textShadow: '3px 3px 10px rgba(0, 0, 0, 0.8)',
@@ -429,7 +429,7 @@ const styles = {
   paragraphMobile: {
     fontSize: '13px',
     lineHeight: '1.5',
-    color: '#dcdcdc',
+    color: '#000',
     marginBottom: '15px',
     textAlign: 'left',
     padding: '0 10px',
