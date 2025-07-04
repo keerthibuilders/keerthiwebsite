@@ -203,9 +203,9 @@ const OurJourney = () => {
 const styles = {
   // Desktop styles (original)
   container: {
-    backgroundColor: '#21623C',
-    color: '#fff',
-    padding: '0px 50px 80px',
+    backgroundColor: '#fff',
+    color: '#000',
+    padding: '0px 50px 20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -228,6 +228,7 @@ const styles = {
     position: 'relative',
     flex: '1 1 40%',
     marginRight: '40px',
+    marginTop: '20px',
   },
   
   image: {
@@ -245,7 +246,7 @@ const styles = {
     transform: 'translateY(-50%)',
     fontSize: '48px',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000',
     lineHeight: '1.1',
     zIndex: 10,
     textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
@@ -273,7 +274,7 @@ const styles = {
   paragraph: {
     fontSize: '16px',
     lineHeight: '1.6',
-    color: '#dcdcdc',
+    color: '#000',
     marginBottom: '20px',
   },
 
@@ -450,7 +451,7 @@ const styles = {
     position: 'absolute',
     width: '2px',
     height: '40px',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(152, 151, 151, 0.2)',
     top: '-50px',
     borderRadius: '4px',
   },
@@ -460,7 +461,7 @@ const styles = {
     position: 'absolute',
     width: '2px',
     height: '35px',
-    backgroundColor: 'rgba(255, 255, 255, 0.18)',
+    backgroundColor: 'rgba(163, 160, 160, 0.18)',
     top: '-45px',
     borderRadius: '3px',
   },
@@ -470,7 +471,7 @@ const styles = {
     position: 'absolute',
     width: '1px',
     height: '25px',
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(148, 146, 146, 0.15)',
     top: '-35px',
     borderRadius: '2px',
   },

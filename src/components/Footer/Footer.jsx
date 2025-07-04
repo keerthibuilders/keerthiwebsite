@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { MdOutlinePhone } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
 import { LuMapPin } from "react-icons/lu";
@@ -10,6 +11,7 @@ import fonts from '../Common/Font';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
+  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [webPoints, setWebPoints] = useState([]);
@@ -20,6 +22,12 @@ function Footer() {
   // Handle navigation function
   const handleNavigation = (targetId, event) => {
     event.preventDefault();
+    
+    // Special handling for About Us page
+    if (targetId === 'about') {
+      navigate('/about');
+      return;
+    }
     
     // Check if we're on the home page
     const isHomePage = window.location.pathname === '/' || window.location.pathname === '/home';
@@ -32,7 +40,7 @@ function Footer() {
       }
     } else {
       // If on another page, navigate to home page with hash
-      window.location.href = `/#${targetId}`;
+      navigate(`/#${targetId}`);
     }
   };
 
@@ -391,10 +399,10 @@ function Footer() {
               <small>Copyright © {new Date().getFullYear()} Keerthi Builders. All Rights Reserved.</small>
             </p>
           </Col>
-          <Col md={5} className="d-flex justify-content-center justify-content-md-end">
+                    <Col md={5} className="d-flex justify-content-center justify-content-md-end">
             <ul style={styles.socialList}>
               <li style={styles.socialItem}>
-                                <a
+                <a
                   href="https://wa.me/919742063580"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -480,7 +488,7 @@ function Footer() {
 
 const styles = {
   footer: {
-    backgroundColor: '#21623C',
+    backgroundColor: '#1A662F',
     color: '#fff',
     padding: '3rem 0 2rem',
     position: 'relative',

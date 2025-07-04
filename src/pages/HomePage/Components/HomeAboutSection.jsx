@@ -153,7 +153,7 @@ const HomeAboutSection = () => {
 
 const styles = {
   aboutContainer: {
-    backgroundColor: "#21623C",
+    backgroundColor: "#1A662F",
     color: "white",
     position: "relative",
     overflow: "hidden",

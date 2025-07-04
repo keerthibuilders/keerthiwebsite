@@ -7,23 +7,101 @@ import fonts from "../Common/Font";
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverWhiteSection, setIsOverWhiteSection] = useState(false);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if we're on a page with white header (home hero or about page)
-  const isWhiteHeaderPage = (location.pathname === '/' || location.pathname === '/home' || location.pathname === '/about') && !isScrolled;
+  // Check if we're on home page or about page
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
+  const isAboutPage = location.pathname === '/about';
 
-  // Handle scroll to change navbar appearance
+  // Check if navbar is over white background sections
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 50); // Change navbar after 50px scroll
+      setIsScrolled(scrollTop > 50);
+
+      let isOverWhite = false;
+
+      if (isHomePage) {
+        // Check for HomeHeroSection with white background
+        const heroSection = document.querySelector('[style*="background: #fff"]') || 
+                           document.querySelector('.hero-section') ||
+                           document.getElementById('hero-section');
+        
+        if (heroSection) {
+          const heroRect = heroSection.getBoundingClientRect();
+          const navbarHeight = 80;
+          isOverWhite = heroRect.top < navbarHeight && heroRect.bottom > 0;
+        } else {
+          // Fallback: assume hero section is at the top of home page
+          isOverWhite = scrollTop < 600;
+        }
+      } else if (isAboutPage) {
+        // Check for AboutHeader section with white background
+        const aboutHeader = document.querySelector('[style*="background: #ffffff"]') ||
+                           document.querySelector('.about-header') ||
+                           document.getElementById('about-header');
+        
+        if (aboutHeader) {
+          const aboutRect = aboutHeader.getBoundingClientRect();
+          const navbarHeight = 80;
+          isOverWhite = aboutRect.top < navbarHeight && aboutRect.bottom > 0;
+        } else {
+          // Fallback: assume AboutHeader is at the top of about page
+          isOverWhite = scrollTop < 500; // Adjust based on AboutHeader height
+        }
+      }
+
+      setIsOverWhiteSection(isOverWhite);
     };
 
+    handleScroll(); // Check initial state
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage, isAboutPage]);
+
+  // Determine navbar style based on white section overlap
+  const getNavbarStyle = () => {
+    if (isOverWhiteSection && !isScrolled) {
+      // White background with blur when over white sections
+      return {
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
+        boxShadow: '0 2px 20px rgba(0,0,0,0.1)'
+      };
+    } else if (isScrolled) {
+      // Scrolled state - white background
+      return {
+        backgroundColor: '#ffffff',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+      };
+    } else {
+      // Default state - transparent
+      return {
+        backgroundColor: 'transparent',
+        boxShadow: 'none'
+      };
+    }
+  };
+
+  // Determine text colors
+  const getTextColor = () => {
+    if (isOverWhiteSection || isScrolled) {
+      return '#1C542C'; // Dark green for white backgrounds
+    } else {
+      return '#ffffff'; // White for dark/transparent backgrounds
+    }
+  };
+
+  const getTextShadow = () => {
+    if (isOverWhiteSection || isScrolled) {
+      return 'none'; // No shadow on white backgrounds
+    } else {
+      return '0 2px 4px rgba(0,0,0,0.7)'; // Shadow for dark backgrounds
+    }
+  };
 
   // Enhanced navigation function
   const handleNavigation = (targetId, event) => {
@@ -31,9 +109,6 @@ const Navbar = () => {
 
     // Close mobile menu first
     setExpanded(false);
-
-    // Check if we're on the home page
-    const isHomePage = location.pathname === '/' || location.pathname === '/home';
 
     if (targetId === 'about') {
       // Navigate to about page
@@ -114,13 +189,16 @@ const Navbar = () => {
     };
   }, [expanded]);
 
+  const navbarStyle = getNavbarStyle();
+  const textColor = getTextColor();
+  const textShadow = getTextShadow();
+
   return (
     <BootstrapNavbar
       expand="lg"
       style={{
         ...styles.navbar,
-        backgroundColor: isScrolled ? '#ffffff' : 'transparent',
-        boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+        ...navbarStyle,
         transition: 'all 0.3s ease',
         position: 'fixed',
         padding: '0.75rem 0'
@@ -143,17 +221,17 @@ const Navbar = () => {
           <div style={styles.titleContainer}>
             <h1 style={{
               ...styles.title,
-              color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
-              textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.7)'
+              color: textColor,
+              textShadow: textShadow
             }}>
               KEERTHI BUILDERS
             </h1>
             <p style={{
               ...styles.subtitle,
-              color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#e0e0e0',
-              textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+              color: textColor,
+              textShadow: textShadow
             }}>
-              Where Excellence Meets Experince
+              Where Excellence Meets Experience
             </p>
           </div>
         </BootstrapNavbar.Brand>
@@ -178,14 +256,12 @@ const Navbar = () => {
           )}
 
           <Nav className="ms-auto">
-           
-            
             <Nav.Link
               href="#project-section"
               style={{
                 ...styles.navLink,
-                color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
-                textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'
+                color: textColor,
+                textShadow: textShadow
               }}
               onClick={(e) => handleNavigation('project-section', e)}
               className={isScrolled ? 'scrolled' : ''}>
@@ -196,13 +272,13 @@ const Navbar = () => {
               href="/about"
               style={{
                 ...styles.navLink,
-                color: isWhiteHeaderPage || isScrolled ? '#1C542C' : '#ffffff',
-                textShadow: isWhiteHeaderPage || isScrolled ? 'none' : '0 1px 3px rgba(0,0,0,0.7)',
+                color: textColor,
+                textShadow: textShadow,
                 fontWeight: location.pathname === '/about' ? '600' : '500'
               }}
               onClick={(e) => handleNavigation('about', e)}
               className={isScrolled ? 'scrolled' : ''}>
-              About
+              About Us
             </Nav.Link>
             
             <Button
@@ -233,7 +309,7 @@ const Navbar = () => {
           }
           
           #navbar-toggle-btn .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${isWhiteHeaderPage ? 'rgba(28, 84, 44, 1)' : (isScrolled ? 'rgba(28, 84, 44, 1)' : 'rgba(255, 255, 255, 1)')}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='${encodeURIComponent(textColor)}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
             width: 24px !important;
             height: 24px !important;
           }
@@ -248,25 +324,16 @@ const Navbar = () => {
             }
             
             .nav-link {
-              color: ${isWhiteHeaderPage ? '#1C542C' : '#ffffff'} !important;
-              text-shadow: ${isWhiteHeaderPage ? 'none' : '0 1px 3px rgba(0,0,0,0.7)'} !important;
+              color: ${textColor} !important;
+              text-shadow: ${textShadow} !important;
               font-weight: 500 !important;
               font-size: 16px !important;
               padding: 0.5rem 0 !important;
               transition: color 0.3s ease !important;
             }
             
-            .nav-link.scrolled {
-              color: #1C542C !important;
-              text-shadow: none !important;
-            }
-            
             .nav-link:hover {
-              color: ${isWhiteHeaderPage ? '#164023' : '#e0e0e0'} !important;
-            }
-            
-            .nav-link.scrolled:hover {
-              color: #164023 !important;
+              color: ${isOverWhiteSection || isScrolled ? '#164023' : '#e0e0e0'} !important;
             }
             
             #navbar-contact-btn {
@@ -369,7 +436,7 @@ const Navbar = () => {
           }
           
           @media (max-width: 576px) {
-            .navbar-brand img {
+                        .navbar-brand img {
               height: 50px !important;
               width: 80px !important;
             }
@@ -465,3 +532,4 @@ const styles = {
 };
 
 export default Navbar;
+

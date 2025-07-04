@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
+import { width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 // Direct Cloudinary video URLs - these are correct
 const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
@@ -116,12 +117,12 @@ const HomeOurPropertiesSection = () => {
       title: "Industrial",
       video: videoFile2
     },
-    {
-      id: 3,
-      image: "https://www.houseofhiranandani.com/vlogs/storage/2019/01/35.png",
-      title: "Premium Villa Plots",
-      video: videoFile3
-    },
+    // {
+    //   id: 3,
+    //   image: "https://www.houseofhiranandani.com/vlogs/storage/2019/01/35.png",
+    //   title: "Premium Villa Plots",
+    //   video: videoFile3
+    // },
   ];
 
   return (
@@ -138,11 +139,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '15%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '0s'
@@ -155,11 +155,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '30%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '1s'
@@ -172,11 +171,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '45%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '2s'
@@ -189,11 +187,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '60%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '3s'
@@ -206,11 +203,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '75%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '4s'
@@ -223,11 +219,10 @@ const HomeOurPropertiesSection = () => {
               position: 'absolute',
               left: '85%',
               top: '-60px',
-              width: '2px',
+              width: '1px',
               height: '50px',
-              background: 'rgba(255, 255, 255, 0.4)',
-              borderRadius: '2px',
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.3)',
+              background: 'rgba(238, 249, 109, 0.3)',
+              borderRadius: '1px',
               opacity: 0,
               animation: 'rainDropSequence 6s linear infinite',
               animationDelay: '5s'
@@ -249,7 +244,7 @@ const HomeOurPropertiesSection = () => {
           
           <Row className="justify-content-center">
             {properties.map((property) => (
-              <Col lg={4} md={6} sm={12} key={property.id} className="mb-4">
+              <Col lg={6} md={6} sm={12} key={property.id} className="mb-4">
                 <PropertyCard
                   image={property.image}
                   title={property.title}
@@ -311,7 +306,7 @@ const HomeOurPropertiesSection = () => {
 
 const styles = {
   sectionContainer: {
-    backgroundColor: "#1C542C",
+    backgroundColor: "#1A662F",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -327,7 +322,6 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(28, 84, 44, 0.7)",
     zIndex: 1,
   },
   animatedLinesContainer: {
@@ -360,17 +354,17 @@ const styles = {
     textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
   },
   propertyCard: {
-    height: "200px",
+    width: "100%",
+    height: "230px", 
     cursor: "pointer",
     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    padding: "20px",
+    padding: "25px", 
     transition: "all 0.4s ease",
     position: "relative",
     borderRadius: "0px", 
-    width: "100%",
   },
   cardVideo: {
     position: "absolute",
@@ -394,16 +388,15 @@ const styles = {
     borderRadius: "0px", 
   },
   propertyTitle: {
-    fontSize: "22px",
+    fontSize: "26px", 
     fontWeight: "500",
-    marginBottom: "8px",
+    marginBottom: "10px",
     transition: "color 0.3s ease",
-    textShadow: "2px 2px 4px rgba(0,0,0,0.8)", 
     fontFamily: fonts.Noto,
   },
   propertyLocation: {
-    fontSize: "14px",
-    marginBottom: "16px",
+    fontSize: "16px", 
+    marginBottom: "18px", 
     transition: "color 0.3s ease",
     fontFamily: fonts.Noto,
     textShadow: "1px 1px 2px rgba(0,0,0,0.8)", 
@@ -412,12 +405,12 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
-    marginTop: "20px",
+    marginTop: "25px", // Increased margin
     position: "relative",
     zIndex: 3
   },
-    arrowContainer: {
-    padding: "8px",
+  arrowContainer: {
+    padding: "10px", // Increased padding
     borderRadius: "50%",
     boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
     display: "flex",

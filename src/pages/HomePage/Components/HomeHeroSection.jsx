@@ -19,7 +19,6 @@ const HomeHeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-      // Start letter animation after main animation
       setTimeout(() => {
         setLettersVisible(true);
       }, 500);
@@ -27,10 +26,10 @@ const HomeHeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Set video to start from 10 seconds when it loads
+  // Set video to start from 6 seconds when it loads
   const handleVideoLoadedData = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 6; // Start from 6 seconds
+      videoRef.current.currentTime = 6;
     }
   };
 
@@ -40,18 +39,14 @@ const HomeHeroSection = () => {
     const timer = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const current = Math.floor(start + (end - start) * easeOutQuart);
-
       setCounters(prev => ({ ...prev, [key]: current }));
-
       if (progress >= 1) {
         clearInterval(timer);
         setCounters(prev => ({ ...prev, [key]: end }));
       }
-    }, 16); // ~60fps
+    }, 16);
   };
 
   // Intersection Observer to trigger animation when section is visible
@@ -61,8 +56,6 @@ const HomeHeroSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
-
-            // Start all counter animations
             animateCounter(0, 15, 2000, 'projects');
             animateCounter(0, 17, 2200, 'experience');
             animateCounter(0, 2500, 2500, 'customers');
@@ -72,11 +65,9 @@ const HomeHeroSection = () => {
       },
       { threshold: 0.3 }
     );
-
     if (statsRef.current) {
       observer.observe(statsRef.current);
     }
-
     return () => {
       if (statsRef.current) {
         observer.unobserve(statsRef.current);
@@ -135,11 +126,91 @@ const HomeHeroSection = () => {
 
   return (
     <>
+      {/* Spider Web Circle Wave Animated Background */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: 0,
+          overflow: "hidden",
+          pointerEvents: "none"
+        }}
+      >
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1440 600"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.18
+          }}
+        >
+          <g>
+            {[0, 1, 2, 3, 4].map(i => (
+              <circle
+                key={i}
+                cx="720"
+                cy="320"
+                r={120 + i * 70}
+                stroke="#21623C"
+                strokeWidth={2 - i * 0.2}
+                fill="none"
+                opacity={0.5 - i * 0.08}
+              >
+                <animate
+                  attributeName="r"
+                  values={`${120 + i * 70};${200 + i * 90};${120 + i * 70}`}
+                  dur={`${6 + i * 1.2}s`}
+                  repeatCount="indefinite"
+                  keyTimes="0;0.5;1"
+                />
+              </circle>
+            ))}
+            {/* Spider web lines */}
+            {[...Array(12)].map((_, idx) => {
+              const angle = (Math.PI * 2 * idx) / 12;
+              const x1 = 720 + Math.cos(angle) * 120;
+              const y1 = 320 + Math.sin(angle) * 120;
+              const x2 = 720 + Math.cos(angle) * 400;
+              const y2 = 320 + Math.sin(angle) * 400;
+              return (
+                <line
+                  key={idx}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke="#21623C"
+                  strokeWidth="1"
+                  opacity="0.12"
+                >
+                  <animate
+                    attributeName="opacity"
+                    values="0.12;0.28;0.12"
+                    dur="5s"
+                    begin={`${idx * 0.3}s`}
+                    repeatCount="indefinite"
+                  />
+                </line>
+              );
+            })}
+          </g>
+        </svg>
+      </div>
+
       {/* Text Section - White Background */}
       <div style={{
-        background: '#fff',
-        color: "#000",
-        paddingTop: "120px",
+        background: '#1A662F',
+        color: "#fff",
+        paddingTop: "150px",
         paddingBottom: "60px",
         position: 'relative',
         overflow: 'hidden'
@@ -151,8 +222,7 @@ const HomeHeroSection = () => {
           left: 0,
           right: 0,
           height: '100%',
-          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`,
+         
           pointerEvents: 'none',
           zIndex: 0
         }} />
@@ -175,22 +245,22 @@ const HomeHeroSection = () => {
           <div style={{ ...styles.rainLine, left: '90%', animationDelay: '2.2s' }} className="rain-line"></div>
         </div>
 
-        <Container style={{ position: 'relative', zIndex: 2 }}>
+        <Container style={{  position: 'relative', zIndex: 2 }}>
           <Row>
             <Col lg={10} md={12} style={textAnimationStyle}>
               <div className="start-center">
                 <h2 style={{
-                  fontSize: "2.5rem",
+                  fontSize: "28",
                   fontWeight: "500",
-                  color: "#000",
-                  lineHeight: '1.2'
+                  color: "#fff",
+                  lineHeight: '1.6',
                 }}>
-                  <AnimatedText text="Keerthi Builders — The " delay={0} />
-                  <span style={{ color: '#1c4c29' }}>
+                  <AnimatedText text="Keerthi Builders The " delay={0} />
+                  <span style={{ color: '#FFD600' }}>
                     <AnimatedText text="Ground" delay={2.5} />
                   </span>
                   <AnimatedText text=" Beneath " delay={3.1} />
-                  <span style={{ color: '#1c4c29' }}>
+                  <br/><span style={{ color: '#FFD600' }}>
                     <AnimatedText text="Great" delay={4.0} />
                   </span>
                   <AnimatedText text=" Futures" delay={4.6} />
@@ -198,10 +268,10 @@ const HomeHeroSection = () => {
               </div>
               <div className="start-center">
                 <p style={{
-                  fontSize: "28px",
+                  fontSize: "18px",
                   fontWeight: "400",
-                  color: "#000",
-                  lineHeight: '1.2'
+                  color: "#fff",
+                  lineHeight: '1.4'
                 }}>
                   <AnimatedText text="Where Excellence Meets Experience " delay={0} />
                 </p>
@@ -224,7 +294,7 @@ const HomeHeroSection = () => {
           left: 0,
           right: 0,
           height: '50%',
-          backgroundColor: '#fff',
+          backgroundColor: '#1A662F',
           zIndex: 0
         }} />
 
@@ -235,8 +305,9 @@ const HomeHeroSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: '#1c4c29',
+          background: '#1A662F',
           zIndex: 0
+          
         }} />
 
         <Container style={{ position: 'relative', zIndex: 1 }}>
@@ -259,12 +330,12 @@ const HomeHeroSection = () => {
                   style={{
                     width: "100%",
                     height: "auto",
-                    maxHeight: "300px",
+                    minHeight: "350px",
+                    maxHeight: "350px",
                     border: "none",
                     borderRadius: "12px",
                     objectFit: 'fill'
                   }}
-
                 >
                   <source
                     src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4"
@@ -275,13 +346,19 @@ const HomeHeroSection = () => {
             </Col>
           </Row>
         </Container>
+        <div style={{ ...styles.rainLine, left: '10%', animationDelay: '0s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '25%', animationDelay: '1.2s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '40%', animationDelay: '0.5s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '60%', animationDelay: '1.8s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '75%', animationDelay: '0.8s' }} className="rain-line"></div>
+          <div style={{ ...styles.rainLine, left: '90%', animationDelay: '2.2s' }} className="rain-line"></div>
       </div>
 
       {/* Stats Section */}
       <div
         ref={statsRef}
         style={{
-          backgroundColor: "#1c4c29",
+          backgroundColor: "#1A662F",
           padding: "0px 0 40px 0",
           position: 'relative',
           border: "none",
@@ -335,17 +412,15 @@ const HomeHeroSection = () => {
         </Container>
       </div>
 
-      {/* CSS for rain line animations */}
+      {/* CSS for rain line and web wave animations */}
       <style>
         {`
           .rain-line {
             animation: rainDrop 4s linear infinite;
           }
-          
           .rain-line-white {
             animation: rainDropWhite 5s linear infinite;
           }
-          
           @keyframes rainDrop {
             0% {
               transform: translateY(-100%);
@@ -364,7 +439,6 @@ const HomeHeroSection = () => {
               opacity: 0;
             }
           }
-
           @keyframes rainDropWhite {
             0% {
               transform: translateY(-100%);
@@ -383,17 +457,6 @@ const HomeHeroSection = () => {
               opacity: 0;
             }
           }
-
-          @keyframes pulse {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 0.8;
-            }
-            50% {
-              transform: scale(1.1);
-              opacity: 0.6;
-            }
-          }
         `}
       </style>
     </>
@@ -404,16 +467,16 @@ const styles = {
   rainLine: {
     position: "absolute",
     width: "1px",
-    height: "40px",
-    backgroundColor: "rgba(28, 76, 41, 0.3)",
+    height: "100px",
+    backgroundColor: "rgba(238, 249, 109, 0.3)",
     top: "-50px",
     borderRadius: "4px",
   },
   rainLineWhite: {
     position: "absolute",
     width: "1px",
-    height: "50px",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    height: "100px",
+    backgroundColor: "rgba(238, 249, 109, 0.3)",
     top: "-50px",
     borderRadius: "4px",
   },

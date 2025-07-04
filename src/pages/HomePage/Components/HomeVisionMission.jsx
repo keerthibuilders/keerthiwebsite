@@ -130,8 +130,8 @@ const HomeVisionMission = () => {
 
 const styles = {
   container: {
-    backgroundColor: '#21623C',
-    padding: '60px 20px',
+    backgroundColor: '#1A662F',
+    padding: '40px 0px',
     color: '#fff',
     fontFamily: 'Arial, sans-serif',
     position: 'relative',

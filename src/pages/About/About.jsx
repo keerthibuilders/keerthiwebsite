@@ -205,9 +205,9 @@ const About = () => {
 
 const styles = {
   container: {
-    backgroundColor: '#21623C',
+    backgroundColor: '#fff',
     color: '#fff',
-    padding: '10px 0px 0px 0px',
+    padding: '40px 0px 0px 0px',
     fontFamily: 'Arial, sans-serif',
   },
   
@@ -363,22 +363,22 @@ const styles = {
   stepDivider1: {
     width: '1px',
     height: '160px',
-    borderLeft: '2px dotted #fff',
+    borderLeft: '2px dotted #000',
   },
   stepDivider2: {
     width: '1px',
     height: '200px',
-    borderLeft: '2px dotted #fff',
+    borderLeft: '2px dotted #000',
   },
   stepDivider3: {
     width: '1px',
     height: '260px',
-    borderLeft: '2px dotted #fff',
+    borderLeft: '2px dotted #000',
   },
   stepDivider4: {
     width: '1px',
     height: '310px',
-    borderLeft: '2px dotted #fff',
+    borderLeft: '2px dotted #000',
   },
   
   imageWrapper: {
