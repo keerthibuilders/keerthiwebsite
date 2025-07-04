@@ -311,7 +311,7 @@ const styles = {
   horizontalLine: {
     width: '60%',
     height: '1px',
-    borderTop: '2px dotted #fff',
+    borderTop: '2px dotted #000',
   },
   
   mobileImageWrapper: {
