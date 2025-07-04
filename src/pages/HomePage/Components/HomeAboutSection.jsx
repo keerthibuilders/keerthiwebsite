@@ -155,7 +155,6 @@ const styles = {
   aboutContainer: {
     backgroundColor: "#21623C",
     color: "white",
-    padding: "20px 0 0 0", // Remove bottom padding
     position: "relative",
     overflow: "hidden",
     backgroundImage: "url('/src/assets/images/bg1.png')",
@@ -173,24 +172,7 @@ const styles = {
     zIndex: 1,
     pointerEvents: "none",
   },
-  circle1: {
-    position: "absolute",
-    width: "300px",
-    height: "300px",
-    borderRadius: "50%",
-    backgroundColor: "rgba(255, 255, 255, 0.03)",
-    top: "-150px",
-    right: "-100px",
-  },
-  rectangle: {
-    position: "absolute",
-    width: "400px",
-    height: "100px",
-    transform: "rotate(45deg)",
-    backgroundColor: "rgba(255, 255, 255, 0.02)",
-    top: "40%",
-    left: "-200px",
-  },
+  
   rainLine: {
     position: "absolute",
     width: "2px",
