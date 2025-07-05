@@ -135,10 +135,10 @@ const OurJourney = () => {
               <h2
                 className="our-journey-title"
                 style={{
-                  fontWeight: 700,
-                  fontSize: isMobile ? '1.6rem' : isTablet ? '2rem' : '2.5rem',
+                  fontWeight: 500,
+                  fontSize: isMobile ? '22px' : isTablet ? '26px' : '30px',
                   color: isTablet ? '#fff' : '#000',
-                  marginBottom: isMobile ? '24px' : '40px',
+                  marginBottom: isMobile ? '14px' : '10px',
                   marginLeft: 0,
                   marginTop: 0,
                   textAlign: 'left',
@@ -157,7 +157,7 @@ const OurJourney = () => {
             <Col xs={12} md={5} className="mb-4 mb-md-0" style={{ paddingRight: isMobile ? '15px' : '5px' }}>
               <div style={{ ...responsiveStyles.imageSection, ...getTextAnimationStyle('left', 1) }}>
                 <img
-                  src="./assets/images/abouts bottom.png"
+                  src="https://res.cloudinary.com/dqmnu220b/image/upload/v1751711859/aboutsbotto_mtwio4.jpg"
                   alt="Our Journey"
                   style={responsiveStyles.image}
                   className="img-fluid"
@@ -266,8 +266,8 @@ const styles = {
     top: '20%',
     right: '-10px',
     transform: 'translateY(-50%)',
-    fontSize: '48px',
-    fontWeight: 'bold',
+    fontSize: '30px',
+    fontWeight: '500',
     color: '#000',
     lineHeight: '1.1',
     zIndex: 10,
@@ -279,7 +279,7 @@ const styles = {
     paddingLeft: '0px', // Reduced from 0px
   },
   paragraph: {
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.6',
     color: '#000',
     marginBottom: '20px',

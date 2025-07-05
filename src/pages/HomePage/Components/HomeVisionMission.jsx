@@ -176,14 +176,14 @@ const styles = {
     marginRight: '12px',
   },
   title: {
-    fontSize: '38px',
+    fontSize: '30px',
     fontWeight: '500',
     margin: 0,
     color: '#fff',
   },
   description: {
     maxWidth: '800px',
-    fontSize: '16px',
+    fontSize: '14px',
     color: '#ccc',
     lineHeight: '1.6',
     margin: 0,

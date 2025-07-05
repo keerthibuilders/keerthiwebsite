@@ -9,6 +9,11 @@ const About = () => {
   const [isMobile, setIsMobile] = useState(false);
   const statsRef = useRef(null);
 
+  // Scroll to top on component mount/reload
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -101,7 +106,7 @@ const About = () => {
         <div style={styles.horizontalLine}></div>
         <div style={styles.mobileImageWrapper}>
           <img
-            src="https://gurupunvaanii.com/wp-content/uploads/2024/01/Rectangle-5844.png"
+            src="https://gurupunvaanii.com/wp-content/uploads/2024/01/Rectangle-5848.png"
             alt="Happy"
             style={styles.dividerImageMobile}
           />
@@ -120,15 +125,15 @@ const About = () => {
         
       </div>
       {/* Step Divider 1 */}
-      <div style={{ ...styles.stepDividerContainer1, ...getAnimStyle(1) }}>
+      <div style={{ ...styles.stepDividerContainer3, ...getAnimStyle(5) }}>
         <div style={styles.stepDivider1}></div>
         <div style={styles.imageWrapper}>
           <img
-            src="https://gurupunvaanii.com/wp-content/uploads/2024/01/Rectangle-5848.png"
-            alt="Delivered"
+            src="https://gurupunvaanii.com/wp-content/uploads/2024/01/Rectangle-5846.png"
+            alt="Location"
             style={styles.dividerImage}
           />
-          </div>
+        </div>
       </div>
       {/* Box 2 */}
       <div style={{ ...styles.statBox, ...getAnimStyle(2) }}>
@@ -237,15 +242,15 @@ const styles = {
   },
   
   value: {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#f7941d',
+    fontSize: '30px',
+    fontWeight: '500',
+    color: '#1A662F',
     marginBottom: '0px',
   },
   
   description: {
     fontSize: '14px',
-    color: '#ccc',
+    color: '#000',
     lineHeight: '1.4',
     marginBottom: '12px',
   },
@@ -282,7 +287,7 @@ const styles = {
   valueMobile: {
     fontSize: '24px',
     fontWeight: 'bold',
-    color: '#f7941d',
+    color: '#1A662F',
     marginBottom: '8px',
   },
   

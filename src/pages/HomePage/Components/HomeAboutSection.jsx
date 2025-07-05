@@ -217,7 +217,7 @@ const styles = {
     justifyContent: "center",
   },
   founderName: {
-    fontSize: "34px",
+    fontSize: "30px",
     fontWeight: "500",
     color: "#fff",
     marginBottom: "0.5rem",
@@ -231,7 +231,7 @@ const styles = {
     fontFamily: "sans-serif",
   },
   founderDescription: {
-    fontSize: "16px",
+    fontSize: "14px",
     lineHeight: "1.8",
     color: "rgba(255, 255, 255, 0.9)",
     marginBottom: "1.5rem",

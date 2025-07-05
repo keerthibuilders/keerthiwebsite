@@ -8,6 +8,7 @@ const HomeProjectSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTurning, setIsTurning] = useState(false);
   const navigate = useNavigate();
   const scrollRef = useRef(null);
 
@@ -15,34 +16,28 @@ const HomeProjectSection = () => {
   const projects = [
     {
       id: 1,
-      image: "./assets/images/ongoing ktm villa phase 2.png"
+      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709558/ongoing_ktm_villa_phase_2_1_afx5qd.png"
     },
     {
       id: 2,
-      image: "./assets/images/ongoing bidadi.png"
+      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709535/ongoing_bidadi_1_dlahge.png"
     },
     {
       id: 3,
-      image: "./assets/images/ongoing ktm urvi phase 2 .png"
+      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709544/ongoing_ktm_urvi_phase_2_1_qpgh2x.png"
     },
-    // {
-    //   id: 5,
-    //   image: "https://d1di04ifehjy6m.cloudfront.net/media/filer_public/26/77/2677738b-7123-4cb9-a6af-0cef6355d744/2048x1046_3.jpg"
-    // }
   ];
 
-  // Auto-scroll functionality
+  // Auto-scroll functionality with page turn effect
   useEffect(() => {
-    if (!isPaused) {
+    if (!isPaused && !isTurning) {
       const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-        );
+        nextSlide();
       }, 3000);
 
       return () => clearInterval(interval);
     }
-  }, [isPaused, projects.length]);
+  }, [isPaused, isTurning, currentIndex]);
 
   // Scroll to current image on mobile when currentIndex changes
   useEffect(() => {
@@ -86,15 +81,23 @@ const HomeProjectSection = () => {
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-    );
+    if (!isTurning) {
+      setIsTurning(true);
+      setTimeout(() => {
+        setCurrentIndex(prev => prev === projects.length - 1 ? 0 : prev + 1);
+        setIsTurning(false);
+      }, 800); // Page turn duration
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
-    );
+    if (!isTurning) {
+      setIsTurning(true);
+      setTimeout(() => {
+        setCurrentIndex(prev => prev === 0 ? projects.length - 1 : prev - 1);
+        setIsTurning(false);
+      }, 800); // Page turn duration
+    }
   };
 
   const getPrevIndex = () => {
@@ -106,9 +109,15 @@ const HomeProjectSection = () => {
   };
 
   const handleDotClick = (index) => {
-    setCurrentIndex(index);
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 5000);
+    if (!isTurning && index !== currentIndex) {
+      setIsTurning(true);
+      setTimeout(() => {
+        setCurrentIndex(index);
+        setIsTurning(false);
+      }, 800);
+      setIsPaused(true);
+      setTimeout(() => setIsPaused(false), 5000);
+    }
   };
 
   const handleNavClick = (callback) => {
@@ -161,12 +170,13 @@ const HomeProjectSection = () => {
               onMouseLeave={() => setIsPaused(false)}
               className="d-flex align-items-center justify-content-center position-relative"
             >
-              {/* Desktop: Prev Button */}
+              {/* Desktop: Prev Button - Positioned over left image */}
               <button
-                style={styles.navButton}
+                style={{...styles.navButton, ...styles.leftNavButton}}
                 onClick={() => handleNavClick(prevSlide)}
                 aria-label="Previous projects"
                 className="d-none d-lg-flex align-items-center justify-content-center"
+                disabled={isTurning}
               >
                 &#8249;
               </button>
@@ -181,12 +191,21 @@ const HomeProjectSection = () => {
                   <img
                     src={projects[getPrevIndex()].image}
                     alt="Previous project"
-                    style={styles.sideImage}
+                    style={{
+                      ...styles.sideImage,
+                      opacity: isTurning ? 0.3 : 0.6,
+                      transform: isTurning ? 'rotateY(-15deg)' : 'rotateY(0deg)',
+                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                      transformOrigin: 'right center'
+                    }}
                     className="w-100 h-100"
-                   
+                    onError={(e) => {
+                      e.target.src = logo;
+                    }}
                   />
                 </div>
-                {/* Center Image */}
+                
+                {/* Center Image Container */}
                 <div
                   style={styles.centerImageContainer}
                   className="position-relative center-image-container"
@@ -195,17 +214,33 @@ const HomeProjectSection = () => {
                   <img
                     src={projects[currentIndex].image}
                     alt="Current project"
-                    style={{ ...styles.centerImage, cursor: 'pointer' }}
-                    className="w-100 h-100 center-image-hover"
-                   
+                    style={{
+                      ...styles.centerImage,
+                      cursor: 'pointer',
+                      transform: isTurning ? 'rotateY(-5deg)' : 'rotateY(0deg)',
+                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                      transformOrigin: 'center center',
+                      boxShadow: isTurning ? '0 20px 40px rgba(0,0,0,0.4)' : '0 10px 30px rgba(0,0,0,0.3)'
+                    }}
+                    className="w-100 h-100"
+                    onError={(e) => {
+                      e.target.src = logo;
+                    }}
                   />
                 </div>
+                
                 {/* Next Image */}
                 <div style={styles.rightSideImageContainer}>
                   <img
                     src={projects[getNextIndex()].image}
                     alt="Next project"
-                    style={styles.sideImage}
+                    style={{
+                      ...styles.sideImage,
+                      opacity: isTurning ? 0.3 : 0.6,
+                      transform: isTurning ? 'rotateY(15deg)' : 'rotateY(0deg)',
+                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                      transformOrigin: 'left center'
+                    }}
                     className="w-100 h-100"
                     onError={(e) => {
                       e.target.src = logo;
@@ -213,6 +248,17 @@ const HomeProjectSection = () => {
                   />
                 </div>
               </div>
+
+              {/* Desktop: Next Button - Positioned over right image */}
+              <button
+                style={{...styles.navButton, ...styles.rightNavButton}}
+                onClick={() => handleNavClick(nextSlide)}
+                aria-label="Next projects"
+                className="d-none d-lg-flex align-items-center justify-content-center"
+                disabled={isTurning}
+              >
+                &#8250;
+              </button>
 
               {/* Mobile: Fullscreen horizontal scrollable images */}
               <div
@@ -246,7 +292,6 @@ const HomeProjectSection = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       background: "#fff",
-                      borderRadius: 0,
                       overflow: "hidden",
                       position: "relative",
                     }}
@@ -262,24 +307,15 @@ const HomeProjectSection = () => {
                         width: "100vw",
                         height: "100%",
                         objectFit: "cover",
-                        borderRadius: 0,
                         display: "block",
+                        transform: isTurning && idx === currentIndex ? 'rotateY(-5deg)' : 'rotateY(0deg)',
+                        transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)'
                       }}
                       onError={e => { e.target.src = logo; }}
                     />
                   </div>
                 ))}
               </div>
-
-              {/* Desktop: Next Button */}
-              <button
-                style={styles.navButton}
-                onClick={() => handleNavClick(nextSlide)}
-                aria-label="Next projects"
-                className="d-none d-lg-flex align-items-center justify-content-center"
-              >
-                &#8250;
-              </button>
             </div>
           </Col>
         </Row>
@@ -293,11 +329,14 @@ const HomeProjectSection = () => {
                   key={index}
                   style={{
                     ...styles.dot,
-                    backgroundColor: index === currentIndex ? '#1C542C' : '#ccc'
+                    backgroundColor: index === currentIndex ? '#1C542C' : '#ccc',
+                    transform: isTurning && index === currentIndex ? 'rotateZ(180deg)' : 'rotateZ(0deg)',
+                    transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)'
                   }}
-                  onClick={() => setCurrentIndex(index)}
+                  onClick={() => handleDotClick(index)}
                   aria-label={`Go to slide ${index + 1}`}
                   className="border-0 me-2"
+                  disabled={isTurning}
                 />
               ))}
             </div>
@@ -305,7 +344,7 @@ const HomeProjectSection = () => {
         </Row>
       </Container>
 
-      {/* CSS for animations and mobile scroll */}
+      {/* CSS for page turn animations */}
       <style>
         {`
           .center-image-hover {
@@ -314,13 +353,6 @@ const HomeProjectSection = () => {
           .center-image-hover:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-          }
-          .side-image-hover {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-          }
-          .side-image-hover:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
           }
 
           @media (max-width: 991.98px) {
@@ -360,6 +392,92 @@ const HomeProjectSection = () => {
             #project-section h2 {
               font-size: 28px !important;
             }
+          }
+
+          /* Button disabled state */
+          button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+
+                    .navButton:hover:not(:disabled) {
+            background-color: rgba(45, 122, 61, 0.9) !important;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+          }
+
+          .navButton:active:not(:disabled) {
+            transform: scale(0.95);
+          }
+
+          /* Page turn animation keyframes */
+          @keyframes pageTurnLeft {
+            0% {
+              transform: rotateY(0deg);
+              transform-origin: right center;
+            }
+            50% {
+              transform: rotateY(-90deg);
+              transform-origin: right center;
+            }
+            100% {
+              transform: rotateY(-180deg);
+              transform-origin: right center;
+            }
+          }
+
+          @keyframes pageTurnRight {
+            0% {
+              transform: rotateY(0deg);
+              transform-origin: left center;
+            }
+            50% {
+              transform: rotateY(90deg);
+              transform-origin: left center;
+            }
+            100% {
+              transform: rotateY(180deg);
+              transform-origin: left center;
+            }
+          }
+
+          @keyframes pageTurnCenter {
+            0% {
+              transform: rotateY(0deg);
+              box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            }
+            50% {
+              transform: rotateY(-10deg);
+              box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            }
+            100% {
+              transform: rotateY(0deg);
+              box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            }
+          }
+
+          /* 3D perspective for page turn effect */
+          .images-wrapper-3d {
+            perspective: 1000px;
+            perspective-origin: center center;
+          }
+
+          .page-turn-container {
+            transform-style: preserve-3d;
+          }
+
+          /* Smooth page turn transitions */
+          .page-turn-transition {
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+          }
+
+          /* Enhanced shadow effects during page turn */
+          .page-shadow {
+            box-shadow: 
+              0 0 20px rgba(0,0,0,0.1),
+              0 10px 40px rgba(0,0,0,0.2),
+              inset 0 0 0 1px rgba(255,255,255,0.1);
           }
         `}
       </style>
@@ -415,15 +533,14 @@ const styles = {
   carouselContainer: {
     display: "flex",
     alignItems: "center",
-    gap: "20px",
     position: "relative",
     justifyContent: "center",
     width: "100%"
   },
   navButton: {
-    backgroundColor: "#1C542C",
+    backgroundColor: "rgba(28, 84, 44, 0.8)",
     color: "white",
-    border: "none",
+    border: "2px solid rgba(255, 255, 255, 0.3)",
     borderRadius: "50%",
     width: "60px",
     height: "60px",
@@ -432,10 +549,18 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 6px 12px rgba(0,0,0,0.3)",
+    boxShadow: "0 6px 12px rgba(0,0,0,0.4)",
     transition: "all 0.3s ease",
-    zIndex: 10,
-    flexShrink: 0
+    zIndex: 20,
+    flexShrink: 0,
+    position: "absolute",
+    backdropFilter: "blur(5px)"
+  },
+  leftNavButton: {
+    left: "75px"
+  },
+  rightNavButton: {
+    right: "75px"
   },
   mobileNavButton: {
     backgroundColor: "#1C542C",
@@ -462,53 +587,52 @@ const styles = {
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    maxWidth: "1200px"
+    maxWidth: "1200px",
+    gap: "37.8px",
+    perspective: "1000px",
+    perspectiveOrigin: "center center"
   },
   centerImageContainer: {
-    flex: "0 0 700px",
+    flex: "0 0 600px",
     height: "450px",
     overflow: "hidden",
     boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
     position: "relative",
     zIndex: 3,
-    cursor: "pointer"
+    cursor: "pointer",
+    transformStyle: "preserve-3d"
   },
   centerImage: {
     width: "100%",
     height: "100%",
-    objectFit: "fit",
-    className: "center-image-hover"
+    objectFit: "cover"
   },
   leftSideImageContainer: {
     flex: "0 0 300px",
     height: "350px",
     overflow: "hidden",
-    opacity: 0.6,
     boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
     position: "relative",
     zIndex: 1,
-    marginRight: "-50px",
     cursor: "pointer",
-    transition: "opacity 0.3s ease"
+    marginLeft: "-150px",
+    transformStyle: "preserve-3d"
   },
   rightSideImageContainer: {
     flex: "0 0 300px",
     height: "350px",
     overflow: "hidden",
-    opacity: 0.6,
     boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
     position: "relative",
     zIndex: 1,
-    marginLeft: "-50px",
     cursor: "pointer",
-    transition: "opacity 0.3s ease"
+    marginRight: "-150px",
+    transformStyle: "preserve-3d"
   },
   sideImage: {
     width: "100%",
     height: "100%",
-    objectFit: "cover",
-    className: "side-image-hover",
-    transition: "transform 0.3s ease"
+    objectFit: "cover"
   },
   dotsContainer: {
     display: "flex",
@@ -528,3 +652,4 @@ const styles = {
 };
 
 export default HomeProjectSection;
+

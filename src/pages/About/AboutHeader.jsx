@@ -43,11 +43,19 @@ const AboutHeader = () => {
       return {
         header: {
           ...styles.headerMobile,
-          backgroundImage: `url('/assets/images/bgimage.png')`,
+          backgroundImage: `url('/assets/images/bghome.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "scroll",
         },
-        content: styles.contentMobile,
+        content: {
+          ...styles.contentMobile,
+          textAlign: "left",
+          paddingLeft: "16px",
+          paddingRight: "16px",
+          paddingTop: "40px", // Added padding-top for mobile text
+        },
         title: styles.titleMobile,
         subtitle: styles.subtitleMobile,
         description: styles.descriptionMobile,
@@ -57,9 +65,10 @@ const AboutHeader = () => {
       return {
         header: {
           ...styles.headerTablet,
-          backgroundImage: `url('/assets/images/bgimage.png')`,
+          backgroundImage: `url('/assets/images/bghome.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         },
         content: styles.contentTablet,
         title: styles.titleTablet,
@@ -74,6 +83,7 @@ const AboutHeader = () => {
           backgroundImage: `url('/assets/images/bghome.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         },
         content: styles.content,
         title: styles.title,
@@ -128,6 +138,13 @@ const AboutHeader = () => {
             }
             .about-header-col {
               margin-bottom: 20px !important;
+              padding-top: 40px !important; /* Added padding-top for mobile column */
+            }
+            header {
+              background-image: url('/assets/images/bghome.png') !important;
+              background-size: cover !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
             }
           }
           @media (max-width: 480px) {
@@ -140,6 +157,16 @@ const AboutHeader = () => {
             }
             .about-header-description {
               font-size: 0.95rem !important;
+            }
+            .about-header-col {
+              padding-top: 50px !important; /* Increased padding-top for smaller mobile screens */
+            }
+            header {
+              min-height: 300px !important;
+              background-image: url('/assets/images/bghome.png') !important;
+              background-size: cover !important;
+              background-position: center center !important;
+              background-repeat: no-repeat !important;
             }
           }
         `}
@@ -196,9 +223,9 @@ const styles = {
   headerMobile: {
     position: "relative",
     width: "100%",
-    minHeight: "auto",
+    minHeight: "300px",
     background: "#ffffff",
-    paddingTop: "80px",
+    paddingTop: "80px", // Increased from 80px to 120px for more top spacing
     paddingBottom: "20px",
     overflow: "hidden",
     border: "none",
@@ -212,6 +239,7 @@ const styles = {
     width: "100%",
     paddingRight: "0px",
     paddingLeft: "0px",
+    paddingTop: "20px", // Added padding-top to content mobile
     marginBottom: "30px",
     border: "none",
     borderTop: "none",
@@ -221,7 +249,7 @@ const styles = {
   },
   // Typography - Desktop
   title: {
-    fontSize: "3.2rem",
+    fontSize: "32px",
     fontWeight: 500,
     letterSpacing: "-0.5px",
     marginBottom: "20px",
@@ -229,16 +257,16 @@ const styles = {
     color: "#1a1a1a",
   },
   subtitle: {
-    fontSize: "1.4rem",
+    fontSize: "20px",
     fontWeight: 600,
-    color: "#21623C",
+    color: "#000",
     margin: "0 0 16px 0",
     lineHeight: 1.4,
   },
   description: {
-    fontSize: "1.1rem",
+    fontSize: "16px",
     fontWeight: 400,
-    color: "#666666",
+    color: "#000",
     margin: "0 0 30px 0",
     lineHeight: 1.6,
     maxWidth: "600px",
@@ -255,38 +283,39 @@ const styles = {
   subtitleTablet: {
     fontSize: "1.2rem",
     fontWeight: 600,
-    color: "#21623C",
+    color: "#000",
     margin: "0 0 14px 0",
     lineHeight: 1.4,
   },
   descriptionTablet: {
     fontSize: "1rem",
     fontWeight: 400,
-    color: "#666666",
+    color: "#000",
     margin: "0 0 25px 0",
     lineHeight: 1.5,
     maxWidth: "500px",
   },
   // Typography - Mobile
   titleMobile: {
-    fontSize: "2.4rem",
+    fontSize: "28px",
     fontWeight: 500,
     letterSpacing: "-0.3px",
     marginBottom: "15px",
+    marginTop: "20px", // Added margin-top for title
     lineHeight: 1.2,
     color: "#1a1a1a",
   },
   subtitleMobile: {
-    fontSize: "1.1rem",
+    fontSize: "18px",
     fontWeight: 600,
-    color: "#21623C",
+    color: "#000",
     margin: "0 0 12px 0",
     lineHeight: 1.3,
   },
   descriptionMobile: {
-    fontSize: "0.95rem",
+    fontSize: "14px",
     fontWeight: 400,
-    color: "#666666",
+    color: "#000",
     margin: "0 0 20px 0",
     lineHeight: 1.5,
     maxWidth: "100%",

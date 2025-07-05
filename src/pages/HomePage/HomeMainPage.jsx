@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HomeHeroSection from './Components/HomeHeroSection'
 import HomeProjectSection from './Components/HomeProjectSection'
 import HomeAboutSection from './Components/HomeAboutSection'
@@ -9,6 +9,11 @@ import AllProject from './Components/AllProjects'
 import HomeVisionMission from './Components/HomeVisionMission'
 
 const HomeMainPage = () => {
+  // Scroll to top on component mount/reload
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <HomeHeroSection />
