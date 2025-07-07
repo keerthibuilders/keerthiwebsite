@@ -243,7 +243,7 @@ const styles = {
   
   value: {
     fontSize: '30px',
-    fontWeight: '500',
+    fontWeight: '700',
     color: '#1A662F',
     marginBottom: '0px',
   },

@@ -303,7 +303,7 @@ const HomeHeroSection = () => {
 
         <Container style={styles.containerRelative}>
           <Row className="justify-content-center">
-            <Col lg={12} xl={12} className="text-center" style={videoAnimationStyle}>
+            <Col md={12} lg={12} xl={12} className="text-center" style={videoAnimationStyle}>
               <div style={responsiveStyles.videoContainer}>
                 <video
                   ref={videoRef}
@@ -565,10 +565,10 @@ const styles = {
   videoDesktop: {
     width: "100%",
     height: "auto",
-    minHeight: "350px",
-    maxHeight: "350px",
+    minHeight: "480px",
+    maxHeight: "480px",
     border: "none",
-    borderRadius: "12px",
+    borderRadius: "0px  80px 0px 80px",
     objectFit: 'fill'
   },
   statsSectionDesktop: {
@@ -598,7 +598,7 @@ const styles = {
     color: "white"
   },
   titleDesktop: {
-    fontSize: "28px",
+    fontSize: "38px",
     fontWeight: "500",
     color: "#fff",
     lineHeight: '1.6',
@@ -667,7 +667,7 @@ const styles = {
     color: "white"
   },
   titleTablet: {
-    fontSize: "24px",
+    fontSize: "30px",
     fontWeight: "500",
     color: "#fff",
     lineHeight: '1.5',

@@ -88,13 +88,13 @@ const HomeAboutSection = () => {
           {/* Right Side Text Content with Side Animation */}
           <Col lg={7} md={6} style={styles.contentColumn}>
             <h2 style={{...styles.founderName, ...getTextAnimationStyle('right', 1)}}>
-              KT Manjunath
+              K M Manjunath
             </h2>
             <h5 style={{...styles.founderTitle, ...getTextAnimationStyle('right', 2)}}>
               Founder & Managing Director
             </h5>
             <p style={{...styles.founderDescription, ...getTextAnimationStyle('right', 3)}}>
-              The driving force behind Keerthi Builders is our founder, KT Manjunath—a visionary with
+              The driving force behind Keerthi Builders is our founder, K M Manjunath—a visionary with
               relentless dedication and a sharp instinct for growth. From humble beginnings to becoming
               one of the most respected names in Bangalore's real estate landscape, Mr. Manjunath's
               journey is a testament to what integrity, hard work, and foresight can achieve.

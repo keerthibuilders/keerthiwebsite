@@ -132,7 +132,7 @@ const OurJourney = () => {
           <Row>
             <Col xs={12}>
               {/* Title at top left */}
-              <h2
+              {/* <h2
                 className="our-journey-title"
                 style={{
                   fontWeight: 500,
@@ -149,7 +149,7 @@ const OurJourney = () => {
                 }}
               >
                 Our Journey
-              </h2>
+              </h2> */}
             </Col>
           </Row>
           <Row className="align-items-center" style={{ gap: '0' }}>
@@ -166,9 +166,12 @@ const OurJourney = () => {
             </Col>
             <Col xs={12} md={7} style={{ paddingLeft: isMobile ? '15px' : '5px' }}>
               <div style={{ ...responsiveStyles.content, ...getTextAnimationStyle('right', 3) }}>
+                <h2 style={{ ...responsiveStyles.headingOur, ...getTextAnimationStyle('right', 2) }}>
+                  Our Journey
+                </h2>
                 <p style={{ ...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 4) }}>
-                  Started in 2019 by our visionary Founder, Mr. Sanjay Baid, Keerthi Builders strives for excellence.
-                  With over 20 years of experience, Mr. Baid envisioned making approved projects more affordable,
+                  Started in 2019 by our visionary Founder, Mr Manjunath, Keerthi Builders strives for excellence.
+                  With over 20 years of experience, Mr Manjunath envisioned making approved projects more affordable,
                   transparent, and accessible while ensuring unwavering value for every investment.
                 </p>
                 <p style={{ ...responsiveStyles.paragraph, ...getTextAnimationStyle('right', 5) }}>
@@ -261,25 +264,18 @@ const styles = {
     borderBottomRightRadius: '60px',
     objectFit: 'cover',
   },
-  headingText: {
-    position: 'absolute',
-    top: '20%',
-    right: '-10px',
-    transform: 'translateY(-50%)',
-    fontSize: '30px',
-    fontWeight: '500',
-    color: '#000',
-    lineHeight: '1.1',
-    zIndex: 10,
-    textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
-  },
   
+  headingOur: {
+    fontSize: '30px',
+    color: '#1A662F',
+    fontWeight: '500',
+    position: 'relative'},
   content: {
     flex: '1 1 55%',
     paddingLeft: '0px', // Reduced from 0px
   },
   paragraph: {
-    fontSize: '14px',
+    fontSize: '16px',
     lineHeight: '1.6',
     color: '#000',
     marginBottom: '20px',

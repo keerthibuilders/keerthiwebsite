@@ -1,6 +1,59 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
+// 🎯 UNIVERSAL CONFIGURATION - Change values here for ALL devices
+const CONFIG = {
+  // Background & Overlay
+  backgroundColor: "#000000",
+  backgroundImage: "/assets/images/about0home.png", // Same image for ALL devices
+  overlayOpacity: 0.7, // 0.1 to 0.9
+  
+  // Layout
+  minHeight: {
+    desktop: "400px",
+    tablet: "350px",
+    mobile: "300px"
+  },
+  padding: {
+    desktop: { top: "120px", bottom: "40px" },
+    tablet: { top: "100px", bottom: "30px" },
+    mobile: { top: "80px", bottom: "20px" }
+  },
+  
+  // Typography
+  textColor: "#fff",
+  title: {
+    desktop: { size: "32px", weight: 500, spacing: "-0.5px", margin: "20px", lineHeight: 1.1 },
+    tablet: { size: "2.8rem", weight: 500, spacing: "-0.4px", margin: "18px", lineHeight: 1.1 },
+    mobile: { size: "28px", weight: 500, spacing: "-0.3px", margin: "15px", lineHeight: 1.2 }
+  },
+  subtitle: {
+    desktop: { size: "20px", weight: 600, lineHeight: 1.4 },
+    tablet: { size: "1.2rem", weight: 600, lineHeight: 1.4 },
+    mobile: { size: "18px", weight: 600, lineHeight: 1.3 }
+  },
+  description: {
+    desktop: { size: "16px", weight: 400, maxWidth: "600px", lineHeight: 1.6 },
+    tablet: { size: "1rem", weight: 400, maxWidth: "500px", lineHeight: 1.5 },
+    mobile: { size: "14px", weight: 400, maxWidth: "100%", lineHeight: 1.5 }
+  },
+  
+  // Animation
+  animation: {
+    duration: "1s",
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  },
+  
+  // Content
+  content: {
+    title: "About Keerthi Builders",
+    subtitle: "Building Trust, Delivering Excellence.",
+    description: "Discover our story, vision, and values that have shaped us into one of the most trusted names in real estate development."
+  }
+};
+
 const AboutHeader = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -16,7 +69,6 @@ const AboutHeader = () => {
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
@@ -28,100 +80,145 @@ const AboutHeader = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { 
+        threshold: CONFIG.animation.threshold, 
+        rootMargin: CONFIG.animation.rootMargin 
+      }
     );
 
     if (headerRef.current) {
       observer.observe(headerRef.current);
     }
-
     return () => observer.disconnect();
   }, []);
 
-  const getResponsiveStyles = () => {
-    if (isMobile) {
-      return {
-        header: {
-          ...styles.headerMobile,
-          backgroundImage: `url('/assets/images/bghome.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "scroll",
-        },
-        content: {
-          ...styles.contentMobile,
-          textAlign: "left",
-          paddingLeft: "16px",
-          paddingRight: "16px",
-          paddingTop: "40px", // Added padding-top for mobile text
-        },
-        title: styles.titleMobile,
-        subtitle: styles.subtitleMobile,
-        description: styles.descriptionMobile,
-        fadeUpScale: styles.fadeUpScaleMobile,
-      };
-    } else if (isTablet) {
-      return {
-        header: {
-          ...styles.headerTablet,
-          backgroundImage: `url('/assets/images/bghome.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        },
-        content: styles.contentTablet,
-        title: styles.titleTablet,
-        subtitle: styles.subtitleTablet,
-        description: styles.descriptionTablet,
-        fadeUpScale: styles.fadeUpScaleTablet,
-      };
-    } else {
-      return {
-        header: {
-          ...styles.header,
-          backgroundImage: `url('/assets/images/bghome.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        },
-        content: styles.content,
-        title: styles.title,
-        subtitle: styles.subtitle,
-        description: styles.description,
-        fadeUpScale: styles.fadeUpScale,
-      };
-    }
+  const getDeviceType = () => {
+    if (isMobile) return 'mobile';
+    if (isTablet) return 'tablet';
+    return 'desktop';
   };
 
-  const responsiveStyles = getResponsiveStyles();
+  const device = getDeviceType();
+
+  const headerStyle = {
+    position: "relative",
+    width: "100%",
+    minHeight: CONFIG.minHeight[device],
+    background: CONFIG.backgroundColor,
+    backgroundColor: CONFIG.backgroundColor,
+    backgroundImage: `url('${CONFIG.backgroundImage}')`, // Same image for all devices
+    backgroundSize: "cover",
+    backgroundPosition: isMobile ? "center center" : "center",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: isMobile ? "scroll" : "scroll",
+    paddingTop: CONFIG.padding[device].top,
+    paddingBottom: CONFIG.padding[device].bottom,
+    overflow: "hidden",
+    border: "none",
+    borderTop: "none",
+    borderBottom: "none",
+    boxShadow: "none",
+    outline: "none",
+  };
+
+  const overlayStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: `rgba(0, 0, 0, ${CONFIG.overlayOpacity})`,
+    zIndex: 1,
+  };
+
+  const containerStyle = {
+    position: 'relative',
+    zIndex: 2
+  };
+
+  const rowStyle = {
+    minHeight: isMobile ? "auto" : "300px"
+  };
+
+  const contentStyle = {
+    textAlign: isMobile ? "center" : "left",
+    width: "100%",
+    paddingRight: isMobile ? "16px" : "20px",
+    paddingLeft: isMobile ? "16px" : "0px",
+    paddingTop: isMobile ? "40px" : "0px",
+    marginBottom: isMobile ? "30px" : "0px",
+    position: "relative",
+    zIndex: 2,
+    border: "none",
+    borderTop: "none",
+    borderBottom: "none",
+    boxShadow: "none",
+    outline: "none",
+  };
+
+  const titleStyle = {
+    fontSize: CONFIG.title[device].size,
+    fontWeight: CONFIG.title[device].weight,
+    letterSpacing: CONFIG.title[device].spacing,
+    marginBottom: CONFIG.title[device].margin,
+    marginTop: isMobile ? "20px" : "0px",
+    lineHeight: CONFIG.title[device].lineHeight,
+    color: CONFIG.textColor,
+  };
+
+  const subtitleStyle = {
+    fontSize: CONFIG.subtitle[device].size,
+    fontWeight: CONFIG.subtitle[device].weight,
+    color: CONFIG.textColor,
+    margin: "0 0 16px 0",
+    lineHeight: CONFIG.subtitle[device].lineHeight,
+  };
+
+  const descriptionStyle = {
+    fontSize: CONFIG.description[device].size,
+    fontWeight: CONFIG.description[device].weight,
+    color: CONFIG.textColor,
+    margin: "0 0 30px 0",
+    lineHeight: CONFIG.description[device].lineHeight,
+    maxWidth: CONFIG.description[device].maxWidth,
+    padding: isMobile ? "0 10px" : "0",
+  };
+
+  const getAnimationTransform = () => {
+    const translateY = isMobile ? '40px' : (isTablet ? '50px' : '60px');
+    const scale = isMobile ? '0.9' : (isTablet ? '0.85' : '0.8');
+    return isVisible ? "translateY(0) scale(1)" : `translateY(${translateY}) scale(${scale})`;
+  };
+
+  const animationStyle = {
+    transform: getAnimationTransform(),
+    opacity: isVisible ? 1 : 0,
+    transition: `all ${CONFIG.animation.duration} ${CONFIG.animation.easing}`,
+  };
 
   return (
-    <header ref={headerRef} style={responsiveStyles.header}>
-      <Container>
-        <Row className="align-items-center" style={{ minHeight: isMobile ? "auto" : "300px" }}>
+    <header ref={headerRef} style={headerStyle}>
+      {/* Dark overlay for better text readability */}
+      <div style={overlayStyle}></div>
+      
+      <Container style={containerStyle}>
+        <Row className="align-items-center" style={rowStyle}>
           <Col lg={8} md={10} sm={12}>
-            <div
-              style={{
-                ...responsiveStyles.content,
-                ...responsiveStyles.fadeUpScale,
-                ...(isVisible ? styles.fadeUpScaleActive : {})
-              }}
-            >
-              <h1 style={responsiveStyles.title}>
-                About <span style={styles.highlight}>Keerthi Builders</span>
+            <div style={{ ...contentStyle, ...animationStyle }}>
+              <h1 style={titleStyle}>
+                {CONFIG.content.title}
               </h1>
-              <p style={responsiveStyles.subtitle}>
-                Building Trust, Delivering Excellence.
+              <p style={subtitleStyle}>
+                {CONFIG.content.subtitle}
               </p>
-              <p style={responsiveStyles.description}>
-                Discover our story, vision, and values that have shaped us into
-                one of the most trusted names in real estate development.
+              <p style={descriptionStyle}>
+                {CONFIG.content.description}
               </p>
             </div>
           </Col>
         </Row>
       </Container>
+      
       <style>
         {`
           @media (max-width: 768px) {
@@ -138,15 +235,18 @@ const AboutHeader = () => {
             }
             .about-header-col {
               margin-bottom: 20px !important;
-              padding-top: 40px !important; /* Added padding-top for mobile column */
+              padding-top: 40px !important;
             }
             header {
-              background-image: url('/assets/images/bghome.png') !important;
+              background-color: ${CONFIG.backgroundColor} !important;
+              background-image: url('${CONFIG.backgroundImage}') !important;
               background-size: cover !important;
               background-position: center !important;
               background-repeat: no-repeat !important;
+              min-height: ${CONFIG.minHeight.mobile} !important;
             }
           }
+          
           @media (max-width: 480px) {
             .about-header-title {
               font-size: 2rem !important;
@@ -159,196 +259,43 @@ const AboutHeader = () => {
               font-size: 0.95rem !important;
             }
             .about-header-col {
-              padding-top: 50px !important; /* Increased padding-top for smaller mobile screens */
+              padding-top: 50px !important;
             }
             header {
-              min-height: 300px !important;
-              background-image: url('/assets/images/bghome.png') !important;
+              min-height: ${CONFIG.minHeight.mobile} !important;
+              background-color: ${CONFIG.backgroundColor} !important;
+              background-image: url('${CONFIG.backgroundImage}') !important;
               background-size: cover !important;
               background-position: center center !important;
               background-repeat: no-repeat !important;
+            }
+          }
+          
+          @media (min-width: 769px) and (max-width: 1024px) {
+            header {
+              background-color: ${CONFIG.backgroundColor} !important;
+              background-image: url('${CONFIG.backgroundImage}') !important;
+              background-size: cover !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              min-height: ${CONFIG.minHeight.tablet} !important;
+            }
+          }
+          
+          @media (min-width: 1025px) {
+            header {
+              background-color: ${CONFIG.backgroundColor} !important;
+              background-image: url('${CONFIG.backgroundImage}') !important;
+              background-size: cover !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              min-height: ${CONFIG.minHeight.desktop} !important;
             }
           }
         `}
       </style>
     </header>
   );
-};
-
-const styles = {
-  header: {
-    position: "relative",
-    width: "100%",
-    minHeight: "400px",
-    background: "#ffffff",
-    paddingTop: "120px",
-    paddingBottom: "40px",
-    overflow: "hidden",
-    border: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    boxShadow: "none",
-    outline: "none",
-  },
-  content: {
-    textAlign: "left",
-    width: "100%",
-    paddingRight: "20px",
-    border: "none",
-    outline: "none",
-  },
-  // Tablet styles
-  headerTablet: {
-    position: "relative",
-    width: "100%",
-    minHeight: "350px",
-    background: "#ffffff",
-    paddingTop: "100px",
-    paddingBottom: "30px",
-    overflow: "hidden",
-    border: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    boxShadow: "none",
-    outline: "none",
-  },
-  contentTablet: {
-    textAlign: "left",
-    width: "100%",
-    paddingRight: "15px",
-    border: "none",
-    outline: "none",
-  },
-  // Mobile styles
-  headerMobile: {
-    position: "relative",
-    width: "100%",
-    minHeight: "300px",
-    background: "#ffffff",
-    paddingTop: "80px", // Increased from 80px to 120px for more top spacing
-    paddingBottom: "20px",
-    overflow: "hidden",
-    border: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    boxShadow: "none",
-    outline: "none",
-  },
-  contentMobile: {
-    textAlign: "center",
-    width: "100%",
-    paddingRight: "0px",
-    paddingLeft: "0px",
-    paddingTop: "20px", // Added padding-top to content mobile
-    marginBottom: "30px",
-    border: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    boxShadow: "none",
-    outline: "none",
-  },
-  // Typography - Desktop
-  title: {
-    fontSize: "32px",
-    fontWeight: 500,
-    letterSpacing: "-0.5px",
-    marginBottom: "20px",
-    lineHeight: 1.1,
-    color: "#1a1a1a",
-  },
-  subtitle: {
-    fontSize: "20px",
-    fontWeight: 600,
-    color: "#000",
-    margin: "0 0 16px 0",
-    lineHeight: 1.4,
-  },
-  description: {
-    fontSize: "16px",
-    fontWeight: 400,
-    color: "#000",
-    margin: "0 0 30px 0",
-    lineHeight: 1.6,
-    maxWidth: "600px",
-  },
-  // Typography - Tablet
-  titleTablet: {
-    fontSize: "2.8rem",
-    fontWeight: 500,
-    letterSpacing: "-0.4px",
-    marginBottom: "18px",
-    lineHeight: 1.1,
-    color: "#1a1a1a",
-  },
-  subtitleTablet: {
-    fontSize: "1.2rem",
-    fontWeight: 600,
-    color: "#000",
-    margin: "0 0 14px 0",
-    lineHeight: 1.4,
-  },
-  descriptionTablet: {
-    fontSize: "1rem",
-    fontWeight: 400,
-    color: "#000",
-    margin: "0 0 25px 0",
-    lineHeight: 1.5,
-    maxWidth: "500px",
-  },
-  // Typography - Mobile
-  titleMobile: {
-    fontSize: "28px",
-    fontWeight: 500,
-    letterSpacing: "-0.3px",
-    marginBottom: "15px",
-    marginTop: "20px", // Added margin-top for title
-    lineHeight: 1.2,
-    color: "#1a1a1a",
-  },
-  subtitleMobile: {
-    fontSize: "18px",
-    fontWeight: 600,
-    color: "#000",
-    margin: "0 0 12px 0",
-    lineHeight: 1.3,
-  },
-  descriptionMobile: {
-    fontSize: "14px",
-    fontWeight: 400,
-    color: "#000",
-    margin: "0 0 20px 0",
-    lineHeight: 1.5,
-    maxWidth: "100%",
-    padding: "0 10px",
-  },
-  // Animations - Desktop
-  fadeUpScale: {
-    transform: "translateY(60px) scale(0.8)",
-    opacity: 0,
-    transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
-  },
-  // Animations - Tablet
-  fadeUpScaleTablet: {
-    transform: "translateY(50px) scale(0.85)",
-    opacity: 0,
-    transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
-  },
-  // Animations - Mobile
-  fadeUpScaleMobile: {
-    transform: "translateY(40px) scale(0.9)",
-    opacity: 0,
-    transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-  },
-  // Active animation states (same for all devices)
-  fadeUpScaleActive: {
-    transform: "translateY(0) scale(1)",
-    opacity: 1,
-  },
-  // Highlight text
-  highlight: {
-    color: "#21623C",
-    position: "relative",
-  },
 };
 
 export default AboutHeader;
