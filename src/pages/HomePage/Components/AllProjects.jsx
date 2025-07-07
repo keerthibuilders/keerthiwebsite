@@ -12,44 +12,44 @@ const AllProjects = () => {
   const navigate = useNavigate();
   const scrollRef = useRef(null);
 
-  // Sample project data - replace with your actual data
+ 
   const projects = [
     {
       id: 1,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709010/sideshwara_layout_1_gudpii.png"
+      image: "./../assets/images/1.webp"
     },
     {
       id: 2,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709024/urvi_phase_one_1_rqst4s.png"
+      image: "./../assets/images/2.webp"
     },
     {
       id: 3,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707964/industal_phase_-_1_1_lo3zmi.png"
+      image: "./../assets/images/3.webp"
     },
     {
       id: 4,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707931/aps_keerthi_1_objcq4.png"
+      image: "./../assets/images/4.webp"
     },
     {
       id: 5,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707979/industal_phase_-_2_1_tjqvd2.png"
+      image: "./../assets/images/5.webp"
     },
     {
       id: 6,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709126/ktm_villa_enclave_jmyiyj.png"
+      image: "./../assets/images/6.webp"
     },
     {
       id: 7,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707948/atr_keerthi_1_y8ivde.png"
+      image: "./../assets/images/7.webp"
     },
     {
       id: 8,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751702816/rupees_1_r4zbyl.png"
+      image: "./../assets/images/8.webp"
     },
-    // {
-    //   id: 9,
-    //   image: "./../assets/images/rajeswari layout.png"
-    // }
+    {
+      id: 9,
+      image: "./../assets/images/9.webp"
+    }
   ];
 
   // Auto-scroll functionality with page turn effect

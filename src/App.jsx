@@ -11,6 +11,9 @@ import HomeProjectSection from './pages/HomePage/Components/HomeProjectSection';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import SocialMediaBar from './components/SocialMediaBar/SocialMediaBar';
 import About from './pages/About/About';
+import ProjectMainPage from './pages/Project/ProjectMainPage';
+import CommercialProjects from './pages/Project/Commercial/CommercialProjects';
+import ResidentialProjects from './pages/Project/Residential/ResidentialProjects';
 
 
 function App() {
@@ -22,6 +25,9 @@ function App() {
           <Route path="/" element={<HomeMainPage />} />
           <Route path="/detailspage" element={<SiteDetailsPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/project" element={<ProjectMainPage />} />
+          <Route path="/residential" element={<ResidentialProjects />} />
+          <Route path="/commercial" element={<CommercialProjects />} />
         </Routes>
         <SocialMediaBar />
         <WhatsAppButton />

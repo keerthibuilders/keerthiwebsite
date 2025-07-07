@@ -545,7 +545,7 @@ const styles = {
   textSectionDesktop: {
     background: '#1A662F',
     color: "#fff",
-    paddingTop: "150px",
+    paddingTop: "50px",
     paddingBottom: "60px",
     position: 'relative',
     overflow: 'hidden'
@@ -614,7 +614,7 @@ const styles = {
   textSectionTablet: {
     background: '#1A662F',
     color: "#fff",
-    paddingTop: "120px",
+    paddingTop: "50px",
     paddingBottom: "50px",
     position: 'relative',
     overflow: 'hidden'
@@ -683,7 +683,7 @@ const styles = {
   textSectionMobile: {
     background: '#1A662F',
     color: "#fff",
-    paddingTop: "100px",
+    paddingTop: "50px",
     paddingBottom: "40px",
     position: 'relative',
     overflow: 'hidden'
