@@ -373,7 +373,7 @@ function Footer() {
               </li>
               <li style={styles.contactItem}>
                 <MdOutlinePhone style={styles.icon} />
-                <a href="tel:+919742063580" style={styles.link}>+91 97420 63580</a>
+                <a href="tel:+91990287666" style={styles.link}>+91 990 287 6666</a>
               </li>
               <li style={styles.contactItem}>
                 <LuMapPin style={{...styles.icon, width:'20px' }} />
