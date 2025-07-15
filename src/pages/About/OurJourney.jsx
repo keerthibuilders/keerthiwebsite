@@ -66,8 +66,8 @@ const OurJourney = () => {
                   Our Journey
                 </h2>
                 <p style={{ ...styles.paragraph, ...getTextAnimationStyle('right', 4) }}>
-                  Started in 2019 by our visionary Founder, Mr Manjunath, Keerthi Builders strives for excellence.
-                  With over 20 years of experience, Mr Manjunath envisioned making approved projects more affordable,
+                  Started in 2000 by our visionary Founder, Mr Manjunath, Keerthi Builders strives for excellence.
+                  With over 25 years of experience, Mr Manjunath envisioned making approved projects more affordable,
                   transparent, and accessible while ensuring unwavering value for every investment.
                 </p>
                 <p style={{ ...styles.paragraph, ...getTextAnimationStyle('right', 5) }}>

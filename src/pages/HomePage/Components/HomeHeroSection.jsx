@@ -44,7 +44,7 @@ const HomeHeroSection = () => {
   // Set video to start from 6 seconds when it loads
   const handleVideoLoadedData = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 6;
+      videoRef.current.currentTime = 3;
     }
   };
 
@@ -71,9 +71,9 @@ const HomeHeroSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
-            animateCounter(0, 15, 2000, 'projects');
-            animateCounter(0, 17, 2200, 'experience');
-            animateCounter(0, 2500, 2500, 'customers');
+            animateCounter(0, 20, 2000, 'projects');
+            animateCounter(0, 25, 2200, 'experience');
+            animateCounter(0, 2000, 2500, 'customers');
             animateCounter(0, 50, 2300, 'sqft');
           }
         });

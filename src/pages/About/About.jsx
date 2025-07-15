@@ -120,7 +120,7 @@ const About = () => {
     <div style={styles.statsWrapper} ref={statsRef}>
       {/* Box 1 */}
       <div style={{ ...styles.statBox, ...getAnimStyle(0) }}>
-        <div style={styles.value}>23 lakhs+</div>
+        <div style={styles.value}>50 lakhs+</div>
         <div style={styles.description}>Square feet Delivered</div>
         
       </div>
@@ -137,7 +137,7 @@ const About = () => {
       </div>
       {/* Box 2 */}
       <div style={{ ...styles.statBox, ...getAnimStyle(2) }}>
-        <div style={styles.value}>30 lakhs+</div>
+        <div style={styles.value}>15 lakhs+</div>
         <div style={styles.description}>Square feet Ready Delivered</div>
       </div>
       {/* Step Divider 2 */}
@@ -153,7 +153,7 @@ const About = () => {
       </div>
       {/* Box 3 */}
       <div style={{ ...styles.statBox, ...getAnimStyle(4) }}>
-        <div style={styles.value}>22+</div>
+        <div style={styles.value}>25+</div>
         <div style={styles.description}>upcoming projects <br /> across various locations</div>
       </div>
       {/* Step Divider 3 */}
