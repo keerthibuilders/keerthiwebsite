@@ -3,7 +3,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const WhatsAppPage = () => {
-  const whatsappNumber = "919742063580"; 
+  const whatsappNumber = "919902876666"; 
   const message =
     "Hello! I am interested in your properties. Can you please provide more information?";
 

@@ -71,7 +71,7 @@ const HomeContactSection = () => {
                   </div>
                   <div style={styles.infoContent}>
                     <span style={styles.infoLabel}>Phone</span>
-                    <a href="tel:+91990287666" style={styles.infoText}>990 287 666</a>
+                    <a href="tel:+919902876666" style={styles.infoText}>990 287 6666</a>
                   </div>
                 </div>
                 

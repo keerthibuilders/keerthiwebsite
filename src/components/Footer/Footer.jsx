@@ -403,7 +403,7 @@ function Footer() {
             <ul style={styles.socialList}>
               <li style={styles.socialItem}>
                 <a
-                  href="https://wa.me/919742063580"
+                  href="https://wa.me/919902876666"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
