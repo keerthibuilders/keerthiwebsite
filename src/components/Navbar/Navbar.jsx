@@ -443,18 +443,18 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     fontFamily: fonts.Noto,
-    marginTop: "25px",
+    marginTop: "15px",
     marginLeft: "5px"
   },
   title: {
-    fontSize: "16px",
+    fontSize: "20px",
     fontWeight: "600",
     margin: "0",
     fontFamily: fonts.Noto,
     color: "#1C542C"
   },
   subtitle: {
-    fontSize: "10px",
+    fontSize: "12px",
     margin: "0",
     fontFamily: fonts.Noto,
     color: "#1C542C"
