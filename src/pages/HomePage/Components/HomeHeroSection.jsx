@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import videoSource from "../../../../public/videos/ktm_hero_video.mp4";
 
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
     projects: 0,
     experience: 0,
     customers: 0,
-    sqft: 0
+    sqft: 0,
   });
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -26,8 +27,8 @@ const HomeHeroSection = () => {
     };
 
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   // Trigger entrance animations on component mount
@@ -56,10 +57,10 @@ const HomeHeroSection = () => {
       const progress = Math.min(elapsed / duration, 1);
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const current = Math.floor(start + (end - start) * easeOutQuart);
-      setCounters(prev => ({ ...prev, [key]: current }));
+      setCounters((prev) => ({ ...prev, [key]: current }));
       if (progress >= 1) {
         clearInterval(timer);
-        setCounters(prev => ({ ...prev, [key]: end }));
+        setCounters((prev) => ({ ...prev, [key]: end }));
       }
     }, 16);
   };
@@ -71,10 +72,10 @@ const HomeHeroSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
-            animateCounter(0, 20, 2000, 'projects');
-            animateCounter(0, 25, 2200, 'experience');
-            animateCounter(0, 2000, 2500, 'customers');
-            animateCounter(0, 50, 2300, 'sqft');
+            animateCounter(0, 20, 2000, "projects");
+            animateCounter(0, 25, 2200, "experience");
+            animateCounter(0, 2000, 2500, "customers");
+            animateCounter(0, 50, 2300, "sqft");
           }
         });
       },
@@ -93,11 +94,11 @@ const HomeHeroSection = () => {
   // Format number with appropriate suffix
   const formatNumber = (num, type) => {
     switch (type) {
-      case 'customers':
+      case "customers":
         return num >= 1000 ? `${(num / 1000).toFixed(1)}K` : num.toString();
-      case 'projects':
-      case 'experience':
-      case 'sqft':
+      case "projects":
+      case "experience":
+      case "sqft":
       default:
         return num.toString();
     }
@@ -154,34 +155,38 @@ const HomeHeroSection = () => {
 
   // Animation styles
   const textAnimationStyle = {
-    transform: isVisible ? 'translateY(0)' : 'translateY(-50px)',
+    transform: isVisible ? "translateY(0)" : "translateY(-50px)",
     opacity: isVisible ? 1 : 0,
-    transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    transition: "all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   };
 
   const videoAnimationStyle = {
-    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.8)',
+    transform: isVisible
+      ? "translateY(0) scale(1)"
+      : "translateY(50px) scale(0.8)",
     opacity: isVisible ? 1 : 0,
-    transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s'
+    transition: "all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s",
   };
 
   // Letter animation component
   const AnimatedText = ({ text, delay = 0 }) => {
     return (
-      <span style={{ display: 'inline-block' }}>
-        {text.split('').map((char, index) => (
+      <span style={{ display: "inline-block" }}>
+        {text.split("").map((char, index) => (
           <span
             key={index}
             style={{
-              display: 'inline-block',
+              display: "inline-block",
               opacity: lettersVisible ? 1 : 0,
-              transform: lettersVisible ? 'translateY(0) rotateX(0)' : 'translateY(50px) rotateX(90deg)',
+              transform: lettersVisible
+                ? "translateY(0) rotateX(0)"
+                : "translateY(50px) rotateX(90deg)",
               transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
               transitionDelay: `${delay + index * 0.1}s`,
-              transformOrigin: 'bottom center',
+              transformOrigin: "bottom center",
             }}
           >
-            {char === ' ' ? '\u00A0' : char}
+            {char === " " ? "\u00A0" : char}
           </span>
         ))}
       </span>
@@ -200,7 +205,7 @@ const HomeHeroSection = () => {
           style={styles.backgroundSvg}
         >
           <g>
-            {[0, 1, 2, 3, 4].map(i => (
+            {[0, 1, 2, 3, 4].map((i) => (
               <circle
                 key={i}
                 cx="720"
@@ -259,12 +264,30 @@ const HomeHeroSection = () => {
 
         {/* Animated rain drop lines */}
         <div style={styles.rainContainer}>
-          <div style={{ ...styles.rainLine, left: '10%', animationDelay: '0s' }} className="rain-line"></div>
-          <div style={{ ...styles.rainLine, left: '25%', animationDelay: '1.2s' }} className="rain-line"></div>
-          <div style={{ ...styles.rainLine, left: '40%', animationDelay: '0.5s' }} className="rain-line"></div>
-          <div style={{ ...styles.rainLine, left: '60%', animationDelay: '1.8s' }} className="rain-line"></div>
-          <div style={{ ...styles.rainLine, left: '75%', animationDelay: '0.8s' }} className="rain-line"></div>
-          <div style={{ ...styles.rainLine, left: '90%', animationDelay: '2.2s' }} className="rain-line"></div>
+          <div
+            style={{ ...styles.rainLine, left: "10%", animationDelay: "0s" }}
+            className="rain-line"
+          ></div>
+          <div
+            style={{ ...styles.rainLine, left: "25%", animationDelay: "1.2s" }}
+            className="rain-line"
+          ></div>
+          <div
+            style={{ ...styles.rainLine, left: "40%", animationDelay: "0.5s" }}
+            className="rain-line"
+          ></div>
+          <div
+            style={{ ...styles.rainLine, left: "60%", animationDelay: "1.8s" }}
+            className="rain-line"
+          ></div>
+          <div
+            style={{ ...styles.rainLine, left: "75%", animationDelay: "0.8s" }}
+            className="rain-line"
+          ></div>
+          <div
+            style={{ ...styles.rainLine, left: "90%", animationDelay: "2.2s" }}
+            className="rain-line"
+          ></div>
         </div>
 
         <Container style={styles.containerRelative}>
@@ -273,11 +296,12 @@ const HomeHeroSection = () => {
               <div className="start-center">
                 <h2 style={responsiveStyles.title}>
                   <AnimatedText text="Keerthi Builders The " delay={0} />
-                  <span style={{ color: '#FFD600' }}>
+                  <span style={{ color: "#FFD600" }}>
                     <AnimatedText text="Ground" delay={2.5} />
                   </span>
                   <AnimatedText text=" Beneath " delay={3.1} />
-                  <br/><span style={{ color: '#FFD600' }}>
+                  <br />
+                  <span style={{ color: "#FFD600" }}>
                     <AnimatedText text="Great" delay={4.0} />
                   </span>
                   <AnimatedText text=" Futures" delay={4.6} />
@@ -285,7 +309,10 @@ const HomeHeroSection = () => {
               </div>
               <div className="start-center">
                 <p style={responsiveStyles.subtitle}>
-                  <AnimatedText text="Where Excellence Meets Experience " delay={0} />
+                  <AnimatedText
+                    text="Where Excellence Meets Experience "
+                    delay={0}
+                  />
                 </p>
               </div>
             </Col>
@@ -303,7 +330,13 @@ const HomeHeroSection = () => {
 
         <Container style={styles.containerRelative}>
           <Row className="justify-content-center">
-            <Col md={12} lg={12} xl={12} className="text-center" style={videoAnimationStyle}>
+            <Col
+              md={12}
+              lg={12}
+              xl={12}
+              className="text-center"
+              style={videoAnimationStyle}
+            >
               <div style={responsiveStyles.videoContainer}>
                 <video
                   ref={videoRef}
@@ -314,34 +347,74 @@ const HomeHeroSection = () => {
                   onLoadedData={handleVideoLoadedData}
                   style={responsiveStyles.video}
                 >
-                  <source
-                    src="./../assets/images/ktm_hero_video.mp4"
-                    type="video/mp4"
-                  />
+                  <source src={videoSource} type="video/mp4" />
                 </video>
               </div>
             </Col>
           </Row>
         </Container>
-        <div style={{ ...styles.rainLine, left: '10%', animationDelay: '0s' }} className="rain-line"></div>
-        <div style={{ ...styles.rainLine, left: '25%', animationDelay: '1.2s' }} className="rain-line"></div>
-        <div style={{ ...styles.rainLine, left: '40%', animationDelay: '0.5s' }} className="rain-line"></div>
-        <div style={{ ...styles.rainLine, left: '60%', animationDelay: '1.8s' }} className="rain-line"></div>
-        <div style={{ ...styles.rainLine, left: '75%', animationDelay: '0.8s' }} className="rain-line"></div>
-        <div style={{ ...styles.rainLine, left: '90%', animationDelay: '2.2s' }} className="rain-line"></div>
+        <div
+          style={{ ...styles.rainLine, left: "10%", animationDelay: "0s" }}
+          className="rain-line"
+        ></div>
+        <div
+          style={{ ...styles.rainLine, left: "25%", animationDelay: "1.2s" }}
+          className="rain-line"
+        ></div>
+        <div
+          style={{ ...styles.rainLine, left: "40%", animationDelay: "0.5s" }}
+          className="rain-line"
+        ></div>
+        <div
+          style={{ ...styles.rainLine, left: "60%", animationDelay: "1.8s" }}
+          className="rain-line"
+        ></div>
+        <div
+          style={{ ...styles.rainLine, left: "75%", animationDelay: "0.8s" }}
+          className="rain-line"
+        ></div>
+        <div
+          style={{ ...styles.rainLine, left: "90%", animationDelay: "2.2s" }}
+          className="rain-line"
+        ></div>
       </div>
 
       {/* Stats Section */}
-      <div
-        ref={statsRef}
-        style={responsiveStyles.statsSection}
-      >
+      <div ref={statsRef} style={responsiveStyles.statsSection}>
         {/* Animated rain drop lines for stats section */}
         <div style={styles.rainContainer}>
-          <div style={{ ...styles.rainLineWhite, left: '15%', animationDelay: '0.3s' }} className="rain-line-white"></div>
-          <div style={{ ...styles.rainLineWhite, left: '35%', animationDelay: '1.5s' }} className="rain-line-white"></div>
-          <div style={{ ...styles.rainLineWhite, left: '55%', animationDelay: '0.9s' }} className="rain-line-white"></div>
-          <div style={{ ...styles.rainLineWhite, left: '75%', animationDelay: '2.1s' }} className="rain-line-white"></div>
+          <div
+            style={{
+              ...styles.rainLineWhite,
+              left: "15%",
+              animationDelay: "0.3s",
+            }}
+            className="rain-line-white"
+          ></div>
+          <div
+            style={{
+              ...styles.rainLineWhite,
+              left: "35%",
+              animationDelay: "1.5s",
+            }}
+            className="rain-line-white"
+          ></div>
+          <div
+            style={{
+              ...styles.rainLineWhite,
+              left: "55%",
+              animationDelay: "0.9s",
+            }}
+            className="rain-line-white"
+          ></div>
+          <div
+            style={{
+              ...styles.rainLineWhite,
+              left: "75%",
+              animationDelay: "2.1s",
+            }}
+            className="rain-line-white"
+          ></div>
         </div>
 
         <Container style={responsiveStyles.statsContainer}>
@@ -349,41 +422,33 @@ const HomeHeroSection = () => {
             <Col xs={6} md={3}>
               <div style={responsiveStyles.statItem}>
                 <h2 style={responsiveStyles.statNumber}>
-                  {formatNumber(counters.projects, 'projects')}+
+                  {formatNumber(counters.projects, "projects")}+
                 </h2>
-                                <p style={responsiveStyles.statLabel}>
-                  Projects Completed
-                </p>
+                <p style={responsiveStyles.statLabel}>Projects Completed</p>
               </div>
             </Col>
             <Col xs={6} md={3}>
               <div style={responsiveStyles.statItem}>
                 <h2 style={responsiveStyles.statNumber}>
-                  {formatNumber(counters.experience, 'experience')}+
+                  {formatNumber(counters.experience, "experience")}+
                 </h2>
-                <p style={responsiveStyles.statLabel}>
-                  Years of Experience
-                </p>
+                <p style={responsiveStyles.statLabel}>Years of Experience</p>
               </div>
             </Col>
             <Col xs={6} md={3}>
               <div style={responsiveStyles.statItem}>
                 <h2 style={responsiveStyles.statNumber}>
-                  {formatNumber(counters.customers, 'customers')}+
+                  {formatNumber(counters.customers, "customers")}+
                 </h2>
-                <p style={responsiveStyles.statLabel}>
-                  Happy Customers
-                </p>
+                <p style={responsiveStyles.statLabel}>Happy Customers</p>
               </div>
             </Col>
             <Col xs={6} md={3}>
               <div style={responsiveStyles.statItem}>
                 <h2 style={responsiveStyles.statNumber}>
-                  {formatNumber(counters.sqft, 'sqft')}+
+                  {formatNumber(counters.sqft, "sqft")}+
                 </h2>
-                <p style={responsiveStyles.statLabel}>
-                  Lakhs+ sqft. Delivered
-                </p>
+                <p style={responsiveStyles.statLabel}>Lakhs+ sqft. Delivered</p>
               </div>
             </Col>
           </Row>
@@ -474,7 +539,7 @@ const styles = {
     height: "100%",
     zIndex: 0,
     overflow: "hidden",
-    pointerEvents: "none"
+    pointerEvents: "none",
   },
   backgroundSvg: {
     position: "absolute",
@@ -482,47 +547,47 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    opacity: 0.18
+    opacity: 0.18,
   },
   backgroundPattern: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
-    height: '100%',
-    pointerEvents: 'none',
-    zIndex: 0
+    height: "100%",
+    pointerEvents: "none",
+    zIndex: 0,
   },
   rainContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
+    position: "absolute",
+    width: "100%",
+    height: "100%",
     top: 0,
     left: 0,
     zIndex: 1,
-    pointerEvents: 'none',
+    pointerEvents: "none",
   },
   containerRelative: {
-    position: 'relative',
-    zIndex: 2
+    position: "relative",
+    zIndex: 2,
   },
   videoBackgroundTop: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
-    height: '50%',
-    backgroundColor: '#1A662F',
-    zIndex: 0
+    height: "50%",
+    backgroundColor: "#1A662F",
+    zIndex: 0,
   },
   videoBackgroundBottom: {
-    position: 'absolute',
-    top: '30%',
+    position: "absolute",
+    top: "30%",
     left: 0,
     right: 0,
     bottom: 0,
-    background: '#1A662F',
-    zIndex: 0
+    background: "#1A662F",
+    zIndex: 0,
   },
   rainLine: {
     position: "absolute",
@@ -543,24 +608,24 @@ const styles = {
 
   // Desktop styles
   textSectionDesktop: {
-    background: '#1A662F',
+    background: "#1A662F",
     color: "#fff",
     paddingTop: "50px",
     paddingBottom: "60px",
-    position: 'relative',
-    overflow: 'hidden'
+    position: "relative",
+    overflow: "hidden",
   },
   videoSectionDesktop: {
-    position: 'relative',
+    position: "relative",
     paddingTop: "0px",
-    paddingBottom: "80px"
+    paddingBottom: "80px",
   },
   videoContainerDesktop: {
-    position: 'relative',
-    display: 'inline-block',
-    width: '100%',
-    maxWidth: '1200px',
-    backgroundColor: 'none',
+    position: "relative",
+    display: "inline-block",
+    width: "100%",
+    maxWidth: "1200px",
+    backgroundColor: "none",
   },
   videoDesktop: {
     width: "100%",
@@ -569,67 +634,67 @@ const styles = {
     maxHeight: "480px",
     border: "none",
     borderRadius: "0px  80px 0px 80px",
-    objectFit: 'fill'
+    objectFit: "fill",
   },
   statsSectionDesktop: {
     backgroundColor: "#1A662F",
     padding: "0px 0 40px 0",
-    position: 'relative',
+    position: "relative",
     border: "none",
     zIndex: 2,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   statsContainerDesktop: {
-    position: 'relative',
-    zIndex: 2
+    position: "relative",
+    zIndex: 2,
   },
   statItemDesktop: {
-    padding: "10px"
+    padding: "10px",
   },
   statNumberDesktop: {
     fontWeight: "bold",
     fontSize: "2.5rem",
     color: "white",
-    marginBottom: "0"
+    marginBottom: "0",
   },
   statLabelDesktop: {
     fontSize: "1.1rem",
     marginBottom: "0",
-    color: "white"
+    color: "white",
   },
   titleDesktop: {
     fontSize: "38px",
     fontWeight: "500",
     color: "#fff",
-    lineHeight: '1.6',
+    lineHeight: "1.6",
   },
   subtitleDesktop: {
     fontSize: "18px",
     fontWeight: "400",
     color: "#fff",
-    lineHeight: '1.4'
+    lineHeight: "1.4",
   },
 
   // Tablet styles
   textSectionTablet: {
-    background: '#1A662F',
+    background: "#1A662F",
     color: "#fff",
     paddingTop: "50px",
     paddingBottom: "50px",
-    position: 'relative',
-    overflow: 'hidden'
+    position: "relative",
+    overflow: "hidden",
   },
   videoSectionTablet: {
-    position: 'relative',
+    position: "relative",
     paddingTop: "0px",
-    paddingBottom: "60px"
+    paddingBottom: "60px",
   },
   videoContainerTablet: {
-    position: 'relative',
-    display: 'inline-block',
-    width: '100%',
-    maxWidth: '900px',
-    backgroundColor: 'none',
+    position: "relative",
+    display: "inline-block",
+    width: "100%",
+    maxWidth: "900px",
+    backgroundColor: "none",
   },
   videoTablet: {
     width: "100%",
@@ -638,67 +703,67 @@ const styles = {
     maxHeight: "280px",
     border: "none",
     borderRadius: "10px",
-    objectFit: 'fill'
+    objectFit: "fill",
   },
   statsSectionTablet: {
     backgroundColor: "#1A662F",
     padding: "0px 0 35px 0",
-    position: 'relative',
+    position: "relative",
     border: "none",
     zIndex: 2,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   statsContainerTablet: {
-    position: 'relative',
-    zIndex: 2
+    position: "relative",
+    zIndex: 2,
   },
   statItemTablet: {
-    padding: "8px"
+    padding: "8px",
   },
   statNumberTablet: {
     fontWeight: "bold",
     fontSize: "2rem",
     color: "white",
-    marginBottom: "0"
+    marginBottom: "0",
   },
   statLabelTablet: {
     fontSize: "0.9rem",
     marginBottom: "0",
-    color: "white"
+    color: "white",
   },
   titleTablet: {
     fontSize: "30px",
     fontWeight: "500",
     color: "#fff",
-    lineHeight: '1.5',
+    lineHeight: "1.5",
   },
   subtitleTablet: {
     fontSize: "16px",
     fontWeight: "400",
     color: "#fff",
-    lineHeight: '1.4'
+    lineHeight: "1.4",
   },
 
   // Mobile styles
   textSectionMobile: {
-    background: '#1A662F',
+    background: "#1A662F",
     color: "#fff",
     paddingTop: "50px",
     paddingBottom: "40px",
-    position: 'relative',
-    overflow: 'hidden'
+    position: "relative",
+    overflow: "hidden",
   },
   videoSectionMobile: {
-    position: 'relative',
+    position: "relative",
     paddingTop: "0px",
-    paddingBottom: "40px"
+    paddingBottom: "40px",
   },
   videoContainerMobile: {
-    position: 'relative',
-    display: 'inline-block',
-    width: '100%',
-    maxWidth: '100%',
-    backgroundColor: 'none',
+    position: "relative",
+    display: "inline-block",
+    width: "100%",
+    maxWidth: "100%",
+    backgroundColor: "none",
   },
   videoMobile: {
     width: "100%",
@@ -707,52 +772,51 @@ const styles = {
     maxHeight: "200px",
     border: "none",
     borderRadius: "30px 0px 30px 0px", // Mobile specific border radius
-    objectFit: 'fill'
+    objectFit: "fill",
   },
   statsSectionMobile: {
     backgroundColor: "#1A662F",
     padding: "0px 0 30px 0",
-    position: 'relative',
+    position: "relative",
     border: "none",
     zIndex: 2,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   statsContainerMobile: {
-    position: 'relative',
-    zIndex: 2
+    position: "relative",
+    zIndex: 2,
   },
   statItemMobile: {
     padding: "5px",
-    marginBottom: "15px"
+    marginBottom: "15px",
   },
   statNumberMobile: {
     fontWeight: "bold",
     fontSize: "1.8rem",
     color: "white",
-    marginBottom: "5px"
+    marginBottom: "5px",
   },
   statLabelMobile: {
     fontSize: "0.8rem",
     marginBottom: "0",
     color: "white",
-    lineHeight: "1.2"
+    lineHeight: "1.2",
   },
   titleMobile: {
     marginTop: "30px",
     fontSize: "20px",
     fontWeight: "500",
     color: "#fff",
-    lineHeight: '1.4',
-    textAlign: 'left'
+    lineHeight: "1.4",
+    textAlign: "left",
   },
   subtitleMobile: {
     fontSize: "14px",
     fontWeight: "400",
     color: "#fff",
-    lineHeight: '1.3',
-    textAlign: 'left'
+    lineHeight: "1.3",
+    textAlign: "left",
   },
 };
 
 export default HomeHeroSection;
-
