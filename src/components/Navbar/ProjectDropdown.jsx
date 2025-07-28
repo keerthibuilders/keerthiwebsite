@@ -1,4 +1,3 @@
-import React from "react";
 import { Dropdown, Row, Col, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import fonts from "../Common/Font";
@@ -47,11 +46,12 @@ const ProjectDropdown = ({
           <div className="dropdown-content-wrapper">
             <Row className="g-0 h-100">
               {/* Left Side - Project Types */}
+
               <Col xs={12} lg={4} className="dropdown-left-section">
                 <div className=" p-3 p-lg-0 border-bottom border-lg-end border-lg-bottom-0">
                   
                   <Dropdown.Item
-                    className={`dropdown-item-custom mb-2 ${location.pathname === '/residential' ? 'active' : ''}`}
+                    className={`dropdown-item-custom mb-2 ${location.pathname === '/residential' || location.pathname === '/'  ? 'active' : ''}`}
                     onClick={(e) => handleNavigation('residential', e)}
                   >
                     <div className="d-flex align-items-center">
@@ -99,14 +99,14 @@ const ProjectDropdown = ({
                           />
                           <Card.Body className="p-2 p-lg-3 flex-grow-1">
                             <Card.Title className="project-card-title mb-1">
-                              Keerthi Villa Enclave
+                              KTM Villa Enclave Phase 2
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
                               <i className="fas fa-map-marker-alt me-1"></i>
-                              Whitefield, Bangalore
+                            Gollahalli-thittahalli,Kumbalagodu, Bangalore.
                             </Card.Text>
                             <small className="project-card-type d-none d-lg-block text-muted">
-                              Luxury Residential
+                              Residential Property
                             </small>
                           </Card.Body>
                         </div>
@@ -129,14 +129,14 @@ const ProjectDropdown = ({
                           />
                           <Card.Body className="p-2 p-lg-3 flex-grow-1">
                             <Card.Title className="project-card-title mb-1">
-                              Keerthi Elite
+                             Keerthi Iinfinity Ullahas
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
                               <i className="fas fa-map-marker-alt me-1"></i>
-                              Marathahalli, Bangalore
+                              Shyanumangala,Bidadi.
                             </Card.Text>
                             <small className="project-card-type d-none d-lg-block text-muted">
-                              Premium Residential
+                             Residential Property
                             </small>
                           </Card.Body>
                         </div>
