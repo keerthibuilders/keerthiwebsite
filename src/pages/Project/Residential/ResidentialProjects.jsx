@@ -1,8 +1,8 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ktmLavish from "../../../../public/assets/images/12.webp"
-import keerthiIinfinityUrviPhase2 from "../../../../public/assets/images/13.webp"
+import ktmLavish from "../../../../public/assets/images/13.webp"
+import keerthiIinfinityUrviPhase2 from "../../../../public/assets/images/12.webp"
 import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
 import ktmVilla from "../../../../public/assets/images/1.webp"
 import siddeshwara from "../../../../public/assets/images/2.webp"
