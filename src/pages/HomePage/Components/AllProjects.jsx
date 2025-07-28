@@ -233,7 +233,6 @@ const AllProjects = () => {
                 <div
                   style={styles.centerImageContainer}
                   className="position-relative center-image-container"
-                  onClick={handleCenterImageClick}
                 >
                   <img
                     src={projects[currentIndex].image}
@@ -321,7 +320,7 @@ const AllProjects = () => {
                     }}
                     onClick={() => {
                       setCurrentIndex(idx);
-                      handleCenterImageClick();
+                      
                     }}
                   >
                     <img
