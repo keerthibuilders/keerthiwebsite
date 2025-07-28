@@ -315,7 +315,7 @@ const HomeHeroSection = () => {
                   style={responsiveStyles.video}
                 >
                   <source
-                    src="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917041/jodfj23i8zpj6vfnikxi.mp4"
+                    src="./../videos/ktm_hero_video.mp4"
                     type="video/mp4"
                   />
                 </video>
