@@ -257,12 +257,12 @@ const ProjectDropdown = ({
             
             .project-card-custom.active .project-card-title {
               color: #1C542C !important;
-              font-weight: 700 !important;
+              font-weight: 500 !important;
             }
             
             .project-card-title {
               font-size: 14px !important;
-              font-weight: 600 !important;
+              font-weight: 500 !important;
               color: #888 !important;
               font-family: ${fonts.Noto} !important;
               line-height: 1.3 !important;
