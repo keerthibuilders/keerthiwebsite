@@ -2,12 +2,12 @@ import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ktmLavish from "../../../../public/assets/images/12.webp"
+import keerthiIinfinityUrviPhase2 from "../../../../public/assets/images/13.webp"
+import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
 import ktmVilla from "../../../../public/assets/images/1.webp"
 import siddeshwara from "../../../../public/assets/images/2.webp"
 import iinfinityUrvi from "../../../../public/assets/images/3.webp"
 import aPSKeerthi from "../../../../public/assets/images/7.webp"
-import keerthiIinfinityUrviPhase1 from "../../../../public/assets/images/13.webp"
-import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
 const ResidentialProjects = () => {
   const ongoingProjects = [
     {
@@ -29,7 +29,7 @@ const ResidentialProjects = () => {
       name: "KTM Iinfinity Urvi Phase 2",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: iinfinityUrvi,
+      image: keerthiIinfinityUrviPhase2,
     },
   ];
   const completedProjects = [
@@ -59,7 +59,7 @@ const ResidentialProjects = () => {
       name: "Keerthi Iinfinity Urvi Phase 1",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: keerthiIinfinityUrviPhase1,
+      image: iinfinityUrvi,
     },
   ];
 
