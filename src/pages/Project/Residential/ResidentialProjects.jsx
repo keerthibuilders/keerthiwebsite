@@ -132,7 +132,7 @@ const styles = {
     fontSize: "32px",
     marginBottom: "2rem",
   },
- projectCard: {
+  projectCard: {
     border: "none",
     borderRadius: "0",
     boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
@@ -140,10 +140,10 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: "400px",
-    objectFit: "cover",
+    height: auto,
+    width:auto,
+    objectFit: "fit",
     borderRadius: "0",
-    width: "100%",
   },
   cardBody: {
     padding: "1.5rem",
@@ -152,7 +152,7 @@ const styles = {
     color: "#1A662F",
     fontWeight: "600",
     fontSize: "1.3rem",
-    marginBottom: "1rem",
+    marginBottom: "0.5rem",
   },
   location: {
     color: "#6c757d",
@@ -160,5 +160,6 @@ const styles = {
     marginBottom: "0",
   },
 };
+
 
 export default ResidentialProjects;
