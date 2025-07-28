@@ -93,7 +93,7 @@ const ProjectDropdown = ({
                         <div className="d-flex d-lg-block">
                           <Card.Img 
                             src="./../assets/images/13.webp" 
-                            alt="Keerthi Paradise"
+                            alt="Keerthi Iinfinity Lavish"
                             className="project-card-image flex-shrink-0"
                             style={styles.projectCardImage}
                           />
@@ -103,7 +103,7 @@ const ProjectDropdown = ({
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
                               <i className="fas fa-map-marker-alt me-1"></i>
-                            Gollahalli-thittahalli,Kumbalagodu, Bangalore.
+                            Gollahalli, Kumbalagodu, Bangalore.
                             </Card.Text>
                             <small className="project-card-type d-none d-lg-block text-muted">
                               Residential Property
@@ -129,7 +129,7 @@ const ProjectDropdown = ({
                           />
                           <Card.Body className="p-2 p-lg-3 flex-grow-1">
                             <Card.Title className="project-card-title mb-1">
-                             Keerthi Iinfinity Ullahas
+                             Keerthi Iinfinity Urvi Phase-2
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
                               <i className="fas fa-map-marker-alt me-1"></i>
