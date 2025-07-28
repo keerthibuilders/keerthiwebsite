@@ -16,15 +16,15 @@ const HomeProjectSection = () => {
   const projects = [
     {
       id: 1,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709558/ongoing_ktm_villa_phase_2_1_afx5qd.png"
+      image: "./../assets/images/13.webp"
     },
     {
       id: 2,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709535/ongoing_bidadi_1_dlahge.png"
+      image: "./../assets/images/11.webp"
     },
     {
       id: 3,
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709544/ongoing_ktm_urvi_phase_2_1_qpgh2x.png"
+      image: "./../assets/images/12.webp"
     },
   ];
 
