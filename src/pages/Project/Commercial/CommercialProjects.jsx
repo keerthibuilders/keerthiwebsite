@@ -1,7 +1,8 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import comphase1 from "../../../../public/assets/images/4.webp"
+import comphase2 from "../../../../public/assets/images/5.webp"
 const CommercialProjects = () => {
   
    const ongoingProjects = [ 
@@ -10,16 +11,23 @@ const CommercialProjects = () => {
       name: "KTM Industal Phase 1",
       location: "Kumbalagodu, Bangalore.",
       property: "Industrial Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707964/industal_phase_-_1_1_lo3zmi.png",
+      image: comphase1,
     },
   ];
     const completedProjects = [
     {
       id: 2,
+      name: "KTM Industal Phase 1",
+      location: "Kumbalagodu, Bangalore.",
+      property: "Industrial Property",
+      image: comphase1,
+    },
+    {
+      id: 3,
       name: "KTM Industal Phase 2",
       location: "Kumbalagodu, Bangalore.",
       property: "Industrial Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707979/industal_phase_-_2_1_tjqvd2.png",
+      image: comphase2,
     },
     
   ];
