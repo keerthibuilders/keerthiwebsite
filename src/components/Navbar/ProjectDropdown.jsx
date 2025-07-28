@@ -92,14 +92,14 @@ const ProjectDropdown = ({
                       >
                         <div className="d-flex d-lg-block">
                           <Card.Img 
-                            src="./../assets/images/1.webp" 
+                            src="./../assets/images/13.webp" 
                             alt="Keerthi Paradise"
                             className="project-card-image flex-shrink-0"
                             style={styles.projectCardImage}
                           />
                           <Card.Body className="p-2 p-lg-3 flex-grow-1">
                             <Card.Title className="project-card-title mb-1">
-                              KTM Villa Enclave Phase 2
+                              Keerthi Iinfinity Lavish
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
                               <i className="fas fa-map-marker-alt me-1"></i>
@@ -122,8 +122,8 @@ const ProjectDropdown = ({
                       >
                         <div className="d-flex d-lg-block">
                           <Card.Img 
-                            src="./../assets/images/5.webp" 
-                            alt="Keerthi Elite"
+                            src="./../assets/images/12.webp" 
+                            alt="Keerthi Iinfinity Urvi Phase-2"
                             className="project-card-image flex-shrink-0"
                             style={styles.projectCardImage}
                           />
