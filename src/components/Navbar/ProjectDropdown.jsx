@@ -252,14 +252,14 @@ const ProjectDropdown = ({
             }
             
             .project-card-custom.active .project-card-title {
-              color: #1C542C !important;
+              color: #3A3A3A !important;
               font-weight: 500 !important;
             }
             
             .project-card-title {
               font-size: 14px !important;
               font-weight: 500 !important;
-              color: #888 !important;
+              color: #3A3A3A !important;
               font-family: ${fonts.Noto} !important;
               line-height: 1.3 !important;
               transition: color 0.2s ease !important;
@@ -389,8 +389,8 @@ const ProjectDropdown = ({
               }
               
               .project-card-image {
-                width: 100px !important;
-                height: 70px !important;
+                width: 120px !important;
+                height: 80px !important;
                 object-fit: cover !important;
                 border-radius: 0px !important;
               }
