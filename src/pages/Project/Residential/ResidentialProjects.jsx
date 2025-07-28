@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ktmLavish from "../../../../public/assets/images/12.webp"
 import ktmVilla from "../../../../public/assets/images/1.webp"
 import siddeshwara from "../../../../public/assets/images/2.webp"
 import iinfinityUrvi from "../../../../public/assets/images/3.webp"
@@ -11,10 +12,10 @@ const ResidentialProjects = () => {
   const ongoingProjects = [
     {
       id: 1,
-      name: "KTM Villa Enclave Phase 2",
+      name: "Keerthi Iifinity Lavish",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: ktmVilla,
+      image: ktmLavish,
     },
     {
       id: 2,
@@ -139,7 +140,7 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: "250px",
+    height: "350px",
     objectFit: "cover",
     borderRadius: "0",
     width: "100%",
