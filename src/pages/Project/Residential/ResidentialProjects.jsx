@@ -1,7 +1,12 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import ktmVilla from "../../../../public/assets/images/1.webp"
+import siddeshwara from "../../../../public/assets/images/2.webp"
+import iinfinityUrvi from "../../../../public/assets/images/3.webp"
+import aPSKeerthi from "../../../../public/assets/images/7.webp"
+import keerthiIinfinityUrviPhase1 from "../../../../public/assets/images/13.webp"
+import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
 const ResidentialProjects = () => {
   const ongoingProjects = [
     {
@@ -9,21 +14,21 @@ const ResidentialProjects = () => {
       name: "KTM Villa Enclave Phase 2",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709558/ongoing_ktm_villa_phase_2_1_afx5qd.png",
+      image: ktmVilla,
     },
     {
       id: 2,
       name: "Keerthi Iinfinity Ullahas",
       location: "Shyanumangala,Bidadi.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709535/ongoing_bidadi_1_dlahge.png",
+      image: keerthiIinfinityUllahas,
     },
     {
       id: 3,
       name: "KTM Iinfinity Urvi Phase 2",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709544/ongoing_ktm_urvi_phase_2_1_qpgh2x.png",
+      image: iinfinityUrvi,
     },
   ];
   const completedProjects = [
@@ -32,28 +37,28 @@ const ResidentialProjects = () => {
           name: "KTM Villa Enclave",
           location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
           property: "Residential Property",
-          image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709126/ktm_villa_enclave_jmyiyj.png",
+          image: ktmVilla,
         },
         {
       id: 5,
       name: "APS Keerthi Iinfinity",
       location: "Ajjanahalli, Dodda aladamara, Bangalore.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751707931/aps_keerthi_1_objcq4.png",
+      image: aPSKeerthi,
     },
     {
       id: 6,
       name: "Siddeshwara Layout",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709010/sideshwara_layout_1_gudpii.png",
+      image: siddeshwara,
     },
     {
       id: 7,
       name: "Keerthi Iinfinity Urvi Phase 1",
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
-      image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709024/urvi_phase_one_1_rqst4s.png",
+      image: keerthiIinfinityUrviPhase1,
     },
   ];
 
@@ -89,12 +94,13 @@ const ResidentialProjects = () => {
           <h2 style={styles.sectionTitle} >Completed Projects</h2>
           {completedProjects.map((project) => (
             <Col xl={6} lg={6} md={6} sm={12} key={project.id} className="mb-4">
-              <Card style={styles.projectCard} className="h-100">
+              <Card style={styles.projectCard} className="h-150">
                 <Card.Img 
                   variant="top" 
                   src={project.image} 
                   alt={project.name}
                   style={styles.projectImage}
+                  content="fit"
                 />
                 
                 <Card.Body style={styles.cardBody}>
@@ -134,8 +140,9 @@ const styles = {
   },
   projectImage: {
     height: "250px",
-    objectFit: "fit",
+    objectFit: "cover",
     borderRadius: "0",
+    width: "100%",
   },
   cardBody: {
     padding: "1.5rem",
