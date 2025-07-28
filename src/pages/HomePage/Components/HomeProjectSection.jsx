@@ -209,7 +209,6 @@ const HomeProjectSection = () => {
                 <div
                   style={styles.centerImageContainer}
                   className="position-relative center-image-container"
-                  onClick={handleCenterImageClick}
                 >
                   <img
                     src={projects[currentIndex].image}
@@ -296,9 +295,7 @@ const HomeProjectSection = () => {
                       position: "relative",
                     }}
                     onClick={() => {
-                      setCurrentIndex(idx);
-                      handleCenterImageClick();
-                    }}
+                      setCurrentIndex(idx);                    }}
                   >
                     <img
                       src={project.image}
