@@ -420,7 +420,7 @@ const ProjectDropdown = ({
               }
               
               .project-card-image {
-                width: 50px !important;
+                width: 80px !important;
                 height: 50px !important;
               }
               
@@ -444,7 +444,7 @@ const ProjectDropdown = ({
               }
               
               .project-card-image {
-                width: 45px !important;
+                width: 65px !important;
                 height: 45px !important;
               }
               
