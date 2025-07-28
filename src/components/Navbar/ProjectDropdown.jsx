@@ -102,12 +102,10 @@ const ProjectDropdown = ({
                               Keerthi Iinfinity Lavish
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
-                              <i className="fas fa-map-marker-alt me-1"></i>
-                            Gollahalli, Kumbalagodu, Bangalore.
+                    
+                            Kumbalagodu, Bangalore.
                             </Card.Text>
-                            <small className="project-card-type d-none d-lg-block text-muted">
-                              Residential Property
-                            </small>
+                          
                           </Card.Body>
                         </div>
                       </Card>
@@ -132,12 +130,10 @@ const ProjectDropdown = ({
                              Keerthi Iinfinity Urvi Phase-2
                             </Card.Title>
                             <Card.Text className="project-card-location mb-0">
-                              <i className="fas fa-map-marker-alt me-1"></i>
+                              
                               Shyanumangala,Bidadi.
                             </Card.Text>
-                            <small className="project-card-type d-none d-lg-block text-muted">
-                             Residential Property
-                            </small>
+                        
                           </Card.Body>
                         </div>
                       </Card>
@@ -282,7 +278,7 @@ const ProjectDropdown = ({
             }
             
             .project-card-image {
-              height: 80px !important;
+              height: 100px !important;
               object-fit: cover !important;
               border-radius: 6px 6px 0 0 !important;
             }
@@ -315,7 +311,7 @@ const ProjectDropdown = ({
               }
               
               .project-card-image {
-                height: 70px !important;
+                height: 100px !important;
               }
               
               .project-card-title {
@@ -393,8 +389,8 @@ const ProjectDropdown = ({
               }
               
               .project-card-image {
-                width: 60px !important;
-                height: 60px !important;
+                width: 100px !important;
+                height: 70px !important;
                 object-fit: cover !important;
                 border-radius: 0px !important;
               }
