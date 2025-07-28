@@ -77,8 +77,7 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: auto,
-    width:auto,
+    height: "400px",
     objectFit: "fit",
     borderRadius: "0",
   },

@@ -132,7 +132,7 @@ const styles = {
     fontSize: "32px",
     marginBottom: "2rem",
   },
-  projectCard: {
+ projectCard: {
     border: "none",
     borderRadius: "0",
     boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
@@ -140,8 +140,7 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: auto,
-    width:auto,
+    height: "400px",
     objectFit: "fit",
     borderRadius: "0",
   },
@@ -160,6 +159,5 @@ const styles = {
     marginBottom: "0",
   },
 };
-
 
 export default ResidentialProjects;
