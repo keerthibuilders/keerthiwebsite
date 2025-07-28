@@ -77,7 +77,7 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: "250px",
+    height: "400px",
     objectFit: "fit",
     borderRadius: "0",
   },
@@ -88,7 +88,7 @@ const styles = {
     color: "#1A662F",
     fontWeight: "600",
     fontSize: "1.3rem",
-    marginBottom: "1rem",
+    marginBottom: "0.5rem",
   },
   location: {
     color: "#6c757d",

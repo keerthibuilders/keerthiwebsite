@@ -140,7 +140,7 @@ const styles = {
     overflow: "hidden",
   },
   projectImage: {
-    height: "350px",
+    height: "400px",
     objectFit: "cover",
     borderRadius: "0",
     width: "100%",
