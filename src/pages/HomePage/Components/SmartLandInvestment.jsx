@@ -26,7 +26,7 @@ const SmartLandInvestment = () => {
       text: 'Risk-free reservation with refundable token, as per terms and conditions',
     },
     {
-      icon: {'https://via.placeholder.com/32'},
+      icon: 'https://via.placeholder.com/32',
       text: 'Lock in your opportunity early, decide later with flexible investment terms',
     },
   ];
