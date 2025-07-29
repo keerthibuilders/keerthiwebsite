@@ -1,7 +1,6 @@
 import React from 'react';
 import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
 
-{* import chartdollar from "../../../../public/assets/images/chart-mixed-up-circle-dollar.svg" *}
 
 const SmartLandInvestment = () => {
   const benefits = [
