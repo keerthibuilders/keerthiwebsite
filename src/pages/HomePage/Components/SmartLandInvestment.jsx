@@ -1,19 +1,24 @@
 import React from 'react';
 import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
-
+import sminv1 from "../../../../public/assets/images/101.webp"
+import sminv2 from "../../../../public/assets/images/102.webp"
+import sminv3 from "../../../../public/assets/images/103.webp"
+import sminv4 from "../../../../public/assets/images/104.webp"
+import sminv5 from "../../../../public/assets/images/105.webp"
+import sminv6 from "../../../../public/assets/images/106.webp"
 
 const SmartLandInvestment = () => {
   const benefits = [
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv1,
       text: 'Early access to best pricing, premium options, and exclusive booking priority',
     },
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv2,
       text: 'Affordable investment opportunity with minimum entry of only ₹5 Lakhs',
     },
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv3,
       text: 'Enjoy fixed 15% returns with secure 12-month investment tenure',
     },
     {

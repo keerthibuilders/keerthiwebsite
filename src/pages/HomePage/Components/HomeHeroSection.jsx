@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import videoSource from "../../../../public/videos/ktm_hero_video.mp4";
 
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
@@ -337,19 +336,19 @@ const HomeHeroSection = () => {
               className="text-center"
               style={videoAnimationStyle}
             >
-              <div style={responsiveStyles.videoContainer}>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  onLoadedData={handleVideoLoadedData}
-                  style={responsiveStyles.video}
-                >
-                  <source src="https://www.youtube.com/embed/tRwcBdVCGqM?si=XDhnOPuMvIYi1oQc" type="video/mp4" />
-                </video>
-              </div>
+<div style={responsiveStyles.videoContainer}>
+<video
+  autoPlay
+  loop
+  muted
+  playsInline
+  
+  style={responsiveStyles.video}
+  src="/ktm_hero_video.mp4"
+/>
+                 
+                
+              </div>
             </Col>
           </Row>
         </Container>
