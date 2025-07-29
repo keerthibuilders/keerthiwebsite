@@ -1,11 +1,11 @@
 import React from 'react';
 import keerthiIinfinityUllahas from "../../../../public/assets/images/11.webp"
-import sminv1 from "../../../../public/assets/images/101.webp"
-import sminv2 from "../../../../public/assets/images/102.webp"
-import sminv3 from "../../../../public/assets/images/103.webp"
-import sminv4 from "../../../../public/assets/images/104.webp"
-import sminv5 from "../../../../public/assets/images/105.webp"
-import sminv6 from "../../../../public/assets/images/106.webp"
+import sminv1 from "../../../../public/assets/images/101.png"
+import sminv2 from "../../../../public/assets/images/102.png"
+import sminv3 from "../../../../public/assets/images/103.png"
+import sminv4 from "../../../../public/assets/images/104.png"
+import sminv5 from "../../../../public/assets/images/105.png"
+import sminv6 from "../../../../public/assets/images/106.png"
 
 const SmartLandInvestment = () => {
   const benefits = [
