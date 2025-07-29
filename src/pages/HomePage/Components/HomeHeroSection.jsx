@@ -347,7 +347,7 @@ const HomeHeroSection = () => {
                   onLoadedData={handleVideoLoadedData}
                   style={responsiveStyles.video}
                 >
-                  <source src="/videos/ktm_hero_video.mp4" type="video/mp4" />
+                  <source src="https://www.youtube.com/embed/tRwcBdVCGqM?si=XDhnOPuMvIYi1oQc" type="video/mp4" />
                 </video>
               </div>
             </Col>
