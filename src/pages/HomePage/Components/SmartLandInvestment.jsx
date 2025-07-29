@@ -124,12 +124,12 @@ fontWeight: '500',
   },
   benefitItem: {
     display: 'flex',
-    gap: '10px',
+    gap: '8px',
     alignItems: 'flex-start',
   },
   icon: {
-    width: '40px',
-    height: '40px',
+    width: '50px',
+    height: '50px',
   },
   benefitText: {
     fontSize: '14px',
