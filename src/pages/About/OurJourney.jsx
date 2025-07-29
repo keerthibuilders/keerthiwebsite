@@ -54,7 +54,7 @@ const OurJourney = () => {
             <Col xs={12} lg={5}>
               <div style={{ ...styles.imageSection, ...getTextAnimationStyle('left', 1) }}>
                 <img
-                  src="../../../../public/assets/images/about-us-bottom.webp"
+                  src={aboutbottom}
                   alt="Our Journey"
                   style={styles.image}
                   className="img-fluid"
