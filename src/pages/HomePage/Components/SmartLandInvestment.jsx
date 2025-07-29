@@ -111,7 +111,8 @@ const styles = {
   },
   subtitle: {
     fontSize: '14px',
-    color: '#444',
+    color: '#1C542C',
+fontWeight: '500',
     marginBottom: '30px',
     lineHeight: 1.6,
   },
@@ -133,6 +134,7 @@ const styles = {
   benefitText: {
     fontSize: '14px',
     color: '#222',
+    fontWeight:'400',
     lineHeight: '1.5',
   },
   buttonGroup: {
