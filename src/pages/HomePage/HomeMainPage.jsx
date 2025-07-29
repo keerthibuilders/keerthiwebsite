@@ -18,8 +18,8 @@ const HomeMainPage = () => {
   return (
     <div>
       <HomeHeroSection />
-      <HomeProjectSection />
       <SmartInvestment />
+      <HomeProjectSection />
       <HomeOurPropertiesSection />
       <AllProject />
       <HomeTestimonial />
