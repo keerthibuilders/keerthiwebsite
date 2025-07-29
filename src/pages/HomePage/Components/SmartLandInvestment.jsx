@@ -22,15 +22,15 @@ const SmartLandInvestment = () => {
       text: 'Enjoy fixed 15% returns with secure 12-month investment tenure',
     },
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv4,
       text: 'Secure better rates and preferred plots with limited early-bird offers',
     },
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv5,
       text: 'Risk-free reservation with refundable token, as per terms and conditions',
     },
     {
-      icon: 'https://via.placeholder.com/32',
+      icon: sminv6,
       text: 'Lock in your opportunity early, decide later with flexible investment terms',
     },
   ];
