@@ -20,7 +20,7 @@ const HomeMainPage = () => {
       <HomeHeroSection />
       <HomeProjectSection />
       <HomeOurPropertiesSection />
-	<SmartInvestment />
+      <SmartInvestment />
       <AllProject />
       <HomeTestimonial />
       {/* <HomeAboutSection />
