@@ -161,8 +161,9 @@ fontWeight: '400',
     border: 'none',
   },
   imageBox: {
-    width: '700px',
-    height: '500px',
+    width: '800px',
+    height: '450px',
+    objectFit: "fit",
     backgroundColor: '#f5f5f5',
    
     borderRadius: '8px',
