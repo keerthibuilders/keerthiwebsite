@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import aboutbottom from "../../../../public/assets/images/about-us-bottom.webp"
+import aboutbottom from "../../../public/assets/images/about-us-bottom.webp"
 
 const OurJourney = () => {
   const [isVisible, setIsVisible] = useState(false);
