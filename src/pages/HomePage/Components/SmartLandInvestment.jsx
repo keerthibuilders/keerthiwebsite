@@ -111,8 +111,8 @@ const styles = {
   },
   subtitle: {
     fontSize: '14px',
-    color: '#1C542C',
-fontWeight: '500',
+    color: '#3A3A3A',
+fontWeight: '400',
     marginBottom: '30px',
     lineHeight: 1.6,
   },
