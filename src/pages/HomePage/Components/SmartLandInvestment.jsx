@@ -67,7 +67,7 @@ const SmartLandInvestment = () => {
 
           <div style={styles.buttonGroup}>
             <button style={{ ...styles.button, ...styles.outline }}>View more details</button>
-            <button style={{ ...styles.button, ...styles.filled }}>Contact us</button>
+            <a href="https://wa.me/919902876666?text=Hello%20I%20would%20like%20more%20information%20✅" target="_blank" style={{ ...styles.button, ...styles.filled }}>Contact us</a>
           </div>
         </div>
 
@@ -127,8 +127,8 @@ const styles = {
     alignItems: 'flex-start',
   },
   icon: {
-    width: '32px',
-    height: '32px',
+    width: '40px',
+    height: '40px',
   },
   benefitText: {
     fontSize: '14px',
