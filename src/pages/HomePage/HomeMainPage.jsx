@@ -7,7 +7,7 @@ import HomeOurPropertiesSection from './Components/HomeOurPropertiesSection'
 import HomeContactSection from './Components/HomeContactSeaction'
 import AllProject from './Components/AllProjects'
 import HomeVisionMission from './Components/HomeVisionMission'
-import SmartLandInvestment from './Components/SmartLandInvestment'
+import SmartInvestment from './Components/SmartLandInvestment'
 
 const HomeMainPage = () => {
   // Scroll to top on component mount/reload
@@ -19,8 +19,8 @@ const HomeMainPage = () => {
     <div>
       <HomeHeroSection />
       <HomeProjectSection />
-      <SmartLandInvestment/>
       <HomeOurPropertiesSection />
+      <SmartInvestment />
       <AllProject />
       <HomeTestimonial />
       {/* <HomeAboutSection />
