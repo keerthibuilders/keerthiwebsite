@@ -19,8 +19,8 @@ const HomeMainPage = () => {
     <div>
       <HomeHeroSection />
       <HomeProjectSection />
-      <HomeOurPropertiesSection />
       <SmartInvestment />
+      <HomeOurPropertiesSection />
       <AllProject />
       <HomeTestimonial />
       {/* <HomeAboutSection />
