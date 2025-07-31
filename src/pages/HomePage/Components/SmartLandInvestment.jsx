@@ -175,7 +175,7 @@ fontWeight: '400',
 
   image: {
     width: '100%',
-    height: auto,
+    height: '100%',
     objectFit: 'cover',
   },
 };
