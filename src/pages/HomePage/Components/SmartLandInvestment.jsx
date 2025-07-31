@@ -162,7 +162,7 @@ fontWeight: '400',
   },
   imageBox: {
     width: 100%,
-    height: auto,
+    height: '420px',
     objectFit: "fit",
     backgroundColor: '#f5f5f5',
    
