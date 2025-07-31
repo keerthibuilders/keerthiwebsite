@@ -162,7 +162,21 @@ fontWeight: '400',
   },
   imageBox: {
     width: '860px',
-    height: '480px',
+    height: '400px',
+    objectFit: "fit",
+    backgroundColor: '#f5f5f5',
+   
+    borderRadius: '5px',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+@media (max-width: 468px) {
+            imageBox: {
+    width: '460px',
+    height: '280px',
     objectFit: "fit",
     backgroundColor: '#f5f5f5',
    
@@ -171,7 +185,8 @@ fontWeight: '400',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
+},
   image: {
     width: '100%',
     height: '100%',
