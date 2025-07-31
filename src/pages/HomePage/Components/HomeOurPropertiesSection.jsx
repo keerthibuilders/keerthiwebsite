@@ -109,15 +109,13 @@ const HomeOurPropertiesSection = () => {
       id: 1,
       image: "https://images.pexels.com/photos/32249747/pexels-photo-32249747/free-photo-of-vibrant-jacaranda-tree-in-bloom-by-urban-street.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "Residential Plots",
-      video: videoFile,
-	link: "https://keerthibuilders.com/residential"
+      video: videoFile
     },
     {
       id: 2,
       image: "https://images.pexels.com/photos/27102111/pexels-photo-27102111/free-photo-of-welder-in-factory.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
       title: "Industrial",
       video: videoFile2,
-	link: "	link: "https://keerthibuilders.com/commercial"
     },
     // {
     //   id: 3,
