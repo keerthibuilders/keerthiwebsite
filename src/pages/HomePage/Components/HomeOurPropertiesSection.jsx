@@ -109,13 +109,15 @@ const HomeOurPropertiesSection = () => {
       id: 1,
       image: "https://images.pexels.com/photos/32249747/pexels-photo-32249747/free-photo-of-vibrant-jacaranda-tree-in-bloom-by-urban-street.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "Residential Plots",
-      video: videoFile
+      video: videoFile,
+	link: "https://keerthibuilders.com/residential"
     },
     {
       id: 2,
       image: "https://images.pexels.com/photos/27102111/pexels-photo-27102111/free-photo-of-welder-in-factory.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
       title: "Industrial",
-      video: videoFile2
+      video: videoFile2,
+	link: "	link: "https://keerthibuilders.com/commercial"
     },
     // {
     //   id: 3,
@@ -245,12 +247,14 @@ const HomeOurPropertiesSection = () => {
           <Row className="justify-content-center">
             {properties.map((property) => (
               <Col lg={6} md={6} sm={12} key={property.id} className="mb-4">
+		<a href="{link}">
                 <PropertyCard
                   image={property.image}
                   title={property.title}
                   location={property.location}
                   video={property.video}
                 />
+		</a>
               </Col>
             ))}
           </Row>
