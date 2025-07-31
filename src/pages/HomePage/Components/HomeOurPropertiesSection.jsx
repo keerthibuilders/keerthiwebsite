@@ -247,14 +247,12 @@ const HomeOurPropertiesSection = () => {
           <Row className="justify-content-center">
             {properties.map((property) => (
               <Col lg={6} md={6} sm={12} key={property.id} className="mb-4">
-		<a href={property.link}>
                 <PropertyCard
                   image={property.image}
                   title={property.title}
                   location={property.location}
                   video={property.video}
                 />
-		</a>
               </Col>
             ))}
           </Row>
