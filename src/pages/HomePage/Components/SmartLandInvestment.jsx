@@ -167,7 +167,7 @@ fontWeight: '400',
     backgroundColor: '#f5f5f5',
    
     borderRadius: '5px',
-    overflow: 'hidden',
+
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
