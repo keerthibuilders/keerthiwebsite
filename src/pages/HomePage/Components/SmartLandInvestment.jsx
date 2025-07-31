@@ -66,8 +66,8 @@ const SmartLandInvestment = () => {
           </div>
 
           <div style={styles.buttonGroup}>
-            <button style={{ ...styles.button, ...styles.outline }}>View more details</button>
-            <a href="https://wa.me/919902876666?text=Hello%20I%20would%20like%20more%20information%20" target="_blank"  style={{ ...styles.button, ...styles.filled }}>Contact us</a>
+            <a href="tel:+919902876666" style={{ ...styles.button, ...styles.outline }}> Call Now </a>
+            <a href="https://wa.me/919902876666?text=Hello%20I%20would%20like%20more%20information%20" target="_blank"  style={{ ...styles.button, ...styles.filled }}>Whatsapp us</a>
           </div>
         </div>
 
@@ -173,20 +173,6 @@ fontWeight: '400',
     justifyContent: 'center',
   },
 
-@media (max-width: 468px) {
-            imageBox: {
-    width: '460px',
-    height: '280px',
-    objectFit: "fit",
-    backgroundColor: '#f5f5f5',
-   
-    borderRadius: '8px',
-    overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-},
   image: {
     width: '100%',
     height: '100%',
