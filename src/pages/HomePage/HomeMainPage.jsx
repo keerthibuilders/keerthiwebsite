@@ -16,15 +16,20 @@ const HomeMainPage = () => {
   const [initialBanner, setInitialBanner] = useState(false);
 
   useEffect(() => {
-    const getFirstTime = localStorage.getItem('isFirst');
-    if(getFirstTime != 1){
-      setInitialBanner(true);
-      localStorage.setItem('isFirst',  '1')
-      setTimeout(() => {
-        setInitialBanner(false)
-      },8000)
-    }
-  },[])
+  const getFirstTime = localStorage.getItem('isFirst');
+  
+
+  if (getFirstTime === null || parseInt(getFirstTime) < 5) {
+    let num = getFirstTime ? parseInt(getFirstTime) : 0;
+    num++; // Increment the visit count
+    localStorage.setItem('isFirst', num.toString());
+    
+    setInitialBanner(true);
+    setTimeout(() => {
+      setInitialBanner(false);
+    }, 8000);
+  }
+}, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
