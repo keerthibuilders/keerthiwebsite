@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import ktmVideo from '../../../../public/ktmHeroVideo.mp4'
 
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
@@ -342,7 +342,7 @@ const HomeHeroSection = () => {
                   src="https://www.youtube.com/embed/yOGdgnRiRVo?si=91ncHgneXBoo89zf&controls=0&autoplay=1&mute=1" 
                   title="YouTube video player" 
                   frameborder="0" 
-                  style={responsiveStyles.video}
+                  style={{...responsiveStyles?.video, pointerEvents: 'none'}}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerpolicy="strict-origin-when-cross-origin" 
                   allowfullscreen>

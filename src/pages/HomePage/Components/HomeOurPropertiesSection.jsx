@@ -15,6 +15,9 @@ const PropertyCard = ({ image, title, location, video, link }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef(null);
 
+  console.log(link);
+  
+
   useEffect(() => {
     if (videoRef.current && !isHovered) {
       // Set video to start from 12 seconds
@@ -43,7 +46,7 @@ const PropertyCard = ({ image, title, location, video, link }) => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      onClick={() => navigate(link)}
+      // onClick={() => navigate(link)}
       // onMouseEnter={() => setIsHovered(true)}
       // onMouseLeave={() => setIsHovered(false)}
     >
@@ -85,14 +88,14 @@ const PropertyCard = ({ image, title, location, video, link }) => {
         )}
       </div>
 
-      <div style={styles.cardFooter}>
+      {/* <div style={styles.cardFooter}>
         <div style={{
           ...styles.arrowContainer,
           backgroundColor: isHovered ? 'white' : 'rgba(255,255,255,0.9)',
         }}>
           <ArrowUpRight size={18} color={isHovered ? '#21623C' : '#21623C'} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -104,14 +107,14 @@ const HomeOurPropertiesSection = () => {
       image: "https://media.istockphoto.com/id/1338058166/photo/land-or-landscape-of-green-field-in-aerial-view-and-home-or-house-icon.jpg?s=612x612&w=0&k=20&c=c-VlOIv3Y18NyZ5qLDZbaNNcapXo2U3yctzf8KkltN0=",
       title: "Residential Plots",
       video: videoFile,
-	    link: "/residential"
+	    // link: "/residential"
     },
     {
       id: 2,
       image: "https://media.istockphoto.com/id/612029324/photo/industrial-units-from-air.jpg?s=612x612&w=0&k=20&c=mp1oFUZUOf3EuKafObzev8N2UaOU9IJHOozcRfNEaTA=",
       title: "Industrial",
       video: videoFile2,
-	    link: "/commercial"
+	    // link: "/commercial"
     },
     // {
     //   id: 3,
@@ -247,7 +250,8 @@ const HomeOurPropertiesSection = () => {
                   title={property.title}
                   location={property.location}
                   video={property.video}
-                  link={property?.link}
+                  link={''}
+                  // link={property?.link}
                 />
 		</a>
               </Col>
