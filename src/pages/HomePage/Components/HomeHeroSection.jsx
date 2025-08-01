@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ktmVideo from '../../../../public/ktmHeroVideo.mp4'
+
 
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
