@@ -15,7 +15,7 @@ const HomeMainPage = () => {
 
   const [initialBanner, setInitialBanner] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
   const getFirstTime = localStorage.getItem('isFirst');
   
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import keerthiIinfinityUllahas from "../../../../public/assets/images/bannerWebsite.webp"
+import keerthiIinfinityUllahas from "../../../../public/assets/images/smart-inv-image.webp"
 import sminv1 from "../../../../public/assets/images/101.png"
 import sminv2 from "../../../../public/assets/images/102.png"
 import sminv3 from "../../../../public/assets/images/103.png"

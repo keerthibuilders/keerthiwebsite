@@ -8,30 +8,26 @@ import ktmVilla from "../../../../public/assets/images/1.webp"
 import siddeshwara from "../../../../public/assets/images/2.webp"
 import iinfinityUrvi from "../../../../public/assets/images/3.webp"
 import aPSKeerthi from "../../../../public/assets/images/7.webp"
-import iinfinityRuppees from "../../../../public/assets/images/8.webp"
-import iinfinityatr from "../../../../public/assets/images/9.webp"
-import rajajeswari from "../../../../public/assets/images/6.webp"
-
 const ResidentialProjects = () => {
   const ongoingProjects = [
     {
       id: 1,
       name: "Keerthi Iifinity Lavish",
-      location: "Gollahalli-thittahalli,Kumbalagodu, Bengaluru",
+      location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
       image: ktmLavish,
     },
     {
       id: 2,
       name: "Keerthi Iinfinity Ullahas",
-      location: "Shyanumangala,Bidadi",
+      location: "Shyanumangala,Bidadi.",
       property: "Residential Property",
       image: keerthiIinfinityUllahas,
     },
     {
       id: 3,
-      name: "Keerthi Iinfinity Urvi Phase 2",
-      location: "Byalalu, Thavarekere",
+      name: "KTM Iinfinity Urvi Phase 2",
+      location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
       image: keerthiIinfinityUrviPhase2,
     },
@@ -40,51 +36,30 @@ const ResidentialProjects = () => {
     {
           id: 4,
           name: "KTM Villa Enclave",
-          location: "Gollahalli-thittahalli,Kumbalagodu, Bengaluru",
+          location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
           property: "Residential Property",
           image: ktmVilla,
         },
         {
       id: 5,
       name: "APS Keerthi Iinfinity",
-      location: "Ajjanahalli, Dodda Aladamara, Bengaluru",
+      location: "Ajjanahalli, Dodda aladamara, Bangalore.",
       property: "Residential Property",
       image: aPSKeerthi,
     },
     {
       id: 6,
       name: "Siddeshwara Layout",
-      location: "Byalalu, Thavarekere",
+      location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
       image: siddeshwara,
     },
     {
       id: 7,
       name: "Keerthi Iinfinity Urvi Phase 1",
-      location: "Byalalu, Thavarekere",
+      location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
       image: iinfinityUrvi,
-    },
-{
-      id: 8,
-      name: "Keerthi Iinfinity Ruppees",
-      location: "Byalalu, Thavarekere",
-      property: "Residential Property",
-      image: iinfinityRuppees,
-    },
-{
-      id: 9,
-      name: "ATR Keerthi Iinfinity",
-      location: "Byalalu, Thavarekere",
-      property: "Residential Property",
-      image: iinfinityatr,
-    },
-{
-      id: 10,
-      name: "Jnanakshi Rajajeswari layout",
-      location: "Chikkanahalli, Thavarekere",
-      property: "Residential Property",
-      image: rajajeswari,
     },
   ];
 

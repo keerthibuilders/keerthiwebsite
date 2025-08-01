@@ -337,19 +337,18 @@ const HomeHeroSection = () => {
               className="text-center"
               style={videoAnimationStyle}
             >
-<div style={responsiveStyles.videoContainer}>
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  
-  style={responsiveStyles.video}
-  src={ktmVideo}
-/>
-                 
-                
-              </div>
+              <div style={responsiveStyles.videoContainer}>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={responsiveStyles.video}
+                >
+                  <source src={ktmVideo} type="video/mp4" />
+                </video>
+                          
+              </div>
             </Col>
           </Row>
         </Container>
