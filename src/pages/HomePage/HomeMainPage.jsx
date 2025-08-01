@@ -22,7 +22,7 @@ const HomeMainPage = () => {
       localStorage.setItem('isFirst',  '1')
       setTimeout(() => {
         setInitialBanner(false)
-      },5000)
+      },10000)
     }
   },[])
 
