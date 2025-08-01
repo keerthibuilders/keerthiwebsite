@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ktmVideo from '../../../../public/ktm_hero_video.mp4'
 
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
@@ -344,7 +345,7 @@ const HomeHeroSection = () => {
   playsInline
   
   style={responsiveStyles.video}
-  src="/ktm_hero_video.mp4"
+  src={ktmVideo}
 />
                  
                 

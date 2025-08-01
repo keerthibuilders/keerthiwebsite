@@ -162,9 +162,9 @@ fontWeight: '400',
   },
   imageBox: {
     width: '900px',
-    height: '450px',
+    // height: '450px',
     objectFit: "fit",
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'white',
    
     borderRadius: '5px',
 
@@ -176,7 +176,7 @@ fontWeight: '400',
   image: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
 };
 

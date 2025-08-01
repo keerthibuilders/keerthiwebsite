@@ -3,13 +3,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import { ArrowUpRight } from "lucide-react";
 import fonts from "../../../components/Common/Font";
 import { width } from "@fortawesome/free-solid-svg-icons/fa0";
+import { useNavigate } from "react-router-dom";
 
 // Direct Cloudinary video URLs - these are correct
 const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
 const videoFile2 = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364547/ke7tlieyeuur72ld7uam.mp4";
 const videoFile3 ="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917082/oqydr1o12iwmkhkwrdma.mp4"
 
-const PropertyCard = ({ image, title, location, video }) => {
+const PropertyCard = ({ image, title, location, video, link }) => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef(null);
 
@@ -38,29 +40,21 @@ const PropertyCard = ({ image, title, location, video }) => {
       className="property-card text-black flex flex-col justify-between"
       style={{
         ...styles.propertyCard,
-        backgroundImage: isHovered ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${image})` : 'none',
-        backgroundColor: isHovered ? 'transparent' : '#e0f0e9',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => navigate(link)}
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       {/* Video Background - shows when not hovered */}
       {!isHovered && video && (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
+        
+        <img 
           style={styles.cardVideo}
-          onLoadedData={handleVideoLoad}
-          onError={handleVideoError}
-        >
-          <source src={video} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          src={image}
+          alt="image" 
+        />
       )}
 
       {/* Video Overlay for better text readability */}
@@ -107,15 +101,17 @@ const HomeOurPropertiesSection = () => {
   const properties = [
     {
       id: 1,
-      image: "https://images.pexels.com/photos/32249747/pexels-photo-32249747/free-photo-of-vibrant-jacaranda-tree-in-bloom-by-urban-street.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "https://media.istockphoto.com/id/1338058166/photo/land-or-landscape-of-green-field-in-aerial-view-and-home-or-house-icon.jpg?s=612x612&w=0&k=20&c=c-VlOIv3Y18NyZ5qLDZbaNNcapXo2U3yctzf8KkltN0=",
       title: "Residential Plots",
-      video: videoFile
+      video: videoFile,
+	    link: "/residential"
     },
     {
       id: 2,
-      image: "https://images.pexels.com/photos/27102111/pexels-photo-27102111/free-photo-of-welder-in-factory.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      image: "https://media.istockphoto.com/id/612029324/photo/industrial-units-from-air.jpg?s=612x612&w=0&k=20&c=mp1oFUZUOf3EuKafObzev8N2UaOU9IJHOozcRfNEaTA=",
       title: "Industrial",
       video: videoFile2,
+	    link: "/commercial"
     },
     // {
     //   id: 3,
@@ -245,12 +241,15 @@ const HomeOurPropertiesSection = () => {
           <Row className="justify-content-center">
             {properties.map((property) => (
               <Col lg={6} md={6} sm={12} key={property.id} className="mb-4">
+		<a href={property.link}>
                 <PropertyCard
                   image={property.image}
                   title={property.title}
                   location={property.location}
                   video={property.video}
+                  link={property?.link}
                 />
+		</a>
               </Col>
             ))}
           </Row>

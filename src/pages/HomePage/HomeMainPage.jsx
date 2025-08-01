@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeHeroSection from './Components/HomeHeroSection'
 import HomeProjectSection from './Components/HomeProjectSection'
 import HomeAboutSection from './Components/HomeAboutSection'
@@ -8,12 +8,35 @@ import HomeContactSection from './Components/HomeContactSeaction'
 import AllProject from './Components/AllProjects'
 import HomeVisionMission from './Components/HomeVisionMission'
 import SmartInvestment from './Components/SmartLandInvestment'
+import LoadingBanner from '../../../src/components/Banner/LoadingBanner'
 
 const HomeMainPage = () => {
   // Scroll to top on component mount/reload
+
+  const [initialBanner, setInitialBanner] = useState(false);
+
+  useEffect(() => {
+    const getFirstTime = localStorage.getItem('isFirst');
+    if(getFirstTime != 1){
+      setInitialBanner(true);
+      localStorage.setItem('isFirst',  '1')
+      setTimeout(() => {
+        setInitialBanner(false)
+      },5000)
+    }
+  },[])
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if(initialBanner){
+    return (
+      <>
+        <LoadingBanner  />
+      </>
+    )
+  }
 
   return (
     <div>

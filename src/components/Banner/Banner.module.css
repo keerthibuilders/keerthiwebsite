@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    background-color: rgb(14 25 20 / 56%);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    animation: fadeInDown 0.5s ease-out; /* ✅ No quotes */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* ✅ No quotes */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* ✅ No quotes */
+    }
+}
+    .buttonGroup {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top : 20px;
+    }
+    .button {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .outline {
+        border: 1px solid rgb(255, 255, 255);
+        background: white;
+        color: black;
+    }
+    .filled {
+        background: #1C542C;
+        color: #fff;
+        border: none;
+    }
+    .imageBox {
+        width: 75%;
+        height: 75%;
+        object-fit: fill;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
