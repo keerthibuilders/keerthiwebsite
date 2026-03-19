@@ -1,563 +1,231 @@
-import { Dropdown, Row, Col, Card } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import fonts from "../Common/Font";
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { allProjects } from "../../data/projectsData";
+import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 
-const ProjectDropdown = ({ 
-  showProjectDropdown, 
-  setShowProjectDropdown, 
-  handleNavigation, 
-  location 
-}) => {
-  return (
-    <div className="nav-dropdown-wrapper" style={{ position: 'relative' }}>
-      <Dropdown 
-        show={showProjectDropdown} 
-        onToggle={setShowProjectDropdown}
-        className="nav-dropdown"
-        drop="down"
-      >
-        <Dropdown.Toggle
-          as="a"
-          className="d-flex align-items-center text-decoration-none"
-          style={{
-            ...styles.navLink,
-            fontWeight: location.pathname === '/project' || 
-                       location.pathname === '/residential' || 
-                       location.pathname === '/commercial' ? '600' : '500',
-            cursor: 'pointer',
-            gap: '8px'
-          }}
+const residentialProjects = allProjects.filter(p => p.type === "residential");
+const commercialProjects  = allProjects.filter(p => p.type === "commercial");
+
+const ProjectDropdown = ({ location }) => {
+  const [open, setOpen]           = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileTab, setMobileTab]   = useState(null);
+  const closeTimer = useRef(null);
+
+  const isProjectActive =
+    location.pathname === "/project" ||
+    location.pathname === "/residential" ||
+    location.pathname === "/commercial" ||
+    location.pathname.startsWith("/project/");
+
+  const openMenu      = () => { clearTimeout(closeTimer.current); setOpen(true); };
+  const scheduleClose = () => { closeTimer.current = setTimeout(() => setOpen(false), 120); };
+
+  const getBadge = (p) => {
+    if (p.tag === "New Launch") return { label: "New", bg: "#fff3e0", color: "#e65100" };
+    if (p.status === "ongoing")   return { label: "Ongoing", bg: "#e8f5e9", color: "#1C542C" };
+    if (p.status === "completed") return null;
+    return null;
+  };
+
+  const renderList = (projects) => {
+    const newLaunches = projects.filter(p => p.tag === "New Launch");
+    const ongoing     = projects.filter(p => p.status === "ongoing" && p.tag !== "New Launch");
+    const completed   = projects.filter(p => p.status === "completed");
+    const sorted      = [...newLaunches, ...ongoing, ...completed];
+
+    return sorted.map(p => {
+      const badge = getBadge(p);
+      return (
+        <Link key={p.id} to={`/project/${p.id}`} style={s.item} onClick={() => setOpen(false)}
+          onMouseEnter={e => e.currentTarget.style.background = "#f0f7f2"}
+          onMouseLeave={e => e.currentTarget.style.background = "transparent"}
         >
-          Projects 
-          <span 
-            className="dropdown-arrow"
-            style={{
-              ...styles.dropdownArrow,
-              transform: showProjectDropdown ? 'rotate(180deg)' : 'rotate(0deg)'
-            }}
-          >
-            ▼
-          </span>
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu 
-          className="dropdown-menu-custom"
-        >
-          <div className="dropdown-content-wrapper">
-            <Row className="g-0 h-100">
-              {/* Left Side - Project Types */}
-
-              <Col xs={12} lg={4} className="dropdown-left-section">
-                <div className=" p-3 p-lg-0 border-bottom border-lg-end border-lg-bottom-0">
-                  
-                  <Dropdown.Item
-                    className={`dropdown-item-custom mb-2 ${location.pathname === '/residential' || location.pathname === '/'  ? 'active' : ''}`}
-                    onClick={(e) => handleNavigation('residential', e)}
-                  >
-                    <div className="d-flex align-items-center">
-                      <i className="fas fa-home me-3 d-none d-lg-inline"></i>
-                      <div>
-                        <div className="dropdown-item-title">Residential</div>
-                       
-                      </div>
-                    </div>
-                  </Dropdown.Item>
-                  
-                  <Dropdown.Item
-                    className={`dropdown-item-custom ${location.pathname === '/commercial' ? 'active' : ''}`}
-                    onClick={(e) => handleNavigation('commercial', e)}
-                  >
-                    <div className="d-flex align-items-center">
-                      <i className="fas fa-building me-3 d-none d-lg-inline"></i>
-                      <div>
-                        <div className="dropdown-item-title">Commercial</div>
-                        
-                      </div>
-                    </div>
-                  </Dropdown.Item>
-                </div>
-              </Col>
-
-              {/* Right Side - Featured Projects */}
-              <Col xs={12} lg={8} className="dropdown-right-section">
-                <div className="p-3 p-lg-0">
-                  
-                  <Row className="g-2 g-lg-3">
-                    {/* Project Card 1 */}
-                    <Col xs={12} sm={6} lg={6}>
-                      <Card 
-                        className={`project-card-custom h-100 border-0 shadow-sm ${location.pathname === '/keerthi-paradise' ? 'active' : ''}`}
-                        onClick={(e) => handleNavigation('keerthi-paradise', e)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <div className="d-flex d-lg-block">
-                          <Card.Img 
-                            src="./../assets/images/13.webp" 
-                            alt="Keerthi Iinfinity Lavish"
-                            className="project-card-image flex-shrink-0"
-                            style={styles.projectCardImage}
-                          />
-                          <Card.Body className="p-2 p-lg-3 flex-grow-1">
-                            <Card.Title className="project-card-title mb-1">
-                              Keerthi Iinfinity Lavish
-                            </Card.Title>
-                            <Card.Text className="project-card-location mb-0">
-                    
-                            Kumbalagodu, Bangalore.
-                            </Card.Text>
-                          
-                          </Card.Body>
-                        </div>
-                      </Card>
-                    </Col>
-
-                    {/* Project Card 2 */}
-                    <Col xs={12} sm={6} lg={6}>
-                      <Card 
-                        className={`project-card-custom h-100 border-0 shadow-sm ${location.pathname === '/keerthi-elite' ? 'active' : ''}`}
-                        onClick={(e) => handleNavigation('keerthi-elite', e)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <div className="d-flex d-lg-block">
-                          <Card.Img 
-                            src="./../assets/images/12.webp" 
-                            alt="Keerthi Iinfinity Urvi Phase-2"
-                            className="project-card-image flex-shrink-0"
-                            style={styles.projectCardImage}
-                          />
-                          <Card.Body className="p-2 p-lg-3 flex-grow-1">
-                            <Card.Title className="project-card-title mb-1">
-                             Keerthi Iinfinity Urvi Phase-2
-                            </Card.Title>
-                            <Card.Text className="project-card-location mb-0">
-                              
-                              Shyanumangala,Bidadi.
-                            </Card.Text>
-                        
-                          </Card.Body>
-                        </div>
-                      </Card>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            </Row>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <span style={s.itemName}>{p.name}</span>
+            <span style={s.itemLoc}>
+              <MapPin size={9} style={{ marginRight: 3 }} />
+              {p.location.split(",")[0]}
+            </span>
           </div>
-        </Dropdown.Menu>
+          {badge && (
+            <span style={{ ...s.badge, background: badge.bg, color: badge.color }}>
+              {badge.label}
+            </span>
+          )}
+        </Link>
+      );
+    });
+  };
 
-        <style>
-          {`
-            /* Custom dropdown styles */
-            .nav-dropdown-wrapper {
-              position: relative !important;
-            }
-            
-            .nav-dropdown {
-              position: relative !important;
-            }
-            
-            .nav-dropdown .dropdown-toggle::after {
-              display: none !important;
-            }
-            
-            .dropdown-arrow {
-              font-size: 10px;
-              color: #1C542C;
-              transition: transform 0.3s ease;
-              display: inline-block;
-              line-height: 1;
-            }
-            
-            .dropdown-menu-custom {
-              position: absolute !important;
-              top: calc(100% + 8px) !important;
-              left: auto !important;
-              right: 0 !important;
-              z-index: 9999 !important;
-              border: 1px solid rgba(0,0,0,0.1) !important;
-              border-radius: 0px !important;
-              overflow: hidden !important;
-              transform: none !important;
-              margin-top: 26px !important;
-              background-color: #ffffff !important;
-              min-width: 600px !important;
-              max-width: calc(100vw - 40px) !important;
-              padding: 25px !important;
-            }
-            
-            .dropdown-content-wrapper {
-              min-height: 200px;
-            }
-            
-            .dropdown-section-title {
-              color: #1A662F !important;
-              font-weight: 600 !important;
-              font-size: 14px !important;
-              text-transform: uppercase !important;
-              letter-spacing: 0.5px !important;
-              font-family: ${fonts.Noto} !important;
-            }
-            
-            .dropdown-item-custom {
-              border: none !important;
-              background: transparent !important;
-              padding: 12px 0 !important;
-              transition: all 0.2s ease !important;
-              border-radius: 0px !important;
-            }
-            
-            .dropdown-item-custom:hover {
-              background-color: rgba(28, 84, 44, 0.05) !important;
-              color: inherit !important;
-            }
-            
-            .dropdown-item-custom.active {
-              background: transparent !important;
-            }
-            
-            .dropdown-item-custom.active .dropdown-item-title {
-              color: #1C542C !important;
-              font-weight: 700 !important;
-            }
-            
-            .dropdown-item-title {
-              font-weight: 600 !important;
-              color: #888 !important;
-              font-size: 15px !important;
-              font-family: ${fonts.Noto} !important;
-              line-height: 1.3 !important;
-              transition: color 0.2s ease !important;
-            }
-            
-            .dropdown-item-desc {
-              color: #666 !important;
-              font-size: 12px !important;
-              font-family: ${fonts.Noto} !important;
-              line-height: 1.3 !important;
-            }
-            
-            .project-card-custom {
-              transition: all 0.3s ease !important;
-              border-radius: 0px !important;
-            }
-            
-            .project-card-custom:hover {
-              transform: translateY(-2px) !important;
-              box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
-            }
-            
-            .project-card-custom.active {
-              border: none !important;
-              background: transparent !important;
-            }
-            
-            .project-card-custom.active .project-card-title {
-              color: #3A3A3A !important;
-              font-weight: 500 !important;
-            }
-            
-            .project-card-title {
-              font-size: 14px !important;
-              font-weight: 500 !important;
-              color: #3A3A3A !important;
-              font-family: ${fonts.Noto} !important;
-              line-height: 1.3 !important;
-              transition: color 0.2s ease !important;
-            }
-            
-            .project-card-location {
-              font-size: 12px !important;
-              color: #666 !important;
-              font-family: ${fonts.Noto} !important;
-              line-height: 1.3 !important;
-            }
-            
-            .project-card-type {
-              font-size: 11px !important;
-              font-family: ${fonts.Noto} !important;
-            }
-            
-            .project-card-image {
-              height: 100px !important;
-              object-fit: cover !important;
-              border-radius: 6px 6px 0 0 !important;
-            }
-            
-            .dropdown-left-section {
-              padding-right: 15px !important;
-            }
-            
-            .dropdown-right-section {
-              padding-left: 15px !important;
-            }
-            
-            /* Desktop styles */
-            @media (min-width: 992px) {
-              .nav-dropdown .dropdown-toggle:hover {
-                color: #164023 !important;
-              }
-              
-              .nav-dropdown:hover .dropdown-menu {
-                display: block !important;
-              }
-            }
-            
-            /* Tablet styles */
-            @media (max-width: 1199px) and (min-width: 992px) {
-              .dropdown-menu-custom {
-                min-width: 500px !important;
-                max-width: calc(100vw - 40px) !important;
-                padding: 20px !important;
-              }
-              
-              .project-card-image {
-                height: 100px !important;
-              }
-              
-              .project-card-title {
-                font-size: 13px !important;
-              }
-              
-              .project-card-location {
-                font-size: 11px !important;
-              }
-            }
-            
-            /* Mobile styles */
-            @media (max-width: 991.98px) {
-              .nav-dropdown-wrapper {
-                width: 100% !important;
-                display: block !important;
-              }
-              
-              .nav-dropdown {
-                width: 100% !important;
-                display: block !important;
-                position: relative !important;
-              }
-              
-              .nav-dropdown .dropdown-toggle {
-                color: #1C542C !important;
-                padding: 1rem 0 !important;
-                width: 100% !important;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-                font-size: 18px !important;
-                font-weight: 500 !important;
-                display: block !important;
-                text-align: left !important;
-              }
-              
-              .dropdown-menu-custom {
-                position: static !important;
-                transform: none !important;
-                box-shadow: none !important;
-                border: none !important;
-                background: transparent !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                border-radius: 0 !important;
-                min-width: auto !important;
-                max-width: none !important;
-                z-index: auto !important;
-              }
-              
-              .dropdown-content-wrapper {
-                padding: 0 1rem !important;
-                min-height: auto !important;
-              }
-              
-              .dropdown-left-section,
-              .dropdown-right-section {
-                padding: 0 !important;
-              }
-              
-              .dropdown-item-custom {
-                padding: 0.75rem 0 !important;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-                margin-bottom: 0.5rem !important;
-              }
-              
-                            .project-card-custom {
-                margin-bottom: 0.75rem !important;
-                border: 1px solid rgba(0,0,0,0.1) !important;
-              }
-              
-              .project-card-custom.active {
-                border: 1px solid rgba(0,0,0,0.1) !important;
-                background: transparent !important;
-              }
-              
-              .project-card-image {
-                width: 120px !important;
-                height: 80px !important;
-                object-fit: cover !important;
-                border-radius: 0px !important;
-              }
-              
-              .project-card-title {
-                font-size: 14px !important;
-              }
-              
-              .project-card-location {
-                font-size: 12px !important;
-              }
-            }
-            
-            /* Small mobile styles */
-            @media (max-width: 576px) {
-              .nav-dropdown .dropdown-toggle {
-                font-size: 16px !important;
-                padding: 0.75rem 0 !important;
-              }
-              
-              .dropdown-content-wrapper {
-                padding: 0 0.5rem !important;
-              }
-              
-              .project-card-custom {
-                padding: 0.75rem !important;
-              }
-              
-              .project-card-image {
-                width: 80px !important;
-                height: 50px !important;
-              }
-              
-              .project-card-title {
-                font-size: 13px !important;
-              }
-              
-              .project-card-location {
-                font-size: 11px !important;
-              }
-              
-              .dropdown-item-title {
-                font-size: 14px !important;
-              }
-            }
-            
-            /* Extra small mobile styles */
-            @media (max-width: 375px) {
-              .dropdown-content-wrapper {
-                padding: 0 0.25rem !important;
-              }
-              
-              .project-card-image {
-                width: 65px !important;
-                height: 45px !important;
-              }
-              
-              .project-card-title {
-                font-size: 12px !important;
-              }
-              
-              .project-card-location {
-                font-size: 10px !important;
-              }
-              
-              .dropdown-item-title {
-                font-size: 13px !important;
-              }
-            }
-            
-            /* Hover effects for better UX */
-            @media (hover: hover) {
-              .dropdown-item-custom:hover .dropdown-item-title {
-                color: #1C542C !important;
-              }
-              
-              .project-card-custom:hover .project-card-title {
-                color: #1C542C !important;
-              }
-            }
-            
-            /* Dark mode support */
-            @media (prefers-color-scheme: dark) {
-              .dropdown-menu-custom {
-                background-color: #2d3748 !important;
-                border-color: #4a5568 !important;
-              }
-              
-              .dropdown-item-title {
-                color: #e2e8f0 !important;
-              }
-              
-              .dropdown-item-desc,
-              .project-card-location {
-                color: #a0aec0 !important;
-              }
-              
-              .project-card-custom {
-                background-color: #4a5568 !important;
-                border-color: #718096 !important;
-              }
-            }
-            
-            /* Print styles */
-            @media print {
-              .nav-dropdown {
-                display: none !important;
-              }
-            }
-            
-            /* High contrast mode support */
-            @media (prefers-contrast: high) {
-              .dropdown-menu-custom {
-                border: 2px solid #000 !important;
-              }
-              
-              .dropdown-item-custom:hover {
-                background-color: #000 !important;
-                color: #fff !important;
-              }
-              
-              .project-card-custom:hover {
-                border-color: #000 !important;
-              }
-            }
-            
-            /* Reduced motion support */
-            @media (prefers-reduced-motion: reduce) {
-              .dropdown-arrow,
-              .project-card-custom,
-              .dropdown-item-custom {
-                transition: none !important;
-              }
-              
-              .project-card-custom:hover {
-                transform: none !important;
-              }
-            }
-          `}
-        </style>
-      </Dropdown>
-    </div>
+  return (
+    <>
+      {/* ── DESKTOP ── */}
+      <div
+        className="pd-desktop"
+        onMouseEnter={openMenu}
+        onMouseLeave={scheduleClose}
+        style={{ position: "relative" }}
+      >
+        <button style={{ ...s.trigger, fontWeight: isProjectActive ? 700 : 500 }}>
+          Projects
+          <ChevronDown size={14} style={{ marginLeft: 5, transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
+        </button>
+
+        {open && (
+          <div style={s.dropdown} onMouseEnter={openMenu} onMouseLeave={scheduleClose}>
+            <div style={s.cols}>
+              {/* Residential */}
+              <div style={s.col}>
+                <div style={s.colHeader}>Residential</div>
+                {renderList(residentialProjects)}
+                <Link to="/residential" style={s.viewAll} onClick={() => setOpen(false)}>View all →</Link>
+              </div>
+
+              <div style={s.divider} />
+
+              {/* Commercial */}
+              <div style={s.col}>
+                <div style={s.colHeader}>Commercial</div>
+                {renderList(commercialProjects)}
+                <Link to="/commercial" style={s.viewAll} onClick={() => setOpen(false)}>View all →</Link>
+              </div>
+            </div>
+
+            <div style={s.footer}>
+              <Link to="/project" style={s.footerLink} onClick={() => setOpen(false)}>All Projects →</Link>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── MOBILE ── */}
+      <div className="pd-mobile" style={{ width: "100%" }}>
+        <button style={s.mobileTrigger} onClick={() => setMobileOpen(!mobileOpen)}>
+          <span>Projects</span>
+          {mobileOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
+
+        {mobileOpen && (
+          <div style={s.mobileMenu}>
+            {[
+              { key: "residential", label: "Residential", projects: residentialProjects, route: "/residential" },
+              { key: "commercial",  label: "Commercial",  projects: commercialProjects,  route: "/commercial"  },
+            ].map(type => (
+              <div key={type.key}>
+                <button
+                  style={{ ...s.mobileTypeBtn, ...(mobileTab === type.key ? s.mobileTypeBtnActive : {}) }}
+                  onClick={() => setMobileTab(mobileTab === type.key ? null : type.key)}
+                >
+                  <span>{type.label}</span>
+                  {mobileTab === type.key ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                </button>
+
+                {mobileTab === type.key && (
+                  <div style={s.mobileProjects}>
+                    {renderList(type.projects)}
+                    <Link to={type.route} style={s.viewAll}
+                      onClick={() => { setMobileOpen(false); setMobileTab(null); }}
+                    >
+                      View all {type.label} →
+                    </Link>
+                  </div>
+                )}
+              </div>
+            ))}
+            <Link to="/project" style={s.mobileAllBtn}
+              onClick={() => { setMobileOpen(false); setMobileTab(null); }}
+            >
+              All Projects
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <style>{`
+        .pd-desktop { display: none; }
+        .pd-mobile  { display: block; }
+        @media (min-width: 992px) {
+          .pd-desktop { display: block; }
+          .pd-mobile  { display: none; }
+        }
+      `}</style>
+    </>
   );
 };
 
-const styles = {
-  navLink: {
-    fontFamily: fonts.Noto,
-    color: "#1C542C",
-    fontSize: "16px",
-    fontWeight: "500",
-    textDecoration: "none"
+const s = {
+  trigger: {
+    background: "none", border: "none", color: "#1C542C",
+    fontSize: 16, cursor: "pointer",
+    display: "flex", alignItems: "center", padding: "8px 0",
   },
-  dropdownArrow: {
-    fontSize: "10px",
-    color: "#1C542C",
-    transition: "transform 0.3s ease",
-    display: "inline-block",
-    lineHeight: "1"
+  dropdown: {
+    position: "absolute", top: "calc(100% + 10px)", right: "-180px",
+    width: 540, background: "#fff",
+    borderRadius: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+    zIndex: 9999, overflow: "hidden",
+    animation: "pdFade 0.15s ease",
   },
-  projectCardImage: {
-    width: "100%",
-    height: "80px",
-    objectFit: "cover",
-    borderRadius: "6px 6px 0 0"
-  }
+  cols: { display: "flex", padding: "20px 20px 12px" },
+  col:  { flex: 1, minWidth: 0 },
+  colHeader: {
+    fontSize: 13, fontWeight: 700, color: "#1C542C",
+    textTransform: "uppercase", letterSpacing: "0.8px",
+    marginBottom: 12, paddingBottom: 8,
+    borderBottom: "2px solid #1C542C",
+  },
+  divider: { width: 1, background: "#eee", margin: "0 16px" },
+  badge: {
+    fontSize: 10, fontWeight: 700,
+    padding: "2px 7px", borderRadius: 4,
+    flexShrink: 0, whiteSpace: "nowrap",
+  },
+  item: {
+    display: "flex", flexDirection: "row", alignItems: "center", gap: 8,
+    padding: "6px 8px", borderRadius: 5,
+    textDecoration: "none", background: "transparent",
+    transition: "background 0.15s", marginBottom: 2,
+  },
+  itemName: { fontSize: 13, fontWeight: 600, color: "#111" },
+  itemLoc:  { fontSize: 11, color: "#888", display: "flex", alignItems: "center", marginTop: 1 },
+  viewAll: {
+    fontSize: 12, fontWeight: 600, color: "#1C542C",
+    textDecoration: "none", display: "inline-block", marginTop: 6,
+  },
+  footer: {
+    borderTop: "1px solid #f0f0f0", padding: "10px 20px",
+    background: "#fafafa",
+  },
+  footerLink: {
+    fontSize: 13, fontWeight: 600, color: "#1C542C", textDecoration: "none",
+  },
+  // mobile
+  mobileTrigger: {
+    width: "100%", background: "none", border: "none",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    color: "#1C542C", fontSize: 18, fontWeight: 500,
+    padding: "1rem 0", display: "flex", alignItems: "center",
+    justifyContent: "space-between", cursor: "pointer",
+  },
+  mobileMenu: { padding: "8px 0 4px" },
+  mobileTypeBtn: {
+    width: "100%", background: "#f8faf8", border: "none",
+    borderRadius: 8, color: "#111", fontSize: 15, fontWeight: 600,
+    padding: "11px 14px", display: "flex", alignItems: "center",
+    justifyContent: "space-between", cursor: "pointer", marginBottom: 4,
+  },
+  mobileTypeBtnActive: { background: "#e8f5e9", color: "#1C542C" },
+  mobileProjects: {
+    background: "#f8faf8", borderRadius: "0 0 8px 8px",
+    padding: "8px 12px 10px", marginBottom: 4,
+  },
+  mobileAllBtn: {
+    display: "block", textAlign: "center",
+    background: "#1C542C", color: "#fff",
+    fontSize: 14, fontWeight: 600, textDecoration: "none",
+    padding: "11px", borderRadius: 8, marginTop: 8,
+  },
 };
 
 export default ProjectDropdown;
-

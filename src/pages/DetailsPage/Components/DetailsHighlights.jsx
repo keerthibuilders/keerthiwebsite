@@ -14,61 +14,35 @@ const SpecItem = ({ label, value }) => (
   </div>
 );
 
-const DetailsHighlights = () => {
+const DetailsHighlights = ({ project }) => {
+  const { specs } = project;
   return (
     <section id="project-highlights" className="py-3 py-md-4 py-lg-0" style={styles.section}>
       <Container fluid className="px-0">
         <Row className="g-0">
           {/* LEFT COLUMN – HEADING, DESCRIPTION & CTA */}
           <Col lg={8} md={7} className="d-flex flex-column" style={styles.leftColumn}>
-            {/* Title */}
             <h2 className="mb-3 mb-md-4" style={styles.title}>
-              Introducing Keerthi Infinity URVI –{" "}
+              Introducing {project.name} –{" "}
               <span style={styles.titleBold}>
-                Premium residential plots in the heart of Byalalu, Bangalore.
+                {project.property} in {project.location}.
               </span>
             </h2>
-            
-            {/* Description paragraphs */}
+
             <div className="d-flex flex-column gap-3 gap-md-4">
-              <p className="mb-0" style={styles.description}>
-                At Keerthi Infinity URVI, your dream home begins with the perfect plot.
-                Spread across prime land in Byalalu, this exclusive collection of
-                residential plots offers the ideal foundation for your future.
-                Strategically located with excellent connectivity to major IT hubs,
-                educational institutions, and healthcare facilities, URVI provides
-                the perfect blend of urban convenience and serene living. The project
-                is designed with modern infrastructure, wide roads, and all essential
-                amenities to ensure a comfortable lifestyle for you and your family.
-              </p>
-              <p className="mb-0" style={styles.description}>
-                Keerthi Infinity URVI represents more than just land ownership – it's
-                an investment in your family's future. With BMRDA approved layouts,
-                clear titles, and transparent documentation, we ensure a hassle-free
-                buying experience. The project features landscaped gardens, children's
-                play areas, and 24/7 security, creating a safe and vibrant community
-                for residents of all ages.
-              </p>
+              <p className="mb-0" style={styles.description}>{project.description1}</p>
+              <p className="mb-0" style={styles.description}>{project.description2}</p>
             </div>
           </Col>
-          
+
           {/* RIGHT COLUMN – PROJECT SPECIFICATIONS */}
           <Col lg={4} md={5} className="d-flex flex-column" style={styles.rightColumn}>
-            <SpecItem label="Survey Number" value="SY NO.16/3" />
-            <SpecItem label="Project Type" value="Residential Plots" />
-            <SpecItem label="Total Plots" value="120 Plots" />
-            <SpecItem
-              label="Plot Sizes"
-              value="30x40 Sq.ft, 30x50 Sq.ft, 40x60 Sq.ft"
-            />
-            <SpecItem
-              label="Approvals"
-              value="BMRDA Approved, BWSSB, BESCOM"
-            />
-            <SpecItem
-              label="Location"
-              value="Byalalu, Bangalore North"
-            />
+            <SpecItem label="Survey Number" value={specs.surveyNumber} />
+            <SpecItem label="Project Type" value={specs.projectType} />
+            <SpecItem label="Total Plots" value={specs.totalPlots} />
+            <SpecItem label="Plot Sizes" value={specs.plotSizes} />
+            <SpecItem label="Approvals" value={specs.approvals} />
+            <SpecItem label="Location" value={specs.location} />
           </Col>
         </Row>
       </Container>

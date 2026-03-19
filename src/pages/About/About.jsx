@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import SEO from '../../components/SEO/SEO';
 import HomeAboutSection from '../HomePage/Components/HomeAboutSection';
 import HomeVisionSection from '../HomePage/Components/HomeVisionMission';
 import OurJourney from './OurJourney';
@@ -188,6 +189,11 @@ const About = () => {
 
   return (
     <>
+      <SEO
+        title="About Us – 25 Years of Trusted Real Estate"
+        description="Learn about Keerthi Builders – 25+ years building trust in South Bangalore. BMRDA-approved layouts, 2000+ happy families, and a legacy of transparent land development in Kumbalagodu & Bidadi."
+        canonical="https://www.keerthibuilders.com/about"
+      />
       <AboutHeader />
       <HomeAboutSection />
       <div style={styles.container}>
@@ -221,7 +227,7 @@ const styles = {
     backgroundColor: '#fff',
     color: '#fff',
     padding: '20px 0px 0px 0px',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Noto Sans', sans-serif",
   },
   
   // Desktop styles (original)

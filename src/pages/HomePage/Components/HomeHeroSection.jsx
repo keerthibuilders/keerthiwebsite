@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ktmVideo from '../../../../public/ktmHeroVideo.mp4'
-
 const HomeHeroSection = () => {
   const [counters, setCounters] = useState({
     projects: 0,
@@ -338,25 +336,16 @@ const HomeHeroSection = () => {
               style={videoAnimationStyle}
             >
               <div style={responsiveStyles.videoContainer}>
-                <iframe width="100%" height="900"
-                  src="https://www.youtube.com/embed/yOGdgnRiRVo?si=91ncHgneXBoo89zf&controls=0&autoplay=1&mute=1" 
-                  title="YouTube video player" 
-                  frameborder="0" 
-                  style={{...responsiveStyles?.video, pointerEvents: 'none'}}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerpolicy="strict-origin-when-cross-origin" 
-                  allowfullscreen>
-                </iframe>
-                {/* <video
+                <video
+                  ref={videoRef}
                   autoPlay
                   loop
                   muted
                   playsInline
                   style={responsiveStyles.video}
                 >
-                  <source src="/ktmHeroVideo.mp4" type="video/mp4" />
-                </video> */}
-                          
+                  <source src="https://ik.imagekit.io/keerthibuilders/ktmHeroVideo.mp4" type="video/mp4" />
+                </video>
               </div>
             </Col>
           </Row>
@@ -638,11 +627,11 @@ const styles = {
   videoDesktop: {
     width: "100%",
     height: "auto",
-    minHeight: "480px",
-    maxHeight: "480px",
+    minHeight: "620px",
+    maxHeight: "620px",
     border: "none",
     borderRadius: "0px  80px 0px 80px",
-    objectFit: "fill",
+    objectFit: "cover",
   },
   statsSectionDesktop: {
     backgroundColor: "#1A662F",

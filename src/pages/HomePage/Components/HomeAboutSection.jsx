@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const HomeAboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -45,8 +44,7 @@ const HomeAboutSection = () => {
   });
 
   const getImageZoomStyle = () => ({
-    opacity: imageLoaded ? 1 : 0,
-    transform: imageLoaded ? 'scale(1)' : 'scale(0.3)',
+    opacity: 1,
     transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)'
   });
 
@@ -77,10 +75,9 @@ const HomeAboutSection = () => {
           <Col lg={5} md={6} style={styles.imageColumn}>
             <div style={getImageZoomStyle()}>
               <img
-                src="../../assets/images/owner.png"
+                src="/assets/images/owner.webp"
                 alt="Founder"
                 style={styles.founderImage}
-                onLoad={() => setImageLoaded(true)}
               />
             </div>
           </Col>
@@ -158,7 +155,7 @@ const styles = {
     color: "white",
     position: "relative",
     overflow: "hidden",
-    backgroundImage: "url('/src/assets/images/bg1.png')",
+    backgroundImage: "url('/assets/images/bg1.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundBlendMode: "overlay",
@@ -221,21 +218,21 @@ const styles = {
     fontWeight: "500",
     color: "#fff",
     marginBottom: "0.5rem",
-    fontFamily: "sans-serif",
+    fontFamily: "'Noto Sans', sans-serif",
   },
   founderTitle: {
     fontSize: "14px",
     marginBottom: "2rem",
     color: "#4CAF50",
     fontWeight: "400",
-    fontFamily: "sans-serif",
+    fontFamily: "'Noto Sans', sans-serif",
   },
   founderDescription: {
     fontSize: "14px",
     lineHeight: "1.8",
     color: "rgba(255, 255, 255, 0.9)",
     marginBottom: "1.5rem",
-    fontFamily: "sans-serif",
+    fontFamily: "'Noto Sans', sans-serif",
   },
   // New wrapper for Vision/Mission with light background
   visionMissionWrapper: {
@@ -255,14 +252,14 @@ const styles = {
     fontWeight: "500",
     marginBottom: "10px",
     color: "#2e7d32",
-    fontFamily: "sans-serif",
+    fontFamily: "'Noto Sans', sans-serif",
     textAlign: "left",
   },
   sectionText: {
     fontSize: "16px",
     lineHeight: "1.8",
     color: "#424242",
-    fontFamily: "sans-serif",
+    fontFamily: "'Noto Sans', sans-serif",
     margin: 0,
     textAlign: "left",
   },

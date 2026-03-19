@@ -1,652 +1,243 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import logo from "/assets/images/logo.png";
-import fonts from "../../../components/Common/Font";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const projects = [
+  {
+    image: "/assets/images/13.webp",
+    name: "Keerthi Infinity Lavish",
+    location: "Gollahalli-Thittahalli, Bengaluru",
+    tag: "Ongoing",
+    tagColor: "#1C542C",
+    link: "/project/keerthi-infinity-lavish",
+  },
+  {
+    image: "/assets/images/11.webp",
+    name: "Keerthi Infinity Ullahas",
+    location: "Shyanumangala, Bidadi",
+    tag: "New Launch",
+    tagColor: "#e65100",
+    link: "/project/keerthi-infinity-ullahas",
+  },
+  {
+    image: "/assets/images/12.webp",
+    name: "KTM Infinity Urvi Phase 2",
+    location: "Gollahalli-Thittahalli, Bengaluru",
+    tag: "Ongoing",
+    tagColor: "#1C542C",
+    link: "/project/ktm-infinity-urvi-phase-2",
+  },
+];
 
 const HomeProjectSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isTurning, setIsTurning] = useState(false);
-  const navigate = useNavigate();
-  const scrollRef = useRef(null);
-
-  // Sample project data - replace with your actual data
-  const projects = [
-    {
-      id: 1,
-      image: "./../assets/images/13.webp"
-    },
-    {
-      id: 2,
-      image: "./../assets/images/11.webp"
-    },
-    {
-      id: 3,
-      image: "./../assets/images/12.webp"
-    },
-  ];
-
-  // Auto-scroll functionality with page turn effect
-  useEffect(() => {
-    if (!isPaused && !isTurning) {
-      const interval = setInterval(() => {
-        nextSlide();
-      }, 3000);
-
-      return () => clearInterval(interval);
-    }
-  }, [isPaused, isTurning, currentIndex]);
-
-  // Scroll to current image on mobile when currentIndex changes
-  useEffect(() => {
-    if (window.innerWidth < 992 && scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: currentIndex * window.innerWidth,
-        behavior: "smooth"
-      });
-    }
-  }, [currentIndex]);
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
+    if (paused) return;
+    const t = setInterval(() => {
+      setCurrent(c => (c + 1) % projects.length);
+    }, 4000);
+    return () => clearInterval(t);
+  }, [paused]);
 
-    const sectionElement = document.getElementById('project-section');
-    if (sectionElement) {
-      observer.observe(sectionElement);
-    }
-
-    return () => {
-      if (sectionElement) {
-        observer.unobserve(sectionElement);
-      }
-    };
-  }, []);
-
-  const getAnimationStyle = (index) => {
-    return {
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-      transition: `opacity 0.5s ease, transform 0.5s ease`,
-      transitionDelay: `${0.1 * index}s`
-    };
-  };
-
-  const nextSlide = () => {
-    if (!isTurning) {
-      setIsTurning(true);
-      setTimeout(() => {
-        setCurrentIndex(prev => prev === projects.length - 1 ? 0 : prev + 1);
-        setIsTurning(false);
-      }, 800); // Page turn duration
-    }
-  };
-
-  const prevSlide = () => {
-    if (!isTurning) {
-      setIsTurning(true);
-      setTimeout(() => {
-        setCurrentIndex(prev => prev === 0 ? projects.length - 1 : prev - 1);
-        setIsTurning(false);
-      }, 800); // Page turn duration
-    }
-  };
-
-  const getPrevIndex = () => {
-    return currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-  };
-
-  const getNextIndex = () => {
-    return currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-  };
-
-  const handleDotClick = (index) => {
-    if (!isTurning && index !== currentIndex) {
-      setIsTurning(true);
-      setTimeout(() => {
-        setCurrentIndex(index);
-        setIsTurning(false);
-      }, 800);
-      setIsPaused(true);
-      setTimeout(() => setIsPaused(false), 5000);
-    }
-  };
-
-  const handleNavClick = (callback) => {
-    callback();
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  const handleCenterImageClick = () => {
-    navigate('/detailspage', {
-      state: {
-        projectId: projects[currentIndex].id,
-        projectData: projects[currentIndex]
-      }
-    });
-  };
-
-  // Handle manual scroll on mobile to update dot indicator
-  const handleMobileScroll = (e) => {
-    const scrollLeft = e.target.scrollLeft;
-    const width = window.innerWidth;
-    const idx = Math.round(scrollLeft / width);
-    if (idx !== currentIndex) setCurrentIndex(idx);
-  };
+  const prev = () => { setCurrent(c => (c - 1 + projects.length) % projects.length); setPaused(true); };
+  const next = () => { setCurrent(c => (c + 1) % projects.length); setPaused(true); };
 
   return (
-    <div id="project-section" style={styles.projectSection}>
-      {/* Background Design Elements */}
-      <div style={styles.bgPattern}></div>
-      <div className="d-none d-lg-block" style={styles.logoWatermark}>
-        <img src={logo} alt="Watermark Logo" style={styles.watermarkImage} />
+    <section style={s.section}>
+      <h2 style={s.heading}>New Launches & Ongoing Projects</h2>
+
+      <div
+        style={s.track}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Cards */}
+        <div style={s.cards}>
+          {projects.map((p, i) => {
+            const offset = i - current;
+            const isActive = offset === 0;
+            const isLeft = offset === -1 || (current === 0 && i === projects.length - 1);
+            const isRight = offset === 1 || (current === projects.length - 1 && i === 0);
+
+            return (
+              <Link
+                to={p.link}
+                key={i}
+                style={{
+                  ...s.card,
+                  ...(isActive ? s.cardActive : {}),
+                  ...(isLeft || isRight ? s.cardSide : {}),
+                  ...(!isActive && !isLeft && !isRight ? s.cardHidden : {}),
+                  transform: isActive
+                    ? "translateX(0) scale(1)"
+                    : isLeft
+                    ? "translateX(-62%) scale(0.85)"
+                    : isRight
+                    ? "translateX(62%) scale(0.85)"
+                    : "translateX(0) scale(0.7)",
+                }}
+              >
+                <img src={p.image} alt={p.name} style={s.img} />
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Arrows */}
+        <button style={{ ...s.arrow, left: 16 }} onClick={prev}>
+          <ChevronLeft size={22} />
+        </button>
+        <button style={{ ...s.arrow, right: 16 }} onClick={next}>
+          <ChevronRight size={22} />
+        </button>
       </div>
 
-      <Container fluid style={styles.container} className="px-2 px-md-4">
-        {/* Heading */}
-        <Row className="mb-2 mb-md-4">
-          <Col xs={12} className="text-center">
-            <h2 style={{ ...styles.heading, ...getAnimationStyle(1) }} className="mb-3 mb-md-4">
-             New Launches & On Going Projects
-            </h2>
-          </Col>
-        </Row>
-
-        {/* Carousel */}
-        <Row>
-          <Col xs={12}>
-            <div
-              style={{ ...styles.carouselContainer, ...getAnimationStyle(2) }}
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              className="d-flex align-items-center justify-content-center position-relative"
-            >
-              {/* Desktop: Prev Button - Positioned over left image */}
-              <button
-                style={{...styles.navButton, ...styles.leftNavButton}}
-                onClick={() => handleNavClick(prevSlide)}
-                aria-label="Previous projects"
-                className="d-none d-lg-flex align-items-center justify-content-center"
-                disabled={isTurning}
-              >
-                &#8249;
-              </button>
-
-              {/* Desktop: Images */}
-              <div
-                style={styles.imagesWrapper}
-                className="d-none d-lg-flex align-items-center justify-content-center position-relative overflow-hidden w-100"
-              >
-                {/* Previous Image */}
-                <div style={styles.leftSideImageContainer}>
-                  <img
-                    src={projects[getPrevIndex()].image}
-                    alt="Previous project"
-                    style={{
-                      ...styles.sideImage,
-                      opacity: isTurning ? 0.3 : 0.6,
-                      transform: isTurning ? 'rotateY(-15deg)' : 'rotateY(0deg)',
-                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                      transformOrigin: 'right center'
-                    }}
-                    className="w-100 h-100"
-                    onError={(e) => {
-                      e.target.src = logo;
-                    }}
-                  />
-                </div>
-                
-                {/* Center Image Container */}
-                <div
-                  style={styles.centerImageContainer}
-                  className="position-relative center-image-container"
-                >
-                  <img
-                    src={projects[currentIndex].image}
-                    alt="Current project"
-                    style={{
-                      ...styles.centerImage,
-                      cursor: 'pointer',
-                      transform: isTurning ? 'rotateY(-5deg)' : 'rotateY(0deg)',
-                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                      transformOrigin: 'center center',
-                      boxShadow: isTurning ? '0 20px 40px rgba(0,0,0,0.4)' : '0 10px 30px rgba(0,0,0,0.3)'
-                    }}
-                    className="w-100 h-100"
-                    onError={(e) => {
-                      e.target.src = logo;
-                    }}
-                  />
-                </div>
-                
-                {/* Next Image */}
-                <div style={styles.rightSideImageContainer}>
-                  <img
-                    src={projects[getNextIndex()].image}
-                    alt="Next project"
-                    style={{
-                      ...styles.sideImage,
-                      opacity: isTurning ? 0.3 : 0.6,
-                      transform: isTurning ? 'rotateY(15deg)' : 'rotateY(0deg)',
-                      transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                      transformOrigin: 'left center'
-                    }}
-                    className="w-100 h-100"
-                    onError={(e) => {
-                      e.target.src = logo;
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Desktop: Next Button - Positioned over right image */}
-              <button
-                style={{...styles.navButton, ...styles.rightNavButton}}
-                onClick={() => handleNavClick(nextSlide)}
-                aria-label="Next projects"
-                className="d-none d-lg-flex align-items-center justify-content-center"
-                disabled={isTurning}
-              >
-                &#8250;
-              </button>
-
-              {/* Mobile: Fullscreen horizontal scrollable images */}
-              <div
-                className="d-lg-none mobile-scroll-wrapper"
-                ref={scrollRef}
-                style={{
-                  width: "100vw",
-                  overflowX: "auto",
-                  display: "flex",
-                  scrollSnapType: "x mandatory",
-                  WebkitOverflowScrolling: "touch",
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                  height: "65vw",
-                  minHeight: "220px",
-                  maxHeight: "80vw",
-                }}
-                tabIndex={0}
-                onScroll={handleMobileScroll}
-              >
-                {projects.map((project, idx) => (
-                  <div
-                    key={project.id}
-                    style={{
-                      minWidth: "100vw",
-                      width: "100vw",
-                      height: "100%",
-                      flex: "0 0 100vw",
-                      scrollSnapAlign: "center",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: "#fff",
-                      overflow: "hidden",
-                      position: "relative",
-                    }}
-                    onClick={() => {
-                      setCurrentIndex(idx);                    }}
-                  >
-                    <img
-                      src={project.image}
-                      alt={`Project ${idx + 1}`}
-                      style={{
-                        width: "100vw",
-                        height: "100%",
-                        objectFit: "cover",
-                        display: "block",
-                        transform: isTurning && idx === currentIndex ? 'rotateY(-5deg)' : 'rotateY(0deg)',
-                        transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)'
-                      }}
-                      onError={e => { e.target.src = logo; }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Col>
-        </Row>
-
-        {/* Dots Indicator */}
-        <Row className="mt-4">
-          <Col xs={12} className="text-center">
-            <div style={styles.dotsContainer} className="d-flex align-items-center justify-content-center">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  style={{
-                    ...styles.dot,
-                    backgroundColor: index === currentIndex ? '#1C542C' : '#ccc',
-                    transform: isTurning && index === currentIndex ? 'rotateZ(180deg)' : 'rotateZ(0deg)',
-                    transition: 'all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)'
-                  }}
-                  onClick={() => handleDotClick(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                  className="border-0 me-2"
-                  disabled={isTurning}
-                />
-              ))}
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* CSS for page turn animations */}
-      <style>
-        {`
-          .center-image-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-          }
-          .center-image-hover:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-          }
-
-          @media (max-width: 991.98px) {
-            .mobile-scroll-wrapper {
-              -ms-overflow-style: none;
-              scrollbar-width: none;
-              scroll-snap-type: x mandatory;
-            }
-            .mobile-scroll-wrapper::-webkit-scrollbar {
-              display: none;
-            }
-            .center-image-container,
-            .left-side-image-container,
-            .right-side-image-container,
-            .navButton,
-            .mobileNavButton,
-            .d-lg-flex.navButton,
-            .d-lg-flex.mobileNavButton {
-              display: none !important;
-            }
-          }
-
-          @media (max-width: 768px) {
-            .carousel-container-mobile {
-              gap: 10px !important;
-            }
-          }
-
-          /* Responsive heading */
-          @media (max-width: 576px) {
-            #project-section h2 {
-              font-size: 24px !important;
-            }
-          }
-
-          @media (min-width: 577px) and (max-width: 768px) {
-            #project-section h2 {
-              font-size: 28px !important;
-            }
-          }
-
-          /* Button disabled state */
-          button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-          }
-
-                    .navButton:hover:not(:disabled) {
-            background-color: rgba(45, 122, 61, 0.9) !important;
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            border-color: rgba(255, 255, 255, 0.5);
-          }
-
-          .navButton:active:not(:disabled) {
-            transform: scale(0.95);
-          }
-
-          /* Page turn animation keyframes */
-          @keyframes pageTurnLeft {
-            0% {
-              transform: rotateY(0deg);
-              transform-origin: right center;
-            }
-            50% {
-              transform: rotateY(-90deg);
-              transform-origin: right center;
-            }
-            100% {
-              transform: rotateY(-180deg);
-              transform-origin: right center;
-            }
-          }
-
-          @keyframes pageTurnRight {
-            0% {
-              transform: rotateY(0deg);
-              transform-origin: left center;
-            }
-            50% {
-              transform: rotateY(90deg);
-              transform-origin: left center;
-            }
-            100% {
-              transform: rotateY(180deg);
-              transform-origin: left center;
-            }
-          }
-
-          @keyframes pageTurnCenter {
-            0% {
-              transform: rotateY(0deg);
-              box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            }
-            50% {
-              transform: rotateY(-10deg);
-              box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            }
-            100% {
-              transform: rotateY(0deg);
-              box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            }
-          }
-
-          /* 3D perspective for page turn effect */
-          .images-wrapper-3d {
-            perspective: 1000px;
-            perspective-origin: center center;
-          }
-
-          .page-turn-container {
-            transform-style: preserve-3d;
-          }
-
-          /* Smooth page turn transitions */
-          .page-turn-transition {
-            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-          }
-
-          /* Enhanced shadow effects during page turn */
-          .page-shadow {
-            box-shadow: 
-              0 0 20px rgba(0,0,0,0.1),
-              0 10px 40px rgba(0,0,0,0.2),
-              inset 0 0 0 1px rgba(255,255,255,0.1);
-          }
-        `}
-      </style>
-    </div>
+      {/* Dots */}
+      <div style={s.dots}>
+        {projects.map((_, i) => (
+          <button
+            key={i}
+            style={{ ...s.dot, ...(i === current ? s.dotActive : {}) }}
+            onClick={() => { setCurrent(i); setPaused(true); }}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
-const styles = {
-  projectSection: {
-    padding: "40px 0",
-    backgroundColor: "#e8f5e9",
-    position: "relative",
-    overflow: "hidden",
-    fontFamily: fonts.Noto
-  },
-  container: {
-    position: "relative",
-    zIndex: 2,
-    padding: "0",
-    fontFamily: fonts.Noto
-  },
-  bgPattern: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundImage: "radial-gradient(#c8e6c9 10%, transparent 10%), radial-gradient(#c8e6c9 10%, transparent 10%)",
-    backgroundSize: "20px 20px",
-    backgroundPosition: "0 0, 10px 10px",
-    opacity: 0.3,
-    zIndex: 1
-  },
-  logoWatermark: {
-    position: "absolute",
-    right: "-50px",
-    bottom: "-50px",
-    opacity: 0.05,
-    zIndex: 1,
-    transform: "rotate(-15deg)"
-  },
-  watermarkImage: {
-    width: "300px",
-    height: "auto"
+const s = {
+  section: {
+    padding: "50px 0 40px",
+    background: "#e8f5e9",
+    textAlign: "center",
   },
   heading: {
-    fontSize: "32px",
-    fontWeight: "600",
+    fontSize: 28,
+    fontWeight: 700,
     color: "#1C542C",
-    marginBottom: "2rem",
-    fontFamily: fonts.Noto
+    marginBottom: 32,
   },
-  carouselContainer: {
-    display: "flex",
-    alignItems: "center",
+  track: {
     position: "relative",
-    justifyContent: "center",
-    width: "100%"
+    height: 420,
+    overflow: "hidden",
+    maxWidth: 1100,
+    margin: "0 auto",
   },
-  navButton: {
-    backgroundColor: "rgba(28, 84, 44, 0.8)",
-    color: "white",
-    border: "2px solid rgba(255, 255, 255, 0.3)",
-    borderRadius: "50%",
-    width: "60px",
-    height: "60px",
-    fontSize: "28px",
-    cursor: "pointer",
+  cards: {
+    position: "absolute",
+    inset: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 6px 12px rgba(0,0,0,0.4)",
-    transition: "all 0.3s ease",
-    zIndex: 20,
-    flexShrink: 0,
+  },
+  card: {
     position: "absolute",
-    backdropFilter: "blur(5px)"
+    width: 560,
+    height: 380,
+    borderRadius: 12,
+    overflow: "hidden",
+    textDecoration: "none",
+    transition: "transform 0.5s ease, opacity 0.5s ease",
+    opacity: 0.5,
+    cursor: "pointer",
   },
-  leftNavButton: {
-    left: "75px"
+  cardActive: {
+    opacity: 1,
+    zIndex: 3,
+    boxShadow: "0 12px 40px rgba(0,0,0,0.22)",
   },
-  rightNavButton: {
-    right: "75px"
+  cardSide: {
+    opacity: 0.55,
+    zIndex: 2,
   },
-  mobileNavButton: {
-    backgroundColor: "#1C542C",
-    color: "white",
+  cardHidden: {
+    opacity: 0,
+    zIndex: 1,
+    pointerEvents: "none",
+  },
+  img: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+  },
+  overlay: {
+    position: "absolute",
+    inset: 0,
+    background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)",
+  },
+  info: {
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    right: 20,
+    textAlign: "left",
+  },
+  tag: {
+    display: "inline-block",
+    fontSize: 11,
+    fontWeight: 700,
+    color: "#fff",
+    padding: "3px 10px",
+    borderRadius: 4,
+    marginBottom: 8,
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: 700,
+    color: "#fff",
+    margin: "0 0 6px",
+  },
+  loc: {
+    fontSize: 13,
+    color: "rgba(255,255,255,0.8)",
+    margin: 0,
+    display: "flex",
+    alignItems: "center",
+  },
+  arrow: {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 10,
+    background: "rgba(28,84,44,0.85)",
+    color: "#fff",
     border: "none",
     borderRadius: "50%",
-    width: "45px",
-    height: "45px",
-    fontSize: "20px",
-    cursor: "pointer",
+    width: 42,
+    height: 42,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-    transition: "all 0.3s ease",
-    zIndex: 10,
-    flexShrink: 0
+    cursor: "pointer",
   },
-  imagesWrapper: {
+  dots: {
     display: "flex",
-    alignItems: "center",
-    flex: 1,
     justifyContent: "center",
-    position: "relative",
-    overflow: "hidden",
-    width: "100%",
-    maxWidth: "1200px",
-    gap: "37.8px",
-    perspective: "1000px",
-    perspectiveOrigin: "center center"
-  },
-  centerImageContainer: {
-    flex: "0 0 600px",
-    height: "450px",
-    overflow: "hidden",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-    position: "relative",
-    zIndex: 3,
-    cursor: "pointer",
-    transformStyle: "preserve-3d"
-  },
-  centerImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover"
-  },
-  leftSideImageContainer: {
-    flex: "0 0 300px",
-    height: "350px",
-    overflow: "hidden",
-    boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
-    position: "relative",
-    zIndex: 1,
-    cursor: "pointer",
-    marginLeft: "-150px",
-    transformStyle: "preserve-3d"
-  },
-  rightSideImageContainer: {
-    flex: "0 0 300px",
-    height: "350px",
-    overflow: "hidden",
-    boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
-    position: "relative",
-    zIndex: 1,
-    cursor: "pointer",
-    marginRight: "-150px",
-    transformStyle: "preserve-3d"
-  },
-  sideImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover"
-  },
-  dotsContainer: {
-    display: "flex",
-    alignContent: 'center',
-    justifyContent: "center",
-    gap: "8px",
-    marginTop: "0px"
+    gap: 8,
+    marginTop: 20,
   },
   dot: {
-    width: "8px",
-    height: "12px",
-    borderRadius: "60%",
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    background: "#bbb",
     border: "none",
     cursor: "pointer",
-    transition: "all 0.3s ease",
-  }
+    padding: 0,
+    transition: "background 0.3s",
+  },
+  dotActive: {
+    background: "#1C542C",
+    width: 24,
+    borderRadius: 4,
+  },
 };
 
 export default HomeProjectSection;
-

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import aboutbottom from "../../../public/assets/images/about-us-bottom.webp"
 
 const OurJourney = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +53,7 @@ const OurJourney = () => {
             <Col xs={12} lg={5}>
               <div style={{ ...styles.imageSection, ...getTextAnimationStyle('left', 1) }}>
                 <img
-                  src={aboutbottom}
+                  src="/assets/images/about-us-bottom.webp"
                   alt="Our Journey"
                   style={styles.image}
                   className="img-fluid"
@@ -135,7 +134,7 @@ const styles = {
     backgroundColor: '#fff',
     color: '#000',
     padding: '60px 0',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Noto Sans', sans-serif",
     position: 'relative',
     overflow: 'hidden',
     minHeight: '500px',

@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Navbar as BootstrapNavbar, Container, Nav, Button } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../../../public/assets/images/logo.png";
 import fonts from "../Common/Font";
 import ProjectDropdown from "./ProjectDropdown";
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
-  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,7 +14,6 @@ const Navbar = () => {
   const handleNavigation = (targetId, event) => {
     event.preventDefault();
     setExpanded(false);
-    setShowProjectDropdown(false);
 
     if (targetId === 'about') {
       navigate('/about');
@@ -119,7 +116,7 @@ const Navbar = () => {
           style={styles.brand}
         >
           <img
-            src={logo}
+            src="/assets/images/logo.png"
             alt="Keerthi Builders Logo"
             style={styles.logo}
           />
@@ -153,12 +150,7 @@ const Navbar = () => {
 
           <Nav className="ms-auto">
             {/* Projects Dropdown - Now using custom component */}
-            <ProjectDropdown 
-              showProjectDropdown={showProjectDropdown}
-              setShowProjectDropdown={setShowProjectDropdown}
-              handleNavigation={handleNavigation}
-              location={location}
-            />
+            <ProjectDropdown location={location} />
 
             <Nav.Link
               href="/about"

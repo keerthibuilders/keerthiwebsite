@@ -1,426 +1,346 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { ArrowUpRight } from "lucide-react";
-import fonts from "../../../components/Common/Font";
-import { width } from "@fortawesome/free-solid-svg-icons/fa0";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
+import { ArrowUpRight, Home, Building2, CheckCircle, MapPin } from "lucide-react";
 
-// Direct Cloudinary video URLs - these are correct
-const videoFile = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364538/jqidf41ta0eurb8ljaos.mp4";
-const videoFile2 = "https://res.cloudinary.com/dqmnu220b/video/upload/v1749364547/ke7tlieyeuur72ld7uam.mp4";
-const videoFile3 ="https://res.cloudinary.com/dqmnu220b/video/upload/v1750917082/oqydr1o12iwmkhkwrdma.mp4"
-
-const PropertyCard = ({ image, title, location, video, link }) => {
-  const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef(null);
-
-  console.log(link);
-  
-
-  useEffect(() => {
-    if (videoRef.current && !isHovered) {
-      // Set video to start from 12 seconds
-      videoRef.current.currentTime = 12;
-      videoRef.current.play().catch(console.error);
-    }
-  }, [isHovered]);
-
-  const handleVideoLoad = () => {
-    if (videoRef.current) {
-      // Set starting time to 13 seconds when video loads
-      videoRef.current.currentTime = 13;
-    }
-  };
-
-  const handleVideoError = (e) => {
-    console.error('Video error:', e);
-    // You could set a fallback state here if needed
-  };
-
-  return (
-    <div
-      className="property-card text-black flex flex-col justify-between"
-      style={{
-        ...styles.propertyCard,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-      // onClick={() => navigate(link)}
-      // onMouseEnter={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Video Background - shows when not hovered */}
-      {!isHovered && video && (
-        
-        <img 
-          style={styles.cardVideo}
-          src={image}
-          alt="image" 
-        />
-      )}
-
-      {/* Video Overlay for better text readability */}
-      {!isHovered && (
-        <div style={styles.cardVideoOverlay}></div>
-      )}
-
-      <div className="content-wrapper">
-        <h2 
-          className="text-2xl font-bold mb-2" 
-          style={{
-            ...styles.propertyTitle,
-            color: isHovered ? 'white' : 'white' // Always white for better visibility over video
-          }}
-        >
-          {title}
-        </h2>
-        {location && (
-          <p 
-            className="text-sm" 
-            style={{
-              ...styles.propertyLocation,
-              color: isHovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.8)'
-            }}
-          >
-            {location}
-          </p>
-        )}
-      </div>
-
-      {/* <div style={styles.cardFooter}>
-        <div style={{
-          ...styles.arrowContainer,
-          backgroundColor: isHovered ? 'white' : 'rgba(255,255,255,0.9)',
-        }}>
-          <ArrowUpRight size={18} color={isHovered ? '#21623C' : '#21623C'} />
-        </div>
-      </div> */}
-    </div>
-  );
-};
+const categories = [
+  {
+    type: "Residential",
+    tag: "RESIDENTIAL LAYOUTS",
+    icon: Home,
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85&fit=crop",
+    headline: "Live Where You Belong",
+    subline: "BMRDA-Approved Plots in South Bangalore",
+    description:
+      "Thoughtfully planned residential layouts in Kumbalagodu & Bidadi — wide asphalted roads, underground drainage, clear titles and full civic amenities.",
+    stats: [
+      { value: "7", label: "Projects" },
+      { value: "500+", label: "Plots Sold" },
+      { value: "25+", label: "Acres" },
+    ],
+    features: ["BMRDA Approved", "30×40 to 40×60 plots", "Gated Community"],
+    cta: "Explore Residential",
+    link: "/residential",
+    overlayFrom: "rgba(0,0,0,0.1)",
+    overlayTo: "rgba(0,0,0,0.96)",
+    accent: "#4ade80",
+    tagBg: "rgba(26,102,47,0.85)",
+  },
+  {
+    type: "Commercial",
+    tag: "INDUSTRIAL PROPERTIES",
+    icon: Building2,
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=85&fit=crop",
+    headline: "Build Your Business Here",
+    subline: "KIADB-Approved Industrial Plots, Mysore Road",
+    description:
+      "KIADB-approved industrial sites in Kumbalagodu's thriving industrial corridor — HT power, 40-ft roads, and NICE Road access for effortless logistics.",
+    stats: [
+      { value: "2", label: "Projects" },
+      { value: "75+", label: "Plots" },
+      { value: "15+", label: "Acres" },
+    ],
+    features: ["KIADB Approved", "HT Power Supply", "40-ft Roads"],
+    cta: "Explore Commercial",
+    link: "/commercial",
+    overlayFrom: "rgba(0,0,0,0.1)",
+    overlayTo: "rgba(0,0,0,0.96)",
+    accent: "#ffc107",
+    tagBg: "rgba(120,80,0,0.85)",
+  },
+];
 
 const HomeOurPropertiesSection = () => {
-  const properties = [
-    {
-      id: 1,
-      image: "https://media.istockphoto.com/id/1338058166/photo/land-or-landscape-of-green-field-in-aerial-view-and-home-or-house-icon.jpg?s=612x612&w=0&k=20&c=c-VlOIv3Y18NyZ5qLDZbaNNcapXo2U3yctzf8KkltN0=",
-      title: "Residential Plots",
-      video: videoFile,
-	    // link: "/residential"
-    },
-    {
-      id: 2,
-      image: "https://media.istockphoto.com/id/612029324/photo/industrial-units-from-air.jpg?s=612x612&w=0&k=20&c=mp1oFUZUOf3EuKafObzev8N2UaOU9IJHOozcRfNEaTA=",
-      title: "Industrial",
-      video: videoFile2,
-	    // link: "/commercial"
-    },
-    // {
-    //   id: 3,
-    //   image: "https://www.houseofhiranandani.com/vlogs/storage/2019/01/35.png",
-    //   title: "Premium Villa Plots",
-    //   video: videoFile3
-    // },
-  ];
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <>
-      <section style={styles.sectionContainer}>
-        {/* Background overlay for better text readability */}
-        <div style={styles.backgroundOverlay}></div>
-        
-        {/* Animated Top to Bottom Lines - Initially Hidden */}
-        <div style={styles.animatedLinesContainer}>
-          {/* Line 1 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '15%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '0s'
-            }}
-          />
-          
-          {/* Line 2 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '30%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '1s'
-            }}
-          />
-          
-          {/* Line 3 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '45%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '2s'
-            }}
-          />
-          
-          {/* Line 4 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '60%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '3s'
-            }}
-          />
-          
-          {/* Line 5 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '75%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '4s'
-            }}
-          />
-          
-          {/* Line 6 */}
-          <div 
-            style={{
-              position: 'absolute',
-              left: '85%',
-              top: '-60px',
-              width: '1px',
-              height: '50px',
-              background: 'rgba(238, 249, 109, 0.3)',
-              borderRadius: '1px',
-              opacity: 0,
-              animation: 'rainDropSequence 6s linear infinite',
-              animationDelay: '5s'
-            }}
-          />
-        </div>
-        
-        <Container style={styles.contentContainer}>
-          <Row className="mb-4">
-            <Col lg={12} className="mx-auto">
-              <h2 style={styles.sectionTitle}>Our Portfolio</h2>
-              <p style={styles.sectionDescription}>
-                At Keerthi Builders, we redefine real estate by merging innovation, quality, and customer satisfaction.
-                Whether it's about residential properties, commercial spaces, luxury villas, affordable housing, or
-                custom projects, we craft exceptional living and working environments that go beyond expectations and create lasting value.
-              </p>
-            </Col>
-          </Row>
-          
-          <Row className="justify-content-center">
-            {properties.map((property) => (
-              <Col lg={6} md={6} sm={12} key={property.id} className="mb-4">
-		<a href={property.link}>
-                <PropertyCard
-                  image={property.image}
-                  title={property.title}
-                  location={property.location}
-                  video={property.video}
-                  link={''}
-                  // link={property?.link}
-                />
-		</a>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </section>
+    <section ref={ref} style={s.section}>
+      {/* Header */}
+      <div style={s.header}>
+        <motion.span
+          style={s.eyebrow}
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          WHAT WE BUILD
+        </motion.span>
+        <motion.h2
+          style={s.title}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.1 }}
+        >
+          Our Portfolio
+        </motion.h2>
+        <motion.p
+          style={s.subtitle}
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Two decades of delivering trusted plots across South Bangalore —
+          residential communities and industrial corridors on Mysore Road.
+        </motion.p>
+      </div>
 
-      {/* Global CSS for animations */}
-      <style jsx global>{`
-        @keyframes rainDropSequence {
-          0% {
-            transform: translateY(0);
-            opacity: 0;
-          }
-          5% {
-            opacity: 0.7;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 0.8;
-          }
-          95% {
-            opacity: 0.3;
-          }
-          100% {
-            transform: translateY(calc(100vh + 100px));
-            opacity: 0;
-          }
-        }
-        
-        .property-card {
-          transition: all 0.4s ease;
+      {/* Cards */}
+      <div style={s.grid} className="portfolio-grid">
+        {categories.map((cat, i) => {
+          const Icon = cat.icon;
+          return (
+            <motion.div
+              key={cat.type}
+              style={s.card}
+              className="portfolio-card"
+              initial={{ opacity: 0, y: 48 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.65, delay: 0.3 + i * 0.15 }}
+            >
+              {/* Background image */}
+              <img src={cat.image} alt={cat.subline} style={s.cardImg} className="portfolio-card-img" />
+
+              {/* Gradient overlay — light at top, heavy at bottom */}
+              <div style={{
+                ...s.cardOverlay,
+                background: `linear-gradient(to bottom, ${cat.overlayFrom} 0%, rgba(0,0,0,0.55) 45%, ${cat.overlayTo} 100%)`,
+              }} />
+
+              {/* Category tag — top left */}
+              <div style={s.cardTop}>
+                <span style={{ ...s.tag, background: cat.tagBg }}>
+                  <Icon size={10} style={{ marginRight: 5, opacity: 0.9 }} />
+                  {cat.tag}
+                </span>
+              </div>
+
+              {/* Content — pinned to bottom */}
+              <div style={s.cardBottom}>
+                {/* Stats */}
+                <div style={s.statsRow}>
+                  {cat.stats.map((stat) => (
+                    <div key={stat.label} style={s.statItem}>
+                      <span style={{ ...s.statVal, color: cat.accent }}>{stat.value}</span>
+                      <span style={s.statLabel}>{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p style={s.subline}>{cat.subline}</p>
+                <h3 style={s.cardTitle}>{cat.headline}</h3>
+                <p style={s.cardDesc}>{cat.description}</p>
+
+                {/* Feature chips */}
+                <div style={s.featureRow}>
+                  {cat.features.map(f => (
+                    <span key={f} style={s.featureChip}>
+                      <CheckCircle size={10} style={{ color: cat.accent, marginRight: 4 }} />
+                      {f}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Location */}
+                <p style={s.locationNote}>
+                  <MapPin size={11} style={{ color: cat.accent, marginRight: 5, flexShrink: 0 }} />
+                  Mysore Road Corridor, South Bangalore
+                </p>
+
+                <Link
+                  to={cat.link}
+                  style={{ ...s.cardCta, background: cat.accent, color: i === 0 ? "#0a2010" : "#1a0e00" }}
+                  className="portfolio-cta"
+                >
+                  {cat.cta}
+                  <ArrowUpRight size={16} style={{ marginLeft: 6 }} />
+                </Link>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <style>{`
+        .portfolio-card {
           position: relative;
           overflow: hidden;
-          border-radius: 8px;
+          border-radius: 16px;
         }
-        
-        .property-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        .portfolio-card-img {
+          transition: transform 0.8s ease;
         }
-        
-        .content-wrapper {
-          position: relative;
-          z-index: 3;
-          transition: all 0.3s ease;
+        .portfolio-card:hover .portfolio-card-img {
+          transform: scale(1.05);
+        }
+        .portfolio-cta:hover {
+          filter: brightness(1.08);
+          transform: translateY(-1px);
+        }
+        @media (max-width: 767px) {
+          .portfolio-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-    </>
+    </section>
   );
 };
 
-const styles = {
-  sectionContainer: {
-    backgroundColor: "#1A662F",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-    padding: "40px 0",
-    color: "white",
-    position: "relative",
-    overflow: "hidden",
+const s = {
+  section: {
+    background: "#1A662F",
+    padding: "72px 40px",
   },
-  backgroundOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 1,
+  header: {
+    textAlign: "center",
+    maxWidth: 680,
+    margin: "0 auto 52px",
   },
-  animatedLinesContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    pointerEvents: "none",
-    zIndex: 1,
-    overflow: "hidden"
+  eyebrow: {
+    display: "inline-block",
+    fontSize: "0.7rem",
+    fontWeight: 700,
+    letterSpacing: "3px",
+    color: "#4ade80",
+    marginBottom: 14,
+    textTransform: "uppercase",
   },
-  contentContainer: {
-    position: "relative",
-    zIndex: 2,
+  title: {
+    color: "#fff",
+    fontSize: "clamp(2rem, 4vw, 3rem)",
+    fontWeight: 700,
+    margin: "0 0 16px",
+    lineHeight: 1.1,
   },
-  sectionTitle: {
-    fontWeight: "400",
-    marginBottom: "16px",
-    fontSize: "30px",
-    fontFamily: fonts.Noto,
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+  subtitle: {
+    color: "rgba(255,255,255,0.65)",
+    fontSize: "1rem",
+    lineHeight: 1.7,
+    margin: 0,
   },
-  sectionDescription: {
-    lineHeight: "1.6",
-    fontSize: "14px",
-    marginBottom: "30px",
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 24,
+    maxWidth: 1200,
     margin: "0 auto",
-    fontFamily: fonts.Noto,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
   },
-  propertyCard: {
-    width: "100%",
-    height: "230px", 
-    cursor: "pointer",
-    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    padding: "25px", 
-    transition: "all 0.4s ease",
-    position: "relative",
-    borderRadius: "0px", 
+  card: {
+    height: 560,
   },
-  cardVideo: {
+  cardImg: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    inset: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    zIndex: 1,
-    borderRadius: "0px", 
-    backgroundColor:"#000",
+    display: "block",
   },
-  cardVideoOverlay: {
+  cardOverlay: {
     position: "absolute",
-    top: 0,
+    inset: 0,
+    zIndex: 1,
+  },
+  cardTop: {
+    position: "absolute",
+    top: 22,
+    left: 22,
+    zIndex: 2,
+  },
+  tag: {
+    display: "inline-flex",
+    alignItems: "center",
+    fontSize: "0.62rem",
+    fontWeight: 700,
+    letterSpacing: "1.5px",
+    padding: "5px 12px",
+    borderRadius: 5,
+    color: "#fff",
+    backdropFilter: "blur(8px)",
+  },
+  cardBottom: {
+    position: "absolute",
+    bottom: 0,
     left: 0,
     right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    padding: "0 28px 32px",
     zIndex: 2,
-    borderRadius: "0px", 
   },
-  propertyTitle: {
-    fontSize: "26px", 
-    fontWeight: "500",
-    marginBottom: "10px",
-    transition: "color 0.3s ease",
-    fontFamily: fonts.Noto,
+  statsRow: {
+    display: "flex",
+    gap: 24,
+    marginBottom: 14,
   },
-  propertyLocation: {
-    fontSize: "16px", 
-    marginBottom: "18px", 
-    transition: "color 0.3s ease",
-    fontFamily: fonts.Noto,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.8)", 
+  statItem: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
   },
-  cardFooter: {
+  statVal: {
+    fontSize: "1.8rem",
+    fontWeight: 700,
+    lineHeight: 1,
+  },
+  statLabel: {
+    fontSize: "0.65rem",
+    color: "rgba(255,255,255,0.5)",
+    textTransform: "uppercase",
+    letterSpacing: "0.8px",
+  },
+  subline: {
+    fontSize: "0.72rem",
+    fontWeight: 600,
+    color: "rgba(255,255,255,0.55)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    margin: "0 0 6px",
+  },
+  cardTitle: {
+    color: "#fff",
+    fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+    fontWeight: 700,
+    margin: "0 0 10px",
+    lineHeight: 1.2,
+  },
+  cardDesc: {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: "0.87rem",
+    lineHeight: 1.6,
+    margin: "0 0 14px",
+    maxWidth: 420,
+  },
+  featureRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 7,
+    marginBottom: 12,
+  },
+  featureChip: {
+    display: "inline-flex",
+    alignItems: "center",
+    fontSize: "0.67rem",
+    color: "rgba(255,255,255,0.7)",
+    background: "rgba(255,255,255,0.08)",
+    border: "1px solid rgba(255,255,255,0.15)",
+    borderRadius: 20,
+    padding: "3px 9px",
+  },
+  locationNote: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginTop: "25px", // Increased margin
-    position: "relative",
-    zIndex: 3
+    color: "rgba(255,255,255,0.4)",
+    fontSize: "0.72rem",
+    margin: "0 0 18px",
   },
-  arrowContainer: {
-    padding: "10px", // Increased padding
-    borderRadius: "50%",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
-    display: "flex",
+  cardCta: {
+    display: "inline-flex",
     alignItems: "center",
-    justifyContent: "center",
-    transition: "all 0.3s ease",
-  }
+    fontWeight: 700,
+    fontSize: "0.88rem",
+    padding: "11px 22px",
+    borderRadius: 50,
+    textDecoration: "none",
+    transition: "filter 0.2s ease, transform 0.2s ease",
+  },
 };
 
 export default HomeOurPropertiesSection;

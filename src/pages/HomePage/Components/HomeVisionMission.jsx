@@ -110,7 +110,7 @@ const HomeVisionMission = () => {
           .vision-mission-section {
             background: #1A662F;
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Noto Sans', sans-serif;
             position: relative;
             overflow: hidden;
           }
@@ -148,7 +148,7 @@ const styles = {
     backgroundColor: '#1A662F',
     padding: '40px 0px',
     color: '#fff',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Noto Sans', sans-serif",
     position: 'relative',
     overflow: 'hidden',
   },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdOutlinePhone } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
 import { LuMapPin } from "react-icons/lu";
@@ -11,38 +11,12 @@ import fonts from '../Common/Font';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
-  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [webPoints, setWebPoints] = useState([]);
   const footerRef = useRef(null);
   const webRef = useRef(null);
   const animationRef = useRef(null);
-
-  // Handle navigation function
-  const handleNavigation = (targetId, event) => {
-    event.preventDefault();
-    
-    // Special handling for About Us page
-    if (targetId === 'about') {
-      navigate('/about');
-      return;
-    }
-    
-    // Check if we're on the home page
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/home';
-    
-    if (isHomePage) {
-      // If on home page, scroll to the section
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // If on another page, navigate to home page with hash
-      navigate(`/#${targetId}`);
-    }
-  };
 
   // Handle mouse movement to track position
   const handleMouseMove = (e) => {
@@ -305,101 +279,129 @@ function Footer() {
       
       <Container style={{ position: 'relative', zIndex: 2 }}>
         <Row className="gy-4">
-          {/* Company Info */}
-          <Col md={3} lg={4} className="text-start">
-            <h5 style={styles.heading}>Keerthi Builders</h5>
-            <p style={styles.paragraph}>
-              At Keerthi Builders, we're passionate about crafting exceptional living spaces that connect you with your
-              dreams. Our team of experts is dedicated to curating unique homes that cater to your
-              interests and preferences.
-            </p>
-          </Col>
-          
-          {/* Useful Links */}
-          <Col md={3} lg={2} className="text-start">
-            <h5 style={styles.heading}>Useful Links</h5>
+          {/* Quick Links */}
+          <Col xs={12} md={2} lg={2} className="text-start">
+            <h5 style={styles.heading}>Quick Links</h5>
             <ul style={styles.linksList}>
-              <li style={styles.listItem}>
-                <a
-                  href="#hero-section"
-                  style={styles.link}
-                  onClick={(e) => handleNavigation('hero-section', e)}
-                >
-                  Home
-                </a>
-              </li>
-              <li style={styles.listItem}>
-                <a
-                  href="#project-section"
-                  style={styles.link}
-                  onClick={(e) => handleNavigation('project-section', e)}
-                >
-                  Projects
-                </a>
-              </li>
-              <li style={styles.listItem}>
-                <a
-                  href="#about"
-                  style={styles.link}
-                  onClick={(e) => handleNavigation('about', e)}
-                >
-                  About Us
-                </a>
-              </li>
-              <li style={styles.listItem}>
-                <a
-                  href="#contact"
-                  style={styles.link}
-                  onClick={(e) => handleNavigation('contact', e)}
-                >
-                  Contact us
-                </a>
-              </li>
+              <li style={styles.listItem}><Link to="/" style={styles.link}>Home</Link></li>
+              <li style={styles.listItem}><Link to="/project" style={styles.link}>All Projects</Link></li>
+              <li style={styles.listItem}><Link to="/residential" style={styles.link}>Residential</Link></li>
+              <li style={styles.listItem}><Link to="/commercial" style={styles.link}>Commercial</Link></li>
+              <li style={styles.listItem}><Link to="/about" style={styles.link}>About Us</Link></li>
             </ul>
           </Col>
-          
+
+          {/* Residential Projects */}
+          <Col xs={12} md={2} lg={2} className="text-start">
+            <h5 style={styles.heading}>Residential</h5>
+            <ul style={styles.linksList}>
+              <li style={styles.listItem}><Link to="/project/keerthi-infinity-lavish" style={styles.link}>Infinity Lavish</Link></li>
+              <li style={styles.listItem}><Link to="/project/keerthi-infinity-ullahas" style={styles.link}>Infinity Ullahas</Link></li>
+              <li style={styles.listItem}><Link to="/project/ktm-infinity-urvi-phase-2" style={styles.link}>Urvi Phase 2</Link></li>
+              <li style={styles.listItem}><Link to="/project/ktm-villa-enclave" style={styles.link}>Villa Enclave</Link></li>
+              <li style={styles.listItem}><Link to="/project/siddeshwara-layout" style={styles.link}>Siddeshwara Layout</Link></li>
+              <li style={styles.listItem}><Link to="/project/aps-keerthi-infinity" style={styles.link}>APS Infinity</Link></li>
+              <li style={styles.listItem}><Link to="/project/keerthi-infinity-urvi-phase-1" style={styles.link}>Urvi Phase 1</Link></li>
+            </ul>
+          </Col>
+
+          {/* Commercial Projects */}
+          <Col xs={12} md={2} lg={2} className="text-start">
+            <h5 style={styles.heading}>Commercial</h5>
+            <ul style={styles.linksList}>
+              <li style={styles.listItem}><Link to="/project/ktm-industal-phase-1" style={styles.link}>Industal Phase 1</Link></li>
+              <li style={styles.listItem}><Link to="/project/ktm-industal-phase-2" style={styles.link}>Industal Phase 2</Link></li>
+            </ul>
+          </Col>
+
           {/* Contact Info */}
-          <Col md={3} lg={4} className="text-start">
-            <h5 style={styles.heading}>Contact</h5>
-            <ul style={styles.contactList}>
+          <Col xs={12} md={6} lg={6} className="text-start">
+            <h5 style={styles.heading}>Keerthi Builders</h5>
+            <p style={styles.paragraph}>
+              Trusted land developers in South Bangalore with over 25 years of experience. We deliver
+              BMRDA-approved residential layouts and industrial plots with clear titles and transparent
+              documentation.
+            </p>
+            <ul style={{ ...styles.contactList, marginTop: 16 }}>
               <li style={styles.contactItem}>
                 <IoMailOutline style={styles.icon} />
-                <a
-                  href="mailto:keerthibuildersales@gmail.com"
-                  style={styles.link}
-                >
+                <a href="mailto:keerthibuildersales@gmail.com" style={styles.link}>
                   keerthibuildersales@gmail.com
                 </a>
               </li>
               <li style={styles.contactItem}>
                 <MdOutlinePhone style={styles.icon} />
-                <a href="tel:+91990287666" style={styles.link}>+91 990 287 6666</a>
+                <a href="tel:+919902876666" style={styles.link}>+91 99028 76666</a>
               </li>
               <li style={styles.contactItem}>
-                <LuMapPin style={{...styles.icon, width:'20px' }} />
+                <LuMapPin style={{ ...styles.icon, width: '20px' }} />
                 <a
-                  href="https://maps.google.com"
+                  href="https://maps.app.goo.gl/kumbalagodu"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={styles.link}
                 >
-                  #938, 1st Main Rd, Stage II, Kengeri Satellite Town, Bengaluru, Karnataka 560060.
+                  #938, 1st Main Rd, Stage II, Kengeri Satellite Town, Bengaluru – 560060.
                 </a>
               </li>
             </ul>
           </Col>
         </Row>
         
+        {/* Property Portals & Loan Partners */}
+        <Row className="gy-3" style={{ marginTop: 8 }}>
+          <Col xs={12}>
+            <p style={{ ...styles.paragraph, fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 600 }}>
+              Find Us On
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 16px', alignItems: 'center', marginBottom: 16 }}>
+              {[
+                { name: '99acres', url: 'https://www.99acres.com' },
+                { name: 'Housing.com', url: 'https://housing.com' },
+                { name: 'MagicBricks', url: 'https://www.magicbricks.com' },
+                { name: 'NoBroker', url: 'https://www.nobroker.in' },
+                { name: 'Sulekha', url: 'https://www.sulekha.com' },
+                { name: 'JustDial', url: 'https://www.justdial.com' },
+              ].map(portal => (
+                <a
+                  key={portal.name}
+                  href={portal.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', background: 'rgba(255,255,255,0.08)', padding: '4px 12px', borderRadius: 20, border: '1px solid rgba(255,255,255,0.15)', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
+                >
+                  {portal.name}
+                </a>
+              ))}
+            </div>
+          </Col>
+          <Col xs={12}>
+            <p style={{ ...styles.paragraph, fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 600 }}>
+              Home Loan Partners
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 14px', alignItems: 'center' }}>
+              {['HDFC Bank', 'SBI Home Loans', 'ICICI Bank', 'LIC Housing Finance', 'Axis Bank', 'Bank of Baroda'].map(bank => (
+                <span
+                  key={bank}
+                  style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.1)', whiteSpace: 'nowrap' }}
+                >
+                  {bank}
+                </span>
+              ))}
+            </div>
+          </Col>
+        </Row>
+
         <hr style={styles.divider} />
-        
+
         {/* Copyright & Social Media */}
         <Row className="align-items-center">
-          <Col md={7} className="text-center text-md-start">
+          <Col xs={12} md={7} className="text-center text-md-start">
             <p style={styles.copyright}>
               <small>Copyright © {new Date().getFullYear()} Keerthi Builders. All Rights Reserved.</small>
             </p>
           </Col>
-                    <Col md={5} className="d-flex justify-content-center justify-content-md-end">
+          <Col xs={12} md={5} className="d-flex justify-content-center justify-content-md-end">
             <ul style={styles.socialList}>
               <li style={styles.socialItem}>
                 <a
