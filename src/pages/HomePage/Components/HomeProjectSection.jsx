@@ -32,6 +32,13 @@ const projects = [
 const HomeProjectSection = () => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handle = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handle);
+    return () => window.removeEventListener("resize", handle);
+  }, []);
 
   useEffect(() => {
     if (paused) return;
@@ -49,7 +56,7 @@ const HomeProjectSection = () => {
       <h2 style={s.heading}>New Launches & Ongoing Projects</h2>
 
       <div
-        style={s.track}
+        style={{ ...s.track, height: isMobile ? 260 : 420 }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -61,21 +68,26 @@ const HomeProjectSection = () => {
             const isLeft = offset === -1 || (current === 0 && i === projects.length - 1);
             const isRight = offset === 1 || (current === projects.length - 1 && i === 0);
 
+            const cardW = isMobile ? Math.min(window.innerWidth - 60, 300) : 560;
+            const cardH = isMobile ? 220 : 380;
+
             return (
               <Link
                 to={p.link}
                 key={i}
                 style={{
                   ...s.card,
+                  width: cardW,
+                  height: cardH,
                   ...(isActive ? s.cardActive : {}),
                   ...(isLeft || isRight ? s.cardSide : {}),
                   ...(!isActive && !isLeft && !isRight ? s.cardHidden : {}),
                   transform: isActive
                     ? "translateX(0) scale(1)"
                     : isLeft
-                    ? "translateX(-62%) scale(0.85)"
+                    ? isMobile ? "translateX(-85%) scale(0.8)" : "translateX(-62%) scale(0.85)"
                     : isRight
-                    ? "translateX(62%) scale(0.85)"
+                    ? isMobile ? "translateX(85%) scale(0.8)" : "translateX(62%) scale(0.85)"
                     : "translateX(0) scale(0.7)",
                 }}
               >

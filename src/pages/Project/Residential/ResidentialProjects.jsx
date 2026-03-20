@@ -350,7 +350,17 @@ const ResidentialProjects = () => {
           .res-hero-title { font-size: 2rem !important; }
           .res-stats { flex-wrap: wrap !important; gap: 20px !important; }
           .res-stat-item { width: 45% !important; }
-          .res-tabs { flex-direction: column !important; gap: 10px !important; }
+          .res-tabs {
+            flex-direction: column !important;
+            gap: 8px !important;
+            border-radius: 12px !important;
+            width: 100% !important;
+          }
+          .res-tabs button {
+            border-radius: 8px !important;
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
     </>

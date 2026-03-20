@@ -342,6 +342,8 @@ const HomeHeroSection = () => {
                   loop
                   muted
                   playsInline
+                  onLoadedData={handleVideoLoadedData}
+                  poster="https://ik.imagekit.io/keerthibuilders/ktmHeroVideo.mp4/ik-thumbnail.jpg"
                   style={responsiveStyles.video}
                 >
                   <source src="https://ik.imagekit.io/keerthibuilders/ktmHeroVideo.mp4" type="video/mp4" />
@@ -754,6 +756,7 @@ const styles = {
     position: "relative",
     paddingTop: "0px",
     paddingBottom: "40px",
+    backgroundColor: "#1A662F",
   },
   videoContainerMobile: {
     position: "relative",

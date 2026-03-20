@@ -315,7 +315,7 @@ const styles = {
   verticalLine: {
     width: '1px',
     height: '80px',
-    borderLeft: '2px dotted #fff',
+    borderLeft: '2px dotted #aaa',
   },
   
   mobileHorizontalDivider: {

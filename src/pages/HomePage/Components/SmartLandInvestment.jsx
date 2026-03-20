@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 const highlights = [
@@ -21,6 +21,13 @@ const highlights = [
 ];
 
 const SmartLandInvestment = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handle = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handle);
+    return () => window.removeEventListener("resize", handle);
+  }, []);
+
   return (
     <div style={styles.section}>
       <div style={styles.container}>
@@ -42,9 +49,9 @@ const SmartLandInvestment = () => {
             ))}
           </div>
 
-          <div style={styles.buttonGroup}>
-            <a href="/projects" style={{ ...styles.button, ...styles.filled }}>View Our Projects</a>
-            <a href="tel:+919902876666" style={{ ...styles.button, ...styles.outline }}>Call Now</a>
+          <div style={{ ...styles.buttonGroup, ...(isMobile ? styles.buttonGroupMobile : {}) }}>
+            <a href="/projects" style={{ ...styles.button, ...styles.filled, ...(isMobile ? styles.buttonFullWidth : {}) }}>View Our Projects</a>
+            <a href="tel:+919902876666" style={{ ...styles.button, ...styles.outline, ...(isMobile ? styles.buttonFullWidth : {}) }}>Call Now</a>
           </div>
         </div>
 
@@ -150,6 +157,14 @@ const styles = {
     display: 'flex',
     gap: '15px',
     flexWrap: 'wrap',
+  },
+  buttonGroupMobile: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
+  buttonFullWidth: {
+    textAlign: 'center',
+    width: '100%',
   },
   button: {
     padding: '11px 24px',

@@ -237,7 +237,7 @@ const SiteDetailsPage = () => {
             </div>
             {/* Quick info card */}
             <div style={s.highlightsRight}>
-              <div style={s.infoCard}>
+              <div style={s.infoCard} className="details-info-card">
                 <div style={s.infoCardHeader}>
                   <h3 style={s.infoCardTitle}>Project Info</h3>
                 </div>
@@ -492,6 +492,10 @@ const SiteDetailsPage = () => {
       </section>
 
       <style>{`
+        .details-info-card { position: sticky; top: 148px; }
+        @media (max-width: 991px) {
+          .details-info-card { position: relative !important; top: auto !important; }
+        }
         .plan-img-box:hover .plan-hover-overlay { opacity: 1 !important; }
         .gallery-img-box:hover img { transform: scale(1.05); }
         .related-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.13) !important; }
@@ -648,7 +652,7 @@ const s = {
     padding: '0 16px',
     height: 56,
     gap: 8,
-    zIndex: 1021,
+    zIndex: 1019,
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
     overflowX: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -770,8 +774,6 @@ const s = {
     border: '1px solid #e9ecef',
     boxShadow: '0 8px 32px rgba(0,0,0,0.07)',
     overflow: 'hidden',
-    position: 'sticky',
-    top: 148,
   },
   infoCardHeader: {
     background: '#1C542C',
