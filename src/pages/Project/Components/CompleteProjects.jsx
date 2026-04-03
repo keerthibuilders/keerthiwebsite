@@ -45,6 +45,13 @@ const CompleteProjects = () => {
       location: "Gollahalli-thittahalli,Kumbalagodu, Bangalore.",
       property: "Residential Property",
       image: "https://res.cloudinary.com/dqmnu220b/image/upload/v1751709126/ktm_villa_enclave_jmyiyj.png",
+    },
+    {
+      id: 7,
+      name: "Keerthi Infinity BMTC Ruppi's Enclave",
+      location: "Near Ruppi's Resort, Kumbalagodu, Bangalore.",
+      property: "Residential Property",
+      image: "/assets/images/6.webp",
     }
   ];
 

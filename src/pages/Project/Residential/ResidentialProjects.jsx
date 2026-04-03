@@ -67,6 +67,14 @@ const completedProjects = [
     image: "/assets/images/3.webp",
     slug: "keerthi-infinity-urvi-phase-1",
   },
+  {
+    id: 8,
+    name: "Keerthi Infinity BMTC Ruppi's Enclave",
+    location: "Near Ruppi's Resort, Kumbalagodu, Bangalore",
+    property: "Residential Layout",
+    image: "/assets/images/6.webp",
+    slug: "keerthi-infinity-bmtc-ruppis-enclave",
+  },
 ];
 
 const tagColors = {
