@@ -12,12 +12,14 @@ import CommercialProjects from './pages/Project/Commercial/CommercialProjects';
 import ResidentialProjects from './pages/Project/Residential/ResidentialProjects';
 import NotFoundPage from './pages/ErrorPages/NotFoundPage';
 import ServerErrorPage from './pages/ErrorPages/ServerErrorPage';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+       <ScrollToTop />
        <Navbar />
         <Routes>
           <Route path="/" element={<HomeMainPage />} />
