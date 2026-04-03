@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const highlights = [
@@ -50,7 +51,7 @@ const SmartLandInvestment = () => {
           </div>
 
           <div style={{ ...styles.buttonGroup, ...(isMobile ? styles.buttonGroupMobile : {}) }}>
-            <a href="/projects" style={{ ...styles.button, ...styles.filled, ...(isMobile ? styles.buttonFullWidth : {}) }}>View Our Projects</a>
+            <Link to="/project" style={{ ...styles.button, ...styles.filled, ...(isMobile ? styles.buttonFullWidth : {}) }}>View Our Projects</Link>
             <a href="tel:+919902876666" style={{ ...styles.button, ...styles.outline, ...(isMobile ? styles.buttonFullWidth : {}) }}>Call Now</a>
           </div>
         </div>
