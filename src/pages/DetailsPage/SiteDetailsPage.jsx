@@ -86,11 +86,12 @@ const SiteDetailsPage = () => {
     )
   }
 
-  const seoDescription = `${project.description1.slice(0, 145)}…`;
   const seoImage = `https://www.keerthibuilders.com${project.gallery?.[0] || project.image}`;
   const seoCanonical = `https://www.keerthibuilders.com/project/${project.id}`;
   const listingPage = project.type === 'residential' ? 'residential' : 'commercial';
   const listingLabel = project.type === 'residential' ? 'Residential' : 'Commercial';
+  // Use per-project SEO fields if available, fallback to generated values
+  const seoDescription = project.seoDescription || `${project.description1.slice(0, 145)}…`;
 
   const projectSchema = {
     "@context": "https://schema.org",
@@ -144,14 +145,14 @@ const SiteDetailsPage = () => {
     ]
   };
 
-  const seoKeywords = project.type === 'residential'
-    ? `${project.name}, ${project.location}, BMRDA approved plots ${project.location}, residential plots ${project.location}, plots for sale south bangalore, 30x40 plots bangalore, gated community plots`
-    : `${project.name}, ${project.location}, KIADB approved industrial plots, industrial plots kumbalagodu, commercial land mysore road`;
+  const seoKeywords = project.seoKeywords || (project.type === 'residential'
+    ? `${project.name}, ${project.location}, BMRDA approved plots ${project.location}, residential plots ${project.location}, plots for sale south bangalore`
+    : `${project.name}, ${project.location}, KIADB approved industrial plots, industrial plots kumbalagodu`);
 
   return (
     <>
       <SEO
-        title={`${project.name} – ${project.specs?.plotSizes || ''} Plots in ${project.location}`}
+        title={project.seoTitle || `${project.name} – ${project.specs?.plotSizes || ''} Plots in ${project.location}`}
         description={seoDescription}
         keywords={seoKeywords}
         canonical={seoCanonical}

@@ -33,6 +33,32 @@ const DetailsHighlights = ({ project }) => {
               <p className="mb-0" style={styles.description}>{project.description1}</p>
               <p className="mb-0" style={styles.description}>{project.description2}</p>
             </div>
+
+            {project.highlights && (
+              <div style={styles.highlightsBox}>
+                <h3 style={styles.highlightsTitle}>Why Invest in {project.name}?</h3>
+                <ul style={styles.highlightsList}>
+                  {project.highlights.map((h, i) => (
+                    <li key={i} style={styles.highlightItem}>
+                      <span style={styles.checkMark}>✓</span>{h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {project.connectivity && (
+              <div style={styles.connectivityBox}>
+                <h3 style={styles.highlightsTitle}>Connectivity</h3>
+                <ul style={styles.highlightsList}>
+                  {project.connectivity.map((c, i) => (
+                    <li key={i} style={styles.highlightItem}>
+                      <span style={styles.pinMark}>📍</span>{c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </Col>
 
           {/* RIGHT COLUMN – PROJECT SPECIFICATIONS */}
@@ -95,13 +121,53 @@ const styles = {
     fontFamily: fonts.Noto
   },
   specValue: {
-    fontSize: "clamp(10px, 1.1vw, 11px)", // Responsive font size
+    fontSize: "clamp(10px, 1.1vw, 11px)",
     fontWeight: "400",
     color: "#374151",
     lineHeight: "1.4",
     margin: 0,
     fontFamily: fonts.Noto
-  }
+  },
+  highlightsBox: {
+    marginTop: 24,
+    padding: "16px 20px",
+    background: "#f0f7f2",
+    borderRadius: 10,
+    borderLeft: "4px solid #1A662F",
+  },
+  connectivityBox: {
+    marginTop: 16,
+    padding: "16px 20px",
+    background: "#fafafa",
+    borderRadius: 10,
+    borderLeft: "4px solid #ccc",
+  },
+  highlightsTitle: {
+    fontSize: "clamp(12px, 1.3vw, 13px)",
+    fontWeight: "700",
+    color: "#1A662F",
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    margin: "0 0 10px",
+    fontFamily: fonts.Noto,
+  },
+  highlightsList: {
+    listStyle: "none",
+    padding: 0,
+    margin: 0,
+  },
+  highlightItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 8,
+    fontSize: "clamp(11px, 1.2vw, 12px)",
+    color: "#374151",
+    lineHeight: 1.5,
+    padding: "4px 0",
+    fontFamily: fonts.Noto,
+  },
+  checkMark: { color: "#1A662F", fontWeight: 700, flexShrink: 0 },
+  pinMark: { flexShrink: 0 },
 };
 
 export default DetailsHighlights;

@@ -13,6 +13,9 @@ import ResidentialProjects from './pages/Project/Residential/ResidentialProjects
 import NotFoundPage from './pages/ErrorPages/NotFoundPage';
 import ServerErrorPage from './pages/ErrorPages/ServerErrorPage';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import LocationPage from './pages/LocationPage/LocationPage';
+import PlotSizePage from './pages/PlotSizePage/PlotSizePage';
+import BMRDAPage from './pages/BMRDAPage/BMRDAPage';
 
 
 function App() {
@@ -29,6 +32,19 @@ function App() {
           <Route path="/project" element={<ProjectMainPage />} />
           <Route path="/residential" element={<ResidentialProjects />} />
           <Route path="/commercial" element={<CommercialProjects />} />
+
+          {/* Programmatic SEO — Location pages */}
+          <Route path="/plots-in-:slug" element={<LocationPage />} />
+          <Route path="/plots-near-:slug" element={<LocationPage />} />
+
+          {/* Programmatic SEO — Plot size pages */}
+          <Route path="/30x40-plots-bangalore" element={<PlotSizePage size="30x40" />} />
+          <Route path="/30x50-plots-bangalore" element={<PlotSizePage size="30x50" />} />
+          <Route path="/40x60-plots-bangalore" element={<PlotSizePage size="40x60" />} />
+
+          {/* Programmatic SEO — Approval page */}
+          <Route path="/bmrda-approved-plots-bangalore" element={<BMRDAPage />} />
+
           <Route path="/500" element={<ServerErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

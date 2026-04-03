@@ -4,83 +4,83 @@
   <!-- Core pages -->
   <url>
     <loc>https://www.keerthibuilders.com/</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/about</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/residential</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/commercial</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Ongoing residential projects -->
   <url>
     <loc>https://www.keerthibuilders.com/project/keerthi-infinity-lavish</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/keerthi-infinity-ullahas</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/ktm-infinity-urvi-phase-2</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.9</priority>
   </url>
 
   <!-- Completed residential projects -->
   <url>
     <loc>https://www.keerthibuilders.com/project/ktm-villa-enclave</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/aps-keerthi-infinity</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/siddeshwara-layout</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/keerthi-infinity-urvi-phase-1</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.keerthibuilders.com/project/jnanakshi-rajajeshwari-layout</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.keerthibuilders.com/project/keerthi-infinity-bmtc-ruppis-enclave</loc>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -88,15 +88,63 @@
   <!-- Commercial / Industrial projects -->
   <url>
     <loc>https://www.keerthibuilders.com/project/ktm-industal-phase-1</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.keerthibuilders.com/project/ktm-industal-phase-2</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Programmatic SEO — Location pages -->
+  <url>
+    <loc>https://www.keerthibuilders.com/plots-in-kumbalagodu</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.keerthibuilders.com/plots-in-bidadi</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.keerthibuilders.com/plots-near-mysore-road</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Programmatic SEO — Plot size pages -->
+  <url>
+    <loc>https://www.keerthibuilders.com/30x40-plots-bangalore</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.keerthibuilders.com/30x50-plots-bangalore</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.keerthibuilders.com/40x60-plots-bangalore</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Programmatic SEO — Approval page -->
+  <url>
+    <loc>https://www.keerthibuilders.com/bmrda-approved-plots-bangalore</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 
 </urlset>
