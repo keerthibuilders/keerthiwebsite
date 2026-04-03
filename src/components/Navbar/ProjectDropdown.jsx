@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 const residentialProjects = allProjects.filter(p => p.type === "residential");
 const commercialProjects  = allProjects.filter(p => p.type === "commercial");
 
-const ProjectDropdown = ({ location }) => {
+const ProjectDropdown = ({ location, onClose }) => {
   const [open, setOpen]           = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileTab, setMobileTab]   = useState(null);
@@ -37,7 +37,7 @@ const ProjectDropdown = ({ location }) => {
     return sorted.map(p => {
       const badge = getBadge(p);
       return (
-        <Link key={p.id} to={`/project/${p.id}`} style={s.item} onClick={() => setOpen(false)}
+        <Link key={p.id} to={`/project/${p.id}`} style={s.item} onClick={() => { setOpen(false); setMobileOpen(false); setMobileTab(null); onClose?.(); }}
           onMouseEnter={e => e.currentTarget.style.background = "#f0f7f2"}
           onMouseLeave={e => e.currentTarget.style.background = "transparent"}
         >
@@ -125,7 +125,7 @@ const ProjectDropdown = ({ location }) => {
                   <div style={s.mobileProjects}>
                     {renderList(type.projects)}
                     <Link to={type.route} style={s.viewAll}
-                      onClick={() => { setMobileOpen(false); setMobileTab(null); }}
+                      onClick={() => { setMobileOpen(false); setMobileTab(null); onClose?.(); }}
                     >
                       View all {type.label} →
                     </Link>
@@ -134,7 +134,7 @@ const ProjectDropdown = ({ location }) => {
               </div>
             ))}
             <Link to="/project" style={s.mobileAllBtn}
-              onClick={() => { setMobileOpen(false); setMobileTab(null); }}
+              onClick={() => { setMobileOpen(false); setMobileTab(null); onClose?.(); }}
             >
               All Projects
             </Link>

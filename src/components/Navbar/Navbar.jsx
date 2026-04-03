@@ -150,7 +150,7 @@ const Navbar = () => {
 
           <Nav className="ms-auto">
             {/* Projects Dropdown - Now using custom component */}
-            <ProjectDropdown location={location} />
+            <ProjectDropdown location={location} onClose={() => setExpanded(false)} />
 
             <Nav.Link
               href="/about"
